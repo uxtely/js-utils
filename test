@@ -2,6 +2,8 @@
 
 node base52.test.js
 node proxyFields.test.js
+node minifyCSS.test.js
+node minifyHTML.test.js
 
 node_modules/.bin/mocha check.test.js
 node_modules/.bin/mocha relativeTime.test.js
