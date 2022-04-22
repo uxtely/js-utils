@@ -1,0 +1,10 @@
+{
+  "name": "@uxtely/js-utils",
+  "version": "1.0.0",
+  "type": "module",
+	"autho": "Eric Fortis",
+	"license": "ISC",
+	"devDependencies": {
+		"mocha": "9.2.2"
+	}
+}
