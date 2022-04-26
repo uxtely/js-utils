@@ -20,6 +20,11 @@ describe('check (single)', () => {
 	oks(1, Number)
 	oks('a', String)
 	oks({}, Object)
+	
+	oks(new Number(1), Number)
+	oks(new String(''), String)
+	oks(Object.create(null), Object)
+	oks(Object.create({}), Object)
 	oks(new Date(), Date)
 
 	oks(new Int8Array(), Int8Array)
