@@ -46,4 +46,4 @@ new Person({ unspecified: true })
 ```
 
 ## See also
-https://blog.uidrafter.com/smarter-types-than-typescript
+https://blog.uidrafter.com/type-without--typescript
