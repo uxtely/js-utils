@@ -1,8 +1,5 @@
 # Plain JS + CSS HTML5 Video Player
-This is minimal video player, it's used in Uxtely's website and documentation.
-
-## Live Example
-https://uxtely.github.io/video-player/
+This is minimal video player, it's used in UI Drafter's website and documentation.
 
 ## License
-This program is [ISC licensed](./LICENSE).
+This program is [ISC licensed](../LICENSE).
