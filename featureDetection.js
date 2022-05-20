@@ -1,6 +1,3 @@
-export const isSafari = typeof navigator !== 'undefined' 
-	&& navigator.vendor === 'Apple Computer, Inc.';
-
 export const isMac = (function () {
 	if (typeof navigator === 'undefined')
 		return false
@@ -10,6 +7,15 @@ export const isMac = (function () {
 
 	return /Mac|iP/.test(navigator.platform)
 }())
+
+
+export const isSafari = typeof navigator !== 'undefined'
+	&& navigator.vendor === 'Apple Computer, Inc.'
+
+
+export const isIos = typeof navigator !== 'undefined'
+	&& ['iPhone', 'iPad'].includes(navigator.platform)
+
 
 export const touchSupported = typeof document !== 'undefined'
 	&& 'ontouchstart' in document.documentElement
