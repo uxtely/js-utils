@@ -4,9 +4,18 @@ export function httpGet(route) {
 	})
 }
 
+export function httpPost(route, json) {
+	return fetchWithRetry(route, {
+		body: json,
+		method: 'POST',
+		headers: new Headers({ 'Content-Type': 'application/json' }),
+		credentials: 'include'
+	})
+}
+
 function fetchWithRetry(url, options) {
 	const maxRetries = 3
-	const retryDelayIncrementMs = 1500
+	const msRetryDelayIncrement = 1500
 
 	return new Promise((resolve, reject) => {
 		attemptFetch(1)
@@ -14,7 +23,9 @@ function fetchWithRetry(url, options) {
 		function attemptFetch(nRetry) {
 			fetch(url, options)
 				.then(response => {
-					if (nRetry <= maxRetries && isErrorStatus(response.status))
+					if (nRetry <= maxRetries
+						&& response.status >= 500
+						&& response.status < 600)
 						retry(nRetry)
 					else
 						resolve(response)
@@ -30,13 +41,8 @@ function fetchWithRetry(url, options) {
 		function retry(nRetry) {
 			setTimeout(() => {
 				attemptFetch(++nRetry)
-			}, retryDelayIncrementMs * nRetry)
+			}, msRetryDelayIncrement * nRetry)
 		}
 	})
 }
-
-function isErrorStatus(code) {
-	return code >= 500 && code < 600
-}
-
 
