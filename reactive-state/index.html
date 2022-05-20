@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>ReactiveState Demo (recoil-like React.js state manager)</title>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script type="module">
+	import { ReactiveState } from './src/ReactiveState.js'
+
+	// Optional `bindState` wrapper
+	React.Component.prototype.subscribeState = function (reactiveStates) {
+		for (const [key, rs] of Object.entries(reactiveStates))
+			rs.bindState(this, key)
+	}
+
+	const clickCount = new ReactiveState(0)
+	const r = React.createElement
+
+	function App() {
+		return (
+			r(React.Fragment, null,
+				r(Display),
+				r(Button)))
+	}
+
+	class Display extends React.Component {
+		constructor() {
+			super()
+			this.subscribeState({ clickCount })
+		}
+		render() {
+			return (
+				r('div', null,
+					'Click Count: ' + this.state.clickCount))
+		}
+	}
+
+	function Button() {
+		return (
+			r('button',
+				{ onClick: () => clickCount.set(clickCount.get + 1) },
+				'Click Me'))
+	}
+
+	ReactDOM
+		.createRoot(document.getElementById('root'))
+		.render(r(App))
+</script>
+</body>
+</html>
