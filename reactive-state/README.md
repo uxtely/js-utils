@@ -1,8 +1,5 @@
 # ReactiveState
 
-## Live Example
-https://uxtely.github.io/reactive-state/
-
 ## Similar Projects
 - [Recoil](https://recoiljs.org/)
 - [zustand](https://github.com/pmndrs/zustand)
