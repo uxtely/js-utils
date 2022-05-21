@@ -18,13 +18,12 @@ function createElement(tagName, props, ...children) {
 	return elem
 }
 
-function createSvgElement(props, innerHTML) {
-	const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-	if (props)
-		for (const [key, value] of Object.entries(props))
-			el.setAttribute(key, value);
-	el.innerHTML = innerHTML;
-	return el
+function createSvgElement(tagName, props, ...children) {
+	const elem = document.createElementNS('http://www.w3.org/2000/svg', tagName)
+	for (const [key, value] of Object.entries(props))
+		elem.setAttribute(key, value)
+	elem.append(...children.flat())
+	return elem
 }
 
 function useRef() {
