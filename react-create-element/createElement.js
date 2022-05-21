@@ -19,7 +19,7 @@ function createElement(tagName, props, ...children) {
 }
 
 function createSvgElement(props, innerHTML) {
-	var el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 	if (props)
 		for (const [key, value] of Object.entries(props))
 			el.setAttribute(key, value);
