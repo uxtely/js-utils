@@ -9,7 +9,7 @@ export const TK = {
 	relative_time_years: null
 }
 
-// See also: https://github.com/uxtely/js-utils/blob/main/proxyFields.js
+// See also: https://github.com/uxtely/js-utils/blob/main/proxy-fields-obfuscator/proxyFields.js
 Object.keys(TK).forEach(k => TK[k] = k)
 
 const Strings = {
