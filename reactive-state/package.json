@@ -1,8 +1,0 @@
-{
-  "name": "@uxtely/reactive-state",
-  "version": "1.0.0",
-  "description": "A standalone state that's bindable to the state of many React class components",
-  "type": "module",
-  "author": "Eric Fortis",
-  "license": "ISC"
-}
