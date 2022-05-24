@@ -3,5 +3,8 @@
 	"version": "1.0.0",
 	"type": "module",
 	"autho": "Eric Fortis",
-	"license": "ISC"
+	"license": "ISC",
+	"engines": {
+		"node": ">=18"
+	}
 }
