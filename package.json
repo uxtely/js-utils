@@ -2,7 +2,7 @@
 	"name": "@uxtely/js-utils",
 	"version": "1.0.0",
 	"type": "module",
-	"autho": "Eric Fortis",
+	"author": "Eric Fortis",
 	"license": "ISC",
 	"engines": {
 		"node": ">=18"

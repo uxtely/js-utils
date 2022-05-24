@@ -1,3 +1,0 @@
-#!/bin/sh
-
-find . -name *.test.js -exec node {} \;
