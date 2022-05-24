@@ -1,11 +1,8 @@
 {
   "name": "@uxtely/reactive-state",
   "version": "1.0.0",
-  "description": "It's a standalone state that's bindable to the state of many React class components",
+  "description": "A standalone state that's bindable to the state of many React class components",
   "type": "module",
   "author": "Eric Fortis",
-  "license": "ISC",
-  "devDependencies": {
-    "mocha": "10.0.0"
-  }
+  "license": "ISC"
 }

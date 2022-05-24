@@ -1,8 +1,10 @@
-import { strictEqual } from 'assert'
-import { minifyHTML } from './minifyHTML.js';
+import test from 'node:test'
+import { strictEqual } from 'node:assert'
+import { minifyHTML } from './minifyHTML.js'
 
 
-strictEqual(minifyHTML(`
+test('minifyHTML', () => {
+	strictEqual(minifyHTML(`
 <!DOCTYPE html>
 <html   
   lang="en">
@@ -37,7 +39,7 @@ strictEqual(minifyHTML(`
 </html>
 `),
 
-	`<!DOCTYPE html>
+		`<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Foo Bar</title>
@@ -64,4 +66,5 @@ Removes leading tabs.
 </p>
 </body>
 </html>`
-)
+	)
+})

@@ -1,9 +1,10 @@
-import { strictEqual, throws } from 'assert'
+import test from 'node:test'
+import { strictEqual, throws } from 'node:assert'
 import { minifyCSS, Testable } from './minifyCSS.js'
 
 
-/* === Acceptance === */
-strictEqual(minifyCSS(`
+test('Acceptance', () => {
+	strictEqual(minifyCSS(`
 :root {
   --foo: orange;
   
@@ -15,11 +16,12 @@ strictEqual(minifyCSS(`
 .d { color: rgb(255, 255,  0); }
 .e { color: #111; }
 `),
-	`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}`)
+		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}`)
+})
 
 
-/* ==== Throws on Nested vars ==== */
-throws(() => minifyCSS(`
+test('Throws on Nested vars', () => {
+	throws(() => minifyCSS(`
 :root {
   --a: 10px;
   --b: var(--a);
@@ -28,9 +30,10 @@ throws(() => minifyCSS(`
   height: var(--b);
 }
 `))
+})
 
-/* ==== Throws on multi :root {} pseudo blocks ==== */
-throws(() => minifyCSS(`
+test('Throws on multi :root {} pseudo blocks', () => {
+	throws(() => minifyCSS(`
 :root {
   --A: 11px;
 }
@@ -41,27 +44,29 @@ throws(() => minifyCSS(`
   height: var(--B);
 }
 `))
+})
 
 
 
-/* === Comments === */
-testRegexMatchesGetDeleted(Testable.reBlockComments, `
+test('Comments', () => {
+	testRegexMatchesGetDeleted(Testable.reBlockComments, `
 /* Foo */
 /* Multiline line 1 
 Line 2 */
 .a { color: red; } /* Bar */
 /*/*/
 `,
-	`
+		`
 
 
 .a { color: red; } 
 
 `)
+})
 
 
-/* === Trimming === */
-testRegexMatchesGetDeleted(Testable.reLeadingAndTrailingWhitespace, `
+test('Trimming', () => {
+	testRegexMatchesGetDeleted(Testable.reLeadingAndTrailingWhitespace, `
  .b .c {
 	color: orange;
   width: 20px;
@@ -70,17 +75,18 @@ testRegexMatchesGetDeleted(Testable.reLeadingAndTrailingWhitespace, `
 		height: 30px;
 		}
 `,
-	`.b .c {
+		`.b .c {
 color: orange;
 width: 20px;
 }
 .d {
 height: 30px;
 }`)
+})
 
 
-/* ==== Inner Prop Value space ==== */
-testRegexMatchesGetDeleted(Testable.rePropValueWhitespaceSeparator, `
+test('Inner Prop Value space', () => {
+	testRegexMatchesGetDeleted(Testable.rePropValueWhitespaceSeparator, `
 .e {
 	color: #f00;
 	height:   100px;
@@ -88,7 +94,7 @@ testRegexMatchesGetDeleted(Testable.rePropValueWhitespaceSeparator, `
 	content:  'a';
 }
 `,
-	`
+		`
 .e {
 	color:#f00;
 	height:100px;
@@ -96,58 +102,66 @@ testRegexMatchesGetDeleted(Testable.rePropValueWhitespaceSeparator, `
 	content:'a';
 }
 `)
+})
 
 
-/* ==== Newlines ==== */
-testRegexMatchesGetDeleted(Testable.reNewlines, `
+test('Newlines', () => {
+	testRegexMatchesGetDeleted(Testable.reNewlines, `
 .f {
 	color: blue;
 	height: 300px;
 	width: 300px;
 }
 `,
-	`.f {	color: blue;	height: 300px;	width: 300px;}`)
+		`.f {	color: blue;	height: 300px;	width: 300px;}`)
+})
 
 
-/* ==== White spaces before braces ==== */
-testRegexMatchesGetDeleted(Testable.reWhitespaceBeforeBraces, `
+test('White spaces before braces', () => {
+	testRegexMatchesGetDeleted(Testable.reWhitespaceBeforeBraces, `
 .g { color: pink; width: 400px; } `,
-	`
+		`
 .g{ color: pink; width: 400px;} `)
+})
 
-/* ==== White spaces after braces ==== */
-testRegexMatchesGetDeleted(Testable.reWhitespaceAfterBraces, `
+
+test('White spaces after braces', () => {
+	testRegexMatchesGetDeleted(Testable.reWhitespaceAfterBraces, `
 .G { color: green; width: 410px; } `,
-	`
+		`
 .G {color: green; width: 410px; }`)
+})
 
-/* ==== Final semicolon ==== */
-testRegexMatchesGetDeleted(Testable.reLastSemicolonInSet,
-	'.h {color: cyan; width: 500px;}',
-	'.h {color: cyan; width: 500px}'
-)
+test('Final semicolon', () => {
+	testRegexMatchesGetDeleted(Testable.reLastSemicolonInSet,
+		'.h {color: cyan; width: 500px;}',
+		'.h {color: cyan; width: 500px}'
+	)
+})
 
-/* ==== Comma + Space ==== */
-testRegexMatchesGetDeleted(Testable.reSpacesAfterComma,
-	'.H { color: rgb(255, 255, 0); }',
-	'.H { color: rgb(255,255,0); }'
-)
+test('Comma + Space', () => {
+	testRegexMatchesGetDeleted(Testable.reSpacesAfterComma,
+		'.H { color: rgb(255, 255, 0); }',
+		'.H { color: rgb(255,255,0); }'
+	)
+})
 
-/* ==== Lines within :root ==== */
-strictEqual(`
+test('Lines within :root', () => {
+	strictEqual(`
 :root {
   --foo: 100px;
   --fooBar: 200px;
 }
 `.match(Testable.reRootPseudoClassBody)[1],
-	`--foo: 100px;
+		`--foo: 100px;
   --fooBar: 200px;
 `
-)
+	)
+})
 
 
-/* ==== Inline Vars ==== */
-const inCSS = `
+test('Inline Vars', () => {
+	const inCSS = `
 :root {
   --foo: 100px;
   --fooBar: 200px;
@@ -157,8 +171,8 @@ const inCSS = `
   height: var(--fooBar);
   left: var( --fooBar  );
 }
-`;
-const outCSS = `
+`
+	const outCSS = `
 :root {
   --foo: 100px;
   --fooBar: 200px;
@@ -168,8 +182,9 @@ const outCSS = `
   height: 200px;
   left: 200px;
 }
-`;
-strictEqual(Testable.inlineVars(inCSS), outCSS)
+`
+	strictEqual(Testable.inlineVars(inCSS), outCSS)
+})
 
 
 
