@@ -1,4 +1,6 @@
-export const TK = {
+import { proxyFieldNames } from '../proxy-fields-obfuscator/proxyFieldNames.js'
+
+let TK = {
 	relative_time_just_now: null,
 	relative_time_seconds: null,
 	relative_time_minutes: null,
@@ -8,9 +10,8 @@ export const TK = {
 	relative_time_weeks: null,
 	relative_time_years: null
 }
-
-// See also: https://github.com/uxtely/js-utils/blob/main/proxy-fields-obfuscator/proxyFields.js
-Object.keys(TK).forEach(k => TK[k] = k)
+TK = proxyFieldNames('TK', TK)
+export { TK }
 
 const Strings = {
 	[TK.relative_time_just_now]: 'a few seconds ago',

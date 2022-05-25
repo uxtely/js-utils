@@ -1,7 +1,7 @@
 import { base52 } from './base52.js'
 
 
-export function proxyFields(devPrefix, dict, isProduction = process.env.NODE_ENV === 'production') {
+export function proxyFieldNames(devPrefix, dict, isProduction = process.env.NODE_ENV === 'production') {
 	const names = new Set()
 
 	let nNull = 0

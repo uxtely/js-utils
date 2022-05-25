@@ -1,6 +1,6 @@
 import test from 'node:test'
 import { throws, strictEqual } from 'node:assert'
-import { proxyFields } from './proxyFields.js'
+import { proxyFieldNames } from './proxyFieldNames.js'
 
 
 function prodTest(a, b) {
@@ -12,7 +12,7 @@ function devTest(prefix, a, b) {
 }
 
 function _test(prefix, a, b, isProduction) {
-	const proxy = proxyFields(prefix, a, isProduction)
+	const proxy = proxyFieldNames(prefix, a, isProduction)
 	for (const k in proxy)
 		strictEqual(proxy[k], b[k])
 }
@@ -42,21 +42,21 @@ test('Prod generates base52 values', () =>
 
 
 test('Repeated values throw', () =>
-	throws(() => proxyFields('PRE', {
+	throws(() => proxyFieldNames('PRE', {
 		x: 0,
 		y: 0
 	}), /value "0" is repeated/))
 
 
 test('Mixing null and numeric values throws', () =>
-	throws(() => proxyFields('PRE', {
+	throws(() => proxyFieldNames('PRE', {
 		x: 0,
 		y: null
 	}), /Mixing null and numeric values in: "PRE"/))
 
 
 test('Undefined key access throws', () => {
-	const proxy = proxyFields('PRE', { x: 'a' })
+	const proxy = proxyFieldNames('PRE', { x: 'a' })
 	throws(() => proxy['missingKey'],
 		/Accessing an undefined field: PRE_missingKey/)
 })
