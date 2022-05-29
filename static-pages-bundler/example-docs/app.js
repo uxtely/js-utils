@@ -13,7 +13,7 @@ import { htmlTemplate } from './htmlTemplate.js'
 const hasDivider = true
 
 // Manually typing the routes because the order is important for the navigation
-export const RouteDefs = [ 
+export const RouteDefs = [
 	['/workspaces', 'Workspaces'],
 	['/cards', 'Cards'],
 	['/shortcuts', 'Shortcuts', hasDivider]
@@ -27,18 +27,18 @@ switch (process.argv[2]) {
 	case 'development':
 		devStaticPages(router)
 		break
-	
+
 	case 'production':
 		buildStaticPages(router, routes, 'docs.uidrafter.com');
-		
+
 		(async () => {
 			const server = http.createServer(router)
 			server.listen(0, DevHost, async error => {
 				if (error)
 					console.error(error)
-				
+
 				await throwIfHasDeadLinks(server.address().port)
-				
+
 				// Default to the first route (using a copy to avoid redirect)
 				copy('dist' + routes[0], 'dist/index')
 				copy('dist' + routes[0] + '.br', 'dist/index.br')
@@ -46,7 +46,7 @@ switch (process.argv[2]) {
 			})
 		})()
 		break
-	
+
 	default:
 		console.error('Error')
 }

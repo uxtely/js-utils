@@ -3,7 +3,7 @@ import { listFiles } from '../../fs-utils.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
 import { buildStaticPages, devStaticPages } from '../static-pages.js'
 
-import { htmlTemplate } from './htmlTemplate.js';
+import { htmlTemplate } from './htmlTemplate.js'
 
 
 const routes = listFiles('root', /\.html$/).map(file => '/' + basename(file, '.html'))
@@ -11,11 +11,13 @@ const router = routerForStaticPages('root', routes, htmlTemplate.bind(null, rout
 
 switch (process.argv[2]) {
 	case 'development':
-		devStaticPages(router);
-		break;
+		devStaticPages(router)
+		break
+
 	case 'production':
-		buildStaticPages(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com');
-		break;
+		buildStaticPages(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com')
+		break
+
 	default:
-		console.error('Error');
+		console.error('Error')
 }
