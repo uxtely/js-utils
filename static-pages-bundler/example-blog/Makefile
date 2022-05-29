@@ -13,6 +13,6 @@ opm:
 prod:
 	sh -c "time node app.js production"
 
-all: opm lint slint prod
+all: lint slint opm prod
 
 .PHONY: dev lint slint opm prod all
