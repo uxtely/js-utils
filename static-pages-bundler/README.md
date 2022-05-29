@@ -19,8 +19,6 @@ This function is used because the pages are partial HTML documents
 an optional head section and the rest is considered part of the body.
 
 
-
-
 ## Assets and CSP
 The production bundler inlines the JavaScript and CSS. Also, it
 computes their corresponding CSP nonce and injects it as well.
@@ -66,15 +64,19 @@ As the compression takes about 60% of the time, for speed,
 it runs in `node:worker_threads` (one per CPU).
 
 
+## Serving
+Here's the [nginx.conf](https://github.com/uxtely/ops-utils/blob/main/location-server/jails/nginx_j/usr/local/etc/nginx/nginx.conf)
+used by UI Drafter.
+
 
 ## Installation
 ```shell script
+npm install
+
 cd ~
 npm install -g eslint \
   stylelint \
   stylelint-config-idiomatic-order \
   stylelint-config-recommended 
   
-cd .  
-npm install
 ```
