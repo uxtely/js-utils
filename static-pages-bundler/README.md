@@ -58,6 +58,10 @@ See [Pretty routes for static HTML](https://blog.uidrafter.com/pretty-routes-for
 The HTML and CSS are custom (an incomplete), but you can make them point to a popular 
 NPM package like we do in [minifyJS](./minifyJS.js)
 
+### Compression
+Each HTML document, CSS and JS file is pre-compressed with brotli.
+For example, there's a `dist/index` and a `dist/index.br`.
+
 
 
 ## Installation
