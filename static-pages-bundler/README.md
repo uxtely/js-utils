@@ -5,7 +5,7 @@ In UI Drafter, this bundler is used for:
 - https://blog.uidrafter.com [example-blog/](./example-blog)
 - https://docs.uidrafter.com [example-docs/](./example-docs)
  
-In dev, iy serves and auto reloads the browser on changes. While
+In dev, it serves and auto reloads the browser on changes. While
 in production it compiles all the pages to static HTML files.
 
 
