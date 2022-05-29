@@ -62,6 +62,9 @@ NPM package like we do in [minifyJS](./minifyJS.js)
 Each HTML document, CSS and JS file is pre-compressed with brotli.
 For example, there's a `dist/index` and a `dist/index.br`.
 
+As the compression takes about 60% of the time, for speed,
+it runs in `node:worker_threads` (one per CPU).
+
 
 
 ## Installation
