@@ -1,0 +1,23 @@
+{
+	"/bitwise-table-lookup": {
+		"hash": "o4RcP4xExlafevu7U-6LydrT5ls",
+		"delta": 0,
+		"size": 28001,
+		"brotliedSize": 7235,
+		"brotliedDelta": 0
+	},
+	"/conditional-avif-for-video-posters": {
+		"hash": "3BQaL-p4GRJ4LjKG--QEO2xy4GA",
+		"delta": 0,
+		"size": 29757,
+		"brotliedSize": 8083,
+		"brotliedDelta": 0
+	},
+	"/index": {
+		"hash": "g5FW7S0gwsCAe6-qRTKr6bPslOU",
+		"delta": 0,
+		"size": 20550,
+		"brotliedSize": 6403,
+		"brotliedDelta": 0
+	}
+}

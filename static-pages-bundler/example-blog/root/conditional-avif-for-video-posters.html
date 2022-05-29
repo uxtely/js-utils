@@ -1,0 +1,174 @@
+<head>
+	<title>Serve the Optimal Image Format with Nginx (JXL, AVIF, WebP)</title>
+	<meta name="description" content="Serve JXL, AVIF, or WebP without changing client-side code.">
+	<link rel="stylesheet" href="conditional-avif-for-video-posters.css">
+</head>
+
+<article>
+	<header>
+		<h1>
+			<span class="normalWeight smallerText">JXL, AVIF</span><br>
+			Serve the Optimal Image Format with&nbsp;Nginx
+		</h1>
+		<div class="Author">
+			by Eric Fortis
+			<a href="/eric"></a>
+			<a target="_blank" href="https://twitter.com/efortis" aria-label="Eric Fortis Twitter"></a>
+			<time>October 2, 2020</time>
+			<time>June 24, 2021 (Updated for JXL)</time>
+		</div>
+	</header>
+
+
+	<section>
+		<p><b>
+			Why let Nginx determine the best image format to serve?
+		</b></p>
+		<ol>
+			<li>
+				There's no need to change client-side code.
+			</li>
+			<li>
+				Video posters have no standard way of specifying many URLs
+				for fetching the optimal format supported by the client.
+			</li>
+		</ol>
+	</section>
+
+	<section>
+		<h2>Here's how</h2>
+		<p>
+			Upload the images with the modern extension appended.
+		</p>
+		<ul class="FileNames">
+			<li>foo.png</li>
+			<li>foo.png<b>.jxl</b></li>
+			<li>foo.png<b>.avif</b></li>
+			<li>foo.png<b>.webp</b></li>
+		</ul>
+		<p>
+			By the way, here's a <a
+			href="/convert-to-avif-programmatically">script to convert them</a>.
+		</p>
+		<p>
+			For dispatching the most efficient format, Nginx will inspect the <a target="_blank"
+			href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept"><code>Accept</code></a>
+			request header. For example, Chrome 85 and up advertise they support AVIF by sending its media
+			(MIME) type in it:
+		</p>
+		<pre>
+Accept: <b>image/avif</b><span class="faint">,image/webp,image/apng,image/*,*/*;q=0.8</span>
+</pre>
+	</section>
+
+
+	<section>
+		<h3>nginx.conf <sup><a href="#-ref-eugene-lazutkin">1</a></sup></h3>
+		<pre>
+http {
+  <span class="codeComment"># ...</span>
+
+  <span class="codeKeyword">map</span> <span class="codeArg">$http_accept</span> <span class="codeVar">$img_ext</span> {
+    ~image/jxl    <span class="codeString">'.jxl'</span>;
+    ~image/avif   <span class="codeString">'.avif'</span>;
+    ~image/webp   <span class="codeString">'.webp'</span>;
+    default       <span class="codeString">''</span>;
+  }
+
+  server {
+    <span class="codeComment"># ...</span>
+    location /images {
+      <span class="codeKeyword">add_header</span>  Vary Accept;
+      <span class="codeKeyword">try_files</span>   $uri<span class="codeVar">$img_ext</span> $uri =404;
+    }
+  }
+}
+</pre>
+
+		<p>
+			On requests under <code>/images</code>, the custom variable <code
+			class="codeVar">$img_ext</code> gets defined with the extension associated to the
+			first matched MIME regex of the <code><a target="_blank" class="codeKeyword"
+			href="https://nginx.org/en/docs/http/ngx_http_map_module.html#map">map</a></code>,
+			using the <code>Accept</code> header (<code><a target="_blank" class="codeArg"
+			href="https://nginx.org/en/docs/http/ngx_http_core_module.html#var_http_">$http_accept</a></code>)
+			as input&nbsp;parameter.
+		</p>
+
+		<p>
+			Then, <code><a target="_blank" class="codeKeyword"
+			href="https://nginx.org/en/docs/http/ngx_http_core_module.html#try_files">try_files</a></code>
+			looks for a file with that
+			extension appended, such as <code>foo.png<span class="codeString">.avif</span></code>,
+			and serves it. The middle <code>$uri</code> is a fail-safe. For
+			instance, maybe the AVIF isn't uploaded yet. Also, it makes possible to
+			request a format directly, e.g. <code>GET images/foo.png.webp</code>
+		</p>
+
+		<p>
+			Lastly, <code>Vary: Accept</code> is set as a response header. This
+			is only needed if the server has caching reverse proxies in front
+			(e.g. intercepting CDNs). Otherwise, those proxies would always
+			serve the same format sent to the first client that requested the
+			particular&nbsp;image.<sup><a href="#-ref-rogier-mulhuijzen">2</a></sup>
+		</p>
+
+		<h3>conf/mime.types</h3>
+		<p>
+			Make sure the JXL and AVIF media types are registered.
+		</p>
+
+		<pre>
+types {
+  <span class="codeComment"># ...</span>
+  image/jxl   jxl;
+  image/avif  avif;
+}</pre>
+	</section>
+
+	<section>
+		<h2>How to Test it?</h2>
+		<div class="RegionImg">
+			<img
+				id="TestImage"
+				width="200"
+				src="media/lenna.png"
+				alt="lenna test image" />
+		</div>
+
+		<pre class="wide">
+<span class="codeComment">#!/bin/sh</span>
+
+img=<span id="TestImageURL" class="codeString">lenna-colors.png</span>
+
+for <b>mime</b> in <span class="codeString">image/avif</span> <span class="codeString">image/webp</span> <span class="codeString">image/png</span>; do
+  <b>response_mime</b>=$(<span class="codeCommand">curl</span> -so /dev/null --head <span class="fainter">\</span>
+    --header <span class="codeString">"Accept: <b>$mime</b>"</span> <span class="fainter">\</span>
+    --write-out <span class="codeString">"%{content_type}"</span> $img)
+
+  if [ <b>"$response_mime"</b> = <b>$mime</b> ]; then
+    <span class="codeCommand">echo</span> <span class="codeString">"OK <b>$mime</b>"</span>
+  else
+    <span class="codeCommand">echo</span> <span class="codeString">"FAIL <b>$mime</b> Got: <b>$response_mime</b>"</span> >&2
+    exit 1
+  fi
+done
+</pre>
+	</section>
+
+
+	<section>
+		<h2>References</h2>
+		<a id="-ref-eugene-lazutkin"></a>
+		1. E. Lazutkin (2014)
+		<a target="_blank" href="https://www.lazutkin.com/blog/2014/02/23/serve-files-with-nginx-conditionally/">
+			Serve files with Nginx conditionally
+		</a>
+		<a id="-ref-rogier-mulhuijzen"></a>
+		2. R. Mulhuijzen (2014)
+		<a target="_blank" href="https://www.fastly.com/blog/best-practices-using-vary-header">
+			Best Practices for Using the Vary Header
+		</a>
+	</section>
+</article>
+<script src="conditional-avif-for-video-posters.js"></script>

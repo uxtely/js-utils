@@ -1,0 +1,95 @@
+i {
+	display: inline-block;
+	color: #444;
+	font-size: 15px;
+	line-height: 16px;
+}
+
+section {
+	display: block;
+	width: auto;
+	margin-top: 24px;
+}
+
+
+dl {
+	width: 100%;
+}
+dl div {
+	padding: 6px 0;
+	margin-left: -10px;
+}
+dl div:hover {
+	background: #ece7ff;
+}
+
+dt {
+	width: 230px;
+	padding-left: 10px;
+	font-weight: normal;
+	line-height: 17px;
+	vertical-align: baseline;
+}
+dt b {
+	text-decoration: underline;
+}
+
+dd {
+	display: inline-block;
+	width: 180px;
+	text-align: right;
+}
+
+@media (max-width: 470px) {
+	dt {
+		width: 100%;
+		margin-top: 12px;
+		margin-bottom: 10px;
+	}
+	dd {
+		display: block;
+		padding-bottom: 8px;
+		margin-left: 10px;
+		text-align: left;
+	}
+}
+
+.MoveCardArrows {
+	width: 100px;
+	margin: 19px;
+	text-align: center;
+}
+
+.MoveCardArrows dd {
+	display: inline-block;
+	width: auto;
+}
+
+.MoveCardArrowsLR {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.MoveCardArrowsLR:hover {
+	background: none
+}
+
+
+.Hint {
+	display: block;
+	color: #555;
+	font-size: 13px;
+}
+
+.VerticalMiddle {
+	vertical-align: middle;
+}
+
+.MarginTop {
+	margin-top: 24px;
+}
+
+section:last-of-type { /* because it's the last page and doesn't have next link */
+	margin-bottom: 80px;
+}

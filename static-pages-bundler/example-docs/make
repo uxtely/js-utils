@@ -1,0 +1,14 @@
+#!/bin/sh
+
+case $1 in
+  dev) node app.js development ;;
+  lint) eslint --config ../.eslintrc.json --fix "root/**/*.js" ;;
+  slint) stylelint --config ../.stylelintrc.json --fix "root/**/*.css" ;;
+
+  opm) ../media-optimizer.sh root/media ;;
+
+  prod) time node app.js production ;;
+  notifygoogle) curl "https://www.google.com/ping?sitemap=https://docs.uidrafter.com/sitemap.txt" ;;
+
+  *) echo "Invalid task $1" >&2; exit 1 ;;
+esac

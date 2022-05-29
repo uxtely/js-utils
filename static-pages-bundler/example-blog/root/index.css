@@ -1,0 +1,14 @@
+h1 {
+	margin-top: 110px;
+	margin-bottom: 100px;
+}
+
+@media (max-width: 430px) {
+	h1 {
+		margin-bottom: 80px;
+		font-size: 33px;
+	}
+	li a {
+		font-size: 16px;
+	}
+}

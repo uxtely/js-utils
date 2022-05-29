@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "stylelint-config-recommended",
+    "stylelint-config-idiomatic-order"
+  ],
+  "syntax": "css",
+  "rules": {
+    "function-name-case": null,
+    "declaration-empty-line-before": null,
+    "max-empty-lines": null
+  }
+}

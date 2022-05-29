@@ -1,0 +1,130 @@
+<article>
+	<h1>Workspaces</h1>
+
+	<section>
+		<ul>
+			<li><b><a href="#-home">Home</a></b></li>
+			<li><b><a href="#-drafter">Drafter</a></b></li>
+			<li><b><a href="#-previewer">Previewer</a></b></li>
+		</ul>
+	</section>
+
+	<section>
+		<p>
+			UI Drafter is an installable web&nbsp;app.
+		</p>
+		<ul>
+			<li>
+				You can <b>Save to disk</b>. 
+			</li>
+			<li>
+				And your files are auto-saved in your computer.
+			</li>
+		</ul>
+	</section>
+
+	<section>
+		<a id="-home"></a>
+		<h2>Home</h2>
+		<p>
+			The Home workspace is for file management. Reach it
+			by clicking the <b class="noBreak">top-left logo</b>.
+		</p>
+		<div class="FullImg">
+			<img
+				src="media/workspaces-home.png"
+				alt="UI Drafter's Home" />
+		</div>
+	</section>
+
+
+	<section>
+		<a id="-drafter"></a>
+		<h2>Drafter <span class="normalWeight">Workspace</span></h2>
+		<p>
+			As everything is either a <i>Card</i> or an <i>Entry</i>, glance over where their actions
+			are. Then, take a look at the Cards and compare them with the next section.
+		</p>
+		<div class="FullImg">
+			<img
+				src="media/workspaces-drafter.png"
+				alt="UI Drafter's Drafter Workspace" />
+		</div>
+	</section>
+
+	<section>
+		<a id="-previewer"></a>
+		<h2>Previewer <span class="normalWeight">Workspace</span></h2>
+		<p>
+			In Previewer, Cards become interactive pages. In this workspace,
+			you can change the page background among other settings.
+		</p>
+		<div class="FullImg light">
+			<img
+				src="media/workspaces-previewer.png"
+				alt="UI Drafter's Previewer Workspace" />
+		</div>
+	</section>
+
+
+	<section>
+		<h3>Initial Page</h3>
+		<p>
+			Previewer opens at the selected Card. Otherwise, at the topmost.
+		</p>
+		<br>
+		<svg width="280" height="84" xmlns="http://www.w3.org/2000/svg">
+			<path d="M0 0h137v84H0zm143 0h137v84H143z" fill="#222" />
+			<path d="M157 33h50v31h-50zm58-14h50v31h-50zM72 26.7h50v31H72zm-58 0h50v31H14z" fill="#fff" />
+			<path d="M237 42h-1.7V29c-.96.84-2.3 1.4-3.4 1.7V29c1.3-.36 2.4-1 3.5-1.7.36-.24.66-.47.92-.7h.64zM250 34c-.26.14-.6.21-1 .21-1.2 0-1.8-.67-1.8-2v-4H246v-.93h1.2v-1.7l1.1-.35v2h1.7v.93h-1.7v3.8c0 .46.08.78.23.98.16.2.41.29.77.29.28 0 .51-.076.71-.23zM240 34v-1.2c.78.59 1.8.82 2.8.55.37-.1.64-.46.62-.85.02-.53-.48-.87-.92-1-.71-.32-1.5-.51-2.1-1.1-.45-.49-.51-1.3-.26-1.9.37-.79 1.3-1.2 2.1-1.2.66-.055 1.3.023 2 .29v1.1a3 3 0 00-2.2-.44c-.43.082-.87.43-.86.9-.03.4.25.73.59.9.79.41 1.7.58 2.4 1.2.62.64.57 1.8-.05 2.4-.65.66-1.6.84-2.5.76-.69-.062-.78-.13-1.5-.4zM37 50h-1.7V37c-.96.84-2.3 1.4-3.4 1.7V37c1.3-.36 2.4-1 3.5-1.7.36-.24.66-.47.92-.7h.64zM50 42c-.26.14-.6.21-1 .21-1.2 0-1.8-.67-1.8-2v-4H46v-.93h1.2v-1.7l1.1-.35v2H50v.93h-1.7v3.8c0 .46.078.78.23.98.16.2.41.29.77.29.28 0 .51-.076.71-.23zM41 42v-1.2c.78.59 1.8.82 2.8.55.37-.1.64-.46.62-.85.017-.53-.48-.87-.92-1-.71-.32-1.5-.51-2.1-1.1-.45-.49-.51-1.3-.26-1.9.37-.79 1.3-1.2 2.1-1.2.66-.055 1.3.023 2 .29v1.1a3 3 0 00-2.2-.44c-.43.082-.87.43-.86.9-.032.4.25.73.59.9.79.41 1.7.58 2.4 1.2.62.64.57 1.8-.05 2.4-.65.66-1.6.84-2.5.76-.69-.062-.78-.13-1.5-.4z" />
+		</svg>
+
+		<h3>Initial Workspace</h3>
+		<p>
+			Files remember their last active workspace.
+		</p>
+	</section>
+
+
+	<section>
+		<details class="noIndent">
+			<summary><b>Undo works in Previewer too</b></summary>
+			<p>
+				Both workspaces share their <i>undo history</i>. For
+				example, changing an Entry value in Previewer modifies
+				it in Drafter as well. If that's undesirable, you can either:
+			</p>
+			<ul>
+				<li>
+					<span class="noBreak"><b>File</b> &rarr; <b>Duplicate</b></span> before previewing, or
+				</li>
+				<li>
+				<span class="noBreak"><b>Previewer</b> &rarr; <b>Preview in New
+				Tab</b></span>. This way Drafter and Previewer will have independent
+					undo histories. But you'll need to make the final edit in the tab
+					you want to be saved in your browser storage. That edit could be
+					arbitrary, or an <span class="noBreak"><b>Undo</b> + <b>Redo</b></span>.
+				</li>
+			</ul>
+		</details>
+	</section>
+
+
+	<section>
+		<h2>Tips</h2>
+
+		<h3>Exporting for Graphic Design Programs</h3>
+		<p>
+			In Previewer, use the browser's <b>Print</b> &rarr; <b>Save
+			as PDF</b>. That PDF serves as an editable starting point
+			you can import into Adobe&reg; Illustrator or Inkscape&reg;.
+		</p>
+
+		<h3>Hiding Toolbars</h3>
+		<p>
+			You can hide the Toolbar and Side Panels using the <b>View</b> menu,
+			because most actions are available in context menus (right-click) and
+			<a href="/shortcuts">Shortcuts</a>, and the top Menubar has all them.
+		</p>
+	</section>
+</article>

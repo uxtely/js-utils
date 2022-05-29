@@ -1,0 +1,113 @@
+<head>
+	<title>Bitwise Table Lookup</title>
+	<meta name="description" content="An unconditional code alternative to nested branches, a software multiplexer.">
+</head>
+
+<article>
+	<header>
+		<h1>
+			<span class="normalWeight smallerText">Code Multiplexer</span><br>
+			Bitwise Table Lookup</h1>
+
+		<div class="Author">
+			by Eric Fortis
+			<a href="/eric"></a>
+			<a target="_blank" href="https://twitter.com/efortis" aria-label="Eric Fortis Twitter"></a>
+			<time>October 2, 2020</time>
+		</div>
+	</header>
+
+	<section>
+		<p>
+			This technique is similar to traditional table lookups,
+			but it generates indices with bitwise operators.
+		</p>
+		<p><b>Benefits:</b></p>
+		<ul>
+			<li>Easier to read than nested conditionals.</li>
+			<li>Makes explicit the number of cases to test and review.</li>
+			<li>Performance</li>
+		</ul>
+	</section>
+
+	<section>
+		<h2>Example</h2>
+		<p>
+			In UI Drafter, a connection's color varies when
+			it's <code class="codeArg">selected</code>, <code class="codeArg">hovered</code>, and their combinations.
+		</p>
+
+		<div class="RegionImg">
+			<svg xmlns="http://www.w3.org/2000/svg" width="320" height="240">
+				<path fill="#1c1c1c" d="M0 0h320v240H0z" />
+
+				<text x="110" y="210" transform="rotate(-37)" font-size="14" fill="#fff">Selected</text>
+				<text x="145" y="235" transform="rotate(-37)" font-size="14" fill="#fff">Hovered</text>
+
+				<text x="215" y="128" font-size="21" fill="#5b5b5b" text-anchor="middle">0</text>
+				<text x="255" y="128" font-size="21" fill="#5b5b5b" text-anchor="middle">0</text>
+
+				<text x="215" y="158" font-size="21" fill="#219f4e" text-anchor="middle">0</text>
+				<text x="255" y="158" font-size="21" fill="#219f4e" text-anchor="middle">1</text>
+
+				<text x="215" y="187" font-size="21" fill="#3658d6" text-anchor="middle">1</text>
+				<text x="255" y="187" font-size="21" fill="#3658d6" text-anchor="middle">0</text>
+
+				<text x="215" y="217" font-size="21" fill="#4170c7" text-anchor="middle">1</text>
+				<text x="255" y="217" font-size="21" fill="#4170c7" text-anchor="middle">1</text>
+
+				<path fill="#383838" d="M14.51 14.32h20.26v152.86H14.51z" />
+				<path fill="#5b5b5b" d="M14.51 14.32h20.26v23.43H14.51zM32.16 53.51h5.14v10.08h-5.14z" />
+				<path d="M36.26 58.16c64.35 0 68.14 63 124.07 63" fill="none" stroke="#5b5b5b" stroke-width="2" />
+				<path d="M36.26 87.1c64.35 0 68.14 63 124.07 63" fill="none" stroke="#219f4e" stroke-width="2" />
+				<path d="M36.26 116.04c64.35 0 68.14 63 124.07 63" fill="none" stroke="#3658d6" stroke-width="2" />
+				<path d="M36.26 144.98c64.35 0 68.14 63 124.07 63" fill="none" stroke="#4170c7" stroke-width="2" />
+				<path fill="#5b5b5b"
+							d="M32.16 82.45h5.14v10.08h-5.14zM32.16 111.4h5.14v10.08h-5.14zM32.16 140.34h5.14v10.08h-5.14z" />
+				<path fill="#383838" d="M181.41 76.72h-20.26v152.86h20.26z" />
+				<path fill="#5b5b5b"
+							d="M181.42 76.72h-20.26v23.43h20.26zM164.02 115.9h-5.14v10.08h5.14zM164.02 144.85h-5.14v10.08h5.14zM164.02 173.79h-5.14v10.08h5.14zM164.02 202.73h-5.14v10.08h5.14z" />
+			</svg>
+		</div>
+
+
+		<p>
+			The colors are in an array:
+		</p>
+		<pre>
+<span class="codeCommentHeading">/* bits: Selected, Hovered */</span>
+<span class="codeKeyword">const</span> <b>colors</b> = [
+  grey,  <span class="codeComment">// 00</span>
+  green, <span class="codeComment">// 01</span>
+  blueA, <span class="codeComment">// 10</span>
+  blueB  <span class="codeComment">// 11</span>
+]
+</pre>
+
+		<p>
+			&hellip;and can be queried as:
+		</p>
+		<pre>
+<b>colors</b>[<span class="codeArg">selected</span> << 1 | <span class="codeArg">hovered</span>]
+</pre>
+	</section>
+
+	<section>
+		<h2>Demo Trace</h2>
+		<p>
+			<code><span class="codeArg">selected</span> = <span class="codeKeyword">true</span></code>,
+			<code><span class="codeArg">hovered</span> = <span class="codeKeyword">true</span></code> would be index
+			<code>3</code>
+		</p>
+		<pre>
+<span class="codeKeyword">true</span> << 1 | <span class="codeKeyword">true</span>
+1 << 1 | 1
+2 | 1
+3
+</pre>
+		
+		<p>
+			It's like a <a href="https://en.wikipedia.org/wiki/Multiplexer">multiplexer</a>.
+		</p>
+	</section>
+</article>

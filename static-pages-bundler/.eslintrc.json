@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "prefer-const": "warn",
+    "no-mixed-spaces-and-tabs": "off"
+  },
+  "globals": {
+    "PRODUCTION": "readonly",
+    "BigInt": "readonly",
+    "Promise": "readonly",
+    "Proxy": "readonly",
+    "Set": "readonly",
+    "Map": "readonly",
+    "PropTypes": "readonly"
+  }
+}

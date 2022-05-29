@@ -1,0 +1,12 @@
+{
+  "name": "-",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "node-watch": "0.7.3"
+  },
+  "dependencies": {
+    "terser": "5.13.1"
+  }
+}

@@ -1,0 +1,7 @@
+ul.FileNames li {
+	padding: 0;
+	margin: 0;
+	font-size: 0.9em;
+	line-height: 1.5;
+	list-style: none;
+}

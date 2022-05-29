@@ -1,6 +1,6 @@
-import { createHash } from 'crypto'
-import { join, dirname } from 'path'
-import { brotliCompressSync } from 'zlib'
+import { createHash } from 'node:crypto'
+import { join, dirname } from 'node:path'
+import { brotliCompressSync } from 'node:zlib'
 import {
 	rmSync,
 	lstatSync,
@@ -11,7 +11,7 @@ import {
 	readFileSync,
 	copyFileSync,
 	writeFileSync
-} from 'fs'
+} from 'node:fs'
 
 
 export const reIsSourceCode = /^(?!.*\.test).*\.js$/; // js not ending in .test.js
