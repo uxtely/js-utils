@@ -34,7 +34,7 @@ export class BrotliPool extends EventEmitter {
 			this.addNewWorker()
 
 		this.on(kWorkerFreedEvent, () => { // Dispatch the next enqueued task, if any.
-			if (this.tasks.length > 0) {
+			if (this.tasks.length) {
 				const { task, callback } = this.tasks.shift()
 				this.compress(task, callback)
 			}
@@ -66,15 +66,14 @@ export class BrotliPool extends EventEmitter {
 		this.emit(kWorkerFreedEvent)
 	}
 
-	compress(task, callback) {
-		if (this.freeWorkers.length === 0) { // Wait until a worker thread becomes free.
-			this.tasks.push({ task, callback })
-			return
+	compress(task, callback) { // Main Task
+		if (this.freeWorkers.length) {
+			const worker = this.freeWorkers.pop()
+			worker[kTaskInfo] = new WorkerPoolTaskInfo(callback)
+			worker.postMessage(task)
 		}
-
-		const worker = this.freeWorkers.pop()
-		worker[kTaskInfo] = new WorkerPoolTaskInfo(callback)
-		worker.postMessage(task)
+		else // Wait until a worker thread becomes free
+			this.tasks.push({ task, callback })
 	}
 
 	close() {
