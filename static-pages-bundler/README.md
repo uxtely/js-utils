@@ -1,10 +1,12 @@
 # Static Pages Bundler
-Dev serves and auto reloads the browser on changes. Production compiles all the pages to static html's.
 
-In UI Drafter, it's used for:
+In UI Drafter, this bundler is used for:
 - https://uidrafter.com
-- https://blog.uidrafter.com [./example-blog/](./example-blog)
-- https://docs.uidrafter.com [./example-docs/](./example-docs)
+- https://blog.uidrafter.com [example-blog/](./example-blog)
+- https://docs.uidrafter.com [example-docs/](./example-docs)
+ 
+In dev, iy serves and auto reloads the browser on changes. While
+in production it compiles all the pages to static HTML files.
 
 
 ## HTML Template
