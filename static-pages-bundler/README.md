@@ -25,19 +25,9 @@ and CSS files. And computes their CSP nonces.
 [media-remaper.js](./media-remaper.js) appends a SHA1 hash to the filenames
 and takes care of rewriting their `src` in HTML (**only in HTML**).
 
-If you want to use media files in CSS, create a similar function to
-`remapMediaInHTML` but with a regex for replacing the `url(...)` content.                         
-
 ### Images (no JPGs)
 We [Conditionally Serve AVIF and WebP with Nginx](https://blog.uidrafter.com/conditional-avif-for-video-posters)
 That's to say, we generate AVIF and WebP using [media-optimizer.sh](./media-optimizer.sh).
-
-For color consistency (especially for app screenshots), we always use PNGs (no JPGs).
-
-If you want to use JPGs:
-- Add its Media Type to [mimes](./routerForStaticPages.js)
-- Add its extension to [media-remaper.js](./media-remaper.js) to the `listFiles` regex
-- Remove the JPG check in [media-optimizer.sh (L22)](./media-optimizer.sh#L22)
 
 ### Videos (only MP4)
 We only use MP4 videos
@@ -50,8 +40,8 @@ It saves the pages without the `.html` extension for pretty URLs.
 See [Pretty routes for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
 
 ### Minifiers
-The HTML and CSS are custom (an incomplete), but you can make them point to a popular 
-NPM package like we do in [minifyJS](./minifyJS.js)
+The HTML and CSS are custom, but you can point them to
+a popular NPM package like we do in [minifyJS](./minifyJS.js)
 
 ### Compression
 Each HTML document, CSS and JS file is pre-compressed with brotli in parallel.
@@ -59,10 +49,10 @@ For example, there's a `dist/index` and a `dist/index.br`.
 
 
 ## Serving
-Here's the [nginx.conf](https://github.com/uxtely/ops-utils/blob/main/location-server/jails/nginx_j/usr/local/etc/nginx/nginx.conf)
-used by UI Drafter.
-
-For the logs database see [web-traffic-logs](https://github.com/uxtely/ops-utils/tree/main/web-traffic-logs/).
+Here's the
+[nginx.conf](https://github.com/uxtely/ops-utils/blob/main/location-server/jails/nginx_j/usr/local/etc/nginx/nginx.conf)
+used by UI Drafter. For the logs
+database see [web-traffic-logs](https://github.com/uxtely/ops-utils/tree/main/web-traffic-logs/).
 
 
 ## Installation
