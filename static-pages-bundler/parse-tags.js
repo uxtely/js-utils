@@ -1,6 +1,6 @@
 /**
- * NOTE: Run minifyHTML first, because this code
- * doesn't support tags within comments nor multiline tags.
+ * NOTE: Run minifyHTML first, because using any of these functions
+ * because they don't support tags within comments nor multiline ones.
  */
 
 const reExtractStyleSheets = /(?<=<link\s.*href=")[^."]+\.css/g
