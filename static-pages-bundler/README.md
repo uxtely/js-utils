@@ -17,27 +17,25 @@ For example, to handle the common header, navigation, and footer.
 
 
 ## Assets and CSP
-The production bundler inlines the JavaScript
-and CSS files. And computes their CSP nonces.
+In production, the JS and CSS gets inlined with their corresponding CSP nonces.
 
 
 ## Images and Videos
-[media-remaper.js](./media-remaper.js) appends a SHA1 hash to the filenames
-and takes care of rewriting their `src` in HTML (**only in HTML**).
+[media-remaper.js](./media-remaper.js) appends a SHA-1 hash to the filenames
+and rewrites their `src` in HTML.
 
-### Images (no JPGs)
+### Images
 We [Conditionally Serve AVIF and WebP with Nginx](https://blog.uidrafter.com/conditional-avif-for-video-posters)
 That's to say, we generate AVIF and WebP using [media-optimizer.sh](./media-optimizer.sh).
 
 ### Videos (only MP4)
-We only use MP4 videos
-[media-optimizer.sh (L44)](./media-optimizer.sh#L44)
+Videos get rewritten if needed for fast playback, see [media-optimizer.sh (L44)](./media-optimizer.sh#L44)
 
 
 ## Production Build
-It crawls the dev server, and saves each route as static html page.
-It saves the pages without the `.html` extension for pretty URLs. 
-See [Pretty routes for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
+It crawls the dev server and saves each route as static html page. For pretty
+URLs, it saves the pages without the `.html` extension, see [Pretty routes
+for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
 
 ### Minifiers
 The HTML and CSS are custom, but you can point them to
