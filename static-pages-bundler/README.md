@@ -1,9 +1,9 @@
 # Static Pages Bundler
 
 In UI Drafter, this bundler is used for:
-- https://docs.uidrafter.com
-- https://blog.uidrafter.com
-- https://uidrafter.com
+- [docs.uidrafter.com](https://docs.uidrafter.com)
+- [blog.uidrafter.com](https://blog.uidrafter.com)
+- [uidrafter.com](https://uidrafter.com)
 
 There are two example projects (docs, and blog) included in this repo.
  
