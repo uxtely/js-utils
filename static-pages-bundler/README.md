@@ -35,7 +35,7 @@ That's to say, we generate AVIF and WebP using [media-optimizer.sh](./media-opti
 For color consistency (especially for app screenshots), we always use PNGs (no JPGs).
 
 If you want to use JPGs:
-- Add its Media Type to [mimes.js](./mimes.js)
+- Add its Media Type to [mimes](./routerForStaticPages.js)
 - Add its extension to [media-remaper.js](./media-remaper.js) to the `listFiles` regex
 - Remove the JPG check in [media-optimizer.sh (L22)](./media-optimizer.sh#L22)
 
