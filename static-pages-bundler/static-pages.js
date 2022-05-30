@@ -12,7 +12,7 @@ import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
 import { minifyHTML } from './minifyHTML.js'
 import { remapMediaInHTML, copyDirWithHashedNames } from './media-remaper.js'
-import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parse-tags.js'
+import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parsers.js'
 
 import { DevHost, browser } from '../Environment.js'
 import { read, write, copyDir, removeDir } from '../fs-utils.js'

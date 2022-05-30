@@ -1,4 +1,4 @@
-import { parseHeadAndBody } from '../parseHeadAndBody.js'
+import { parseHeadAndBody } from '../parsers.js'
 
 
 export function htmlTemplate(docRoutes, html, iRoute) {
