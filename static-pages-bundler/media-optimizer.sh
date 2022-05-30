@@ -36,8 +36,8 @@ for img in $(find $1 -type f -name *\.png); do
 done
 
 
-# For faster video playback, the metadata section (moov) of an mp4
-# should appear before the video and audio section (mdat).
+# Enables "+faststart" if needed, which ensures the metadata section (moov)
+# of an mp4 is before the video and audio section (mdat).
 # https://trac.ffmpeg.org/wiki/HowToCheckIfFaststartIsEnabledForPlayback
 # https://www.ramugedia.com/mp4-container
 for video in $(find $1 -type f -name *\.mp4); do
