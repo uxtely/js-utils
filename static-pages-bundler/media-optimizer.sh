@@ -19,7 +19,7 @@ command -v ffmpeg > /dev/null || abort "Missing ffmpeg"
 # We only use PNGs, no JPGs. This way we can ensure there's no
 # color shifting between screenshots and PNGs look sharper anyways.
 nJPG=$(find $1 -type f -name *\.jpg | awk 'END{print NR}')
-test $nJPG = 0 || abort "Found a JPG. Convert it to PNG." 
+test $nJPG = 0 || abort "Found a JPG, use a PNG instead." 
 
 
 # If there's no foo.png.avif, foo.png outputs:
