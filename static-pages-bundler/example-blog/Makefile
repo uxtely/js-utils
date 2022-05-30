@@ -1,3 +1,5 @@
+# https://blog.uidrafter.com/getting-rid-of-npm-scripts
+
 dev:
 	node app.js development
 	
@@ -16,3 +18,4 @@ prod:
 all: lint slint opm prod
 
 .PHONY: dev lint slint opm prod all
+

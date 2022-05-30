@@ -1,3 +1,5 @@
+# https://blog.uidrafter.com/getting-rid-of-npm-scripts
+
 dev:
 	node app.js development
 	
