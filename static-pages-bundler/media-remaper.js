@@ -3,10 +3,10 @@ import { copy, sha1, makeDir, listFiles } from '../fs-utils.js'
 
 
 /**
- * Copies a dir, withtout subdirs, and replaces the filenames with a hash in the target dir
- *   foo.png      -> <png-hash>.png
- *   foo.png.webp -> <png-hash>.png.webp
- *   foo.png.avif -> <png-hash>.png.avif
+ * Copies a dir, without subdirectories, and adds SHA-1 hash to the copied filename
+ *   foo.png      -> foo-<sha1>.png
+ *   foo.png.webp -> foo-<sha1>.png.webp
+ *   foo.png.avif -> foo-<sha1>.png.avif
  *
  * Yes, all use the SHA-1 from the original PNG. That way
  * in nginx.conf we can conditionally serve the best format.
