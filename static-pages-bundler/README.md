@@ -15,11 +15,6 @@ in production it compiles all the pages to static HTML files.
 Optionally, you can create an HTML template.
 For example, to handle the common header, navigation, and footer.
 
-### [parseHeadAndBody.js](./parseHeadAndBody.js)
-This function is used because the pages are partial HTML documents
-(e.g. [shortcuts.html](./example-docs/root/shortcuts.html), they have
-an optional head section and the rest is considered part of the body.
-
 
 ## Assets and CSP
 The production bundler inlines the JavaScript and CSS files. Also, it
