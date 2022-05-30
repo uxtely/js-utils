@@ -3,7 +3,7 @@ import { copy, sha1, makeDir, listFiles } from '../fs-utils.js'
 
 
 /**
- * Copies a dir, withtout subdirs, and replaces the filenames with a hash in the target dir
+ * Copies a dir, without subdirs, and replaces the filenames with a hash in the target dir
  *   foo.png      -> <png-hash>.png
  *   foo.png.webp -> <png-hash>.png.webp
  *   foo.png.avif -> <png-hash>.png.avif
