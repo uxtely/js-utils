@@ -1,4 +1,18 @@
-// TODO This is not a perfect solution, e.g.:
+/**
+ * minifyCSS and minifyHTML are not perfect solutions, but I wrote my own not only
+ * for learning, but because popular CSS and HTML minifiers were causing issues.
+ *
+ * For example, in CSS some minifiers reorder rules (for compression) but
+ * that messed up workaround for example with browser-specific prefixes.
+ *
+ * Similarly, in HTML the messed up the relevant spaces
+ * between tags, and others did not handle <pre>
+ *
+ * At any rate, see minifyJS so you can do something
+ * similar to hook up a different minifier.
+ */
+
+// TODO
 // - it doesn't handle nested comments like /*/* foo */*/
 // - it doesn't preserve anything within data-uri, nor content strings.
 //   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
