@@ -54,11 +54,8 @@ The HTML and CSS are custom (an incomplete), but you can make them point to a po
 NPM package like we do in [minifyJS](./minifyJS.js)
 
 ### Compression
-Each HTML document, CSS and JS file is pre-compressed with brotli.
+Each HTML document, CSS and JS file is pre-compressed with brotli in parallel.
 For example, there's a `dist/index` and a `dist/index.br`.
-
-As the compression takes about 60% of the time, for speed,
-it runs in `node:worker_threads` (one per CPU).
 
 
 ## Serving
