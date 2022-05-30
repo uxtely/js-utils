@@ -6,7 +6,6 @@ import { removeCommentsFromHTML } from './minifyHTML.js'
  * because they don't support tags within comments nor multiline ones.
  */
 
-
 const reExtractStyleSheets = /(?<=<link\s.*href=")[^."]+\.css/g
 const reExtractScripts = /(?<=<script\s.*src=")[^."]+\.js/g
 

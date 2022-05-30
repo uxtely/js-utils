@@ -6,15 +6,18 @@ import { fileURLToPath } from 'node:url'
 
 import watch from 'node-watch'
 
-import { BrotliPool } from './worker-pool-for-brotli.js'
 import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
 import { minifyHTML } from './minifyHTML.js'
 import { remapMediaInHTML, copyDirWithHashedNames } from './media-remaper.js'
 import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parsers.js'
 
+import { Pool } from '../parallel.js'
 import { DevHost, browser } from '../Environment.js'
 import { read, write, copyDir, removeDir, sizeOf, sha1, exists, saveAsJSON } from '../fs-utils.js'
+
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 
 export function devStaticPages(router, rootDir = './root') {
@@ -27,7 +30,7 @@ export function devStaticPages(router, rootDir = './root') {
 			spawn(browser(), [serverAddr])
 			console.log(serverAddr)
 			watch(rootDir, { recursive: true }, () => {
-				spawn(dirname(fileURLToPath(import.meta.url)) + '/reload-browser')
+				spawn(__dirname + '/reload-browser')
 			})
 		}
 	})
@@ -54,7 +57,7 @@ export async function buildStaticPages(router, routes, sitemapDomain) {
 			removeDir(pDist)
 			const mediaHashes = copyDirWithHashedNames(pMedia, pDistMedia)
 
-			const brotliPool = new BrotliPool()
+			const brotliPool = new Pool(__dirname + '/worker-for-brotli.js')
 			let nFinishedBrotliWorkers = 0
 
 			for (const route of routes) {
@@ -93,7 +96,7 @@ export async function buildStaticPages(router, routes, sitemapDomain) {
 					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
 
 				write(pDist + route, html)
-				brotliPool.compress(pDist + route, async error => {
+				brotliPool.run(pDist + route, async error => {
 					if (error)
 						console.error(error)
 

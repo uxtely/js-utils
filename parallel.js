@@ -4,9 +4,6 @@ import { EventEmitter } from 'node:events'
 import { AsyncResource } from 'node:async_hooks'
 
 
-/** This file is only needed for running brotli in parallel */
-
-const TASK = 'worker-for-brotli.js'
 const kTaskInfo = Symbol('kTaskInfo')
 const kWorkerFreedEvent = Symbol('kWorkerFreedEvent')
 
@@ -24,9 +21,10 @@ class WorkerPoolTaskInfo extends AsyncResource {
 }
 
 
-export class BrotliPool extends EventEmitter {
-	constructor() {
+export class Pool extends EventEmitter {
+	constructor(taskFile) {
 		super()
+		this.taskFile = taskFile
 		this.nThreads = cpus().length
 		this.freeWorkers = []
 		this.workers = []
@@ -38,16 +36,16 @@ export class BrotliPool extends EventEmitter {
 		this.on(kWorkerFreedEvent, () => { // Dispatch the next enqueued task, if any.
 			if (this.tasks.length) {
 				const { task, callback } = this.tasks.shift()
-				this.compress(task, callback)
+				this.run(task, callback)
 			}
 		})
 	}
 
 	addNewWorker() {
-		const worker = new Worker(new URL(TASK, import.meta.url))
+		const worker = new Worker(new URL(this.taskFile, import.meta.url))
 
 		worker.on('message', () => {
-			worker[kTaskInfo].done(null) // Calls `compress` callback
+			worker[kTaskInfo].done(null) // Calls `run` callback
 			worker[kTaskInfo] = null // Removes the `TaskInfo` associated with the Worker
 			this.freeWorkers.push(worker)
 			this.emit(kWorkerFreedEvent)
@@ -55,7 +53,7 @@ export class BrotliPool extends EventEmitter {
 
 		worker.on('error', error => {
 			if (worker[kTaskInfo])
-				worker[kTaskInfo].done(error, null) // Calls `compress` callback with error
+				worker[kTaskInfo].done(error, null) // Calls `run` callback with error
 			else
 				this.emit('error', error)
 
@@ -68,7 +66,7 @@ export class BrotliPool extends EventEmitter {
 		this.emit(kWorkerFreedEvent)
 	}
 
-	compress(task, callback) { // Main Task
+	run(task, callback) { // Main Task
 		if (this.freeWorkers.length) {
 			const worker = this.freeWorkers.pop()
 			worker[kTaskInfo] = new WorkerPoolTaskInfo(callback)
