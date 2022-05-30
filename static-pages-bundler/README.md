@@ -50,9 +50,9 @@ Builds a `sitemap.txt`
 
 
 ## Serving
-Here's the
+Here's an
 [nginx.conf](https://github.com/uxtely/ops-utils/blob/main/location-server/jails/nginx_j/usr/local/etc/nginx/nginx.conf)
-used by UI Drafter. For the logs
+example. For the logs
 database see [web-traffic-logs](https://github.com/uxtely/ops-utils/tree/main/web-traffic-logs/).
 
 

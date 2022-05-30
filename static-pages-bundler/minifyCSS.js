@@ -3,13 +3,12 @@
  * for learning, but because popular CSS and HTML minifiers were causing issues.
  *
  * For example, in CSS some minifiers reorder rules (for compression) but
- * that messed up workarounds with browser-specific prefixes (for example).
+ * that messed up workarounds with browser-specific prefixes. 
  *
  * Similarly, in HTML the messed up the relevant spaces
  * between tags, and others did not handle <pre>
  *
- * At any rate, see minifyJS so you can do something
- * similar to hook up a different minifier.
+ * At any rate, see minifyJS if you want to hook up a different minifier.
  */
 
 // TODO
