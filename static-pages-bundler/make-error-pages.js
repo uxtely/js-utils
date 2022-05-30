@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 import { writeFileSync } from 'node:fs'
 
-// The error pages end up with no extension, but Nginx takes
-// care of that, it defaults to content-type text/html
-
+// The error pages have no extension, see
+// https://blog.uidrafter.com/pretty-routes-for-static-html
 [
-	'./example-blog',
-	'./example-docs'
+	'./example-blog/root/root-meta/',
+	'./example-docs/root/root-meta/'
 ]
 	.forEach(dir => {
 		make(dir, 400, 'Bad Request')
