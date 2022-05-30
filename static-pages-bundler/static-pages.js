@@ -1,11 +1,11 @@
 import http from 'node:http'
 import { spawn } from 'node:child_process'
 import { dirname } from 'node:path'
+import { createHash } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 
 import watch from 'node-watch'
 
-import { cspNonce } from './csp-nonce.js'
 import { BrotliPool } from './BrotliPool.js'
 import { reportSizes } from './reportSizes.js'
 import { minifyJS } from './minifyJS.js'
@@ -139,3 +139,10 @@ export function httpGet(url) {
 		}).on('error', reject)
 	})
 }
+
+function cspNonce(data) {
+	return data
+		? 'sha256-' + createHash('sha256').update(data).digest('base64')
+		: ''
+}
+
