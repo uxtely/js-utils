@@ -55,7 +55,7 @@ export async function buildStaticPages(router, routes, sitemapDomain) {
 			const mediaHashes = copyDirWithHashedNames(pMedia, pDistMedia)
 
 			const brotliPool = new BrotliPool()
-			let nFinishedWorkers = 0
+			let nFinishedBrotliWorkers = 0
 
 			for (const route of routes) {
 				let html = await httpGet(serverAddr + route)
@@ -97,7 +97,7 @@ export async function buildStaticPages(router, routes, sitemapDomain) {
 					if (error)
 						console.error(error)
 
-					if (++nFinishedWorkers === routes.length) {
+					if (++nFinishedBrotliWorkers === routes.length) {
 						brotliPool.close()
 
 						if (sitemapDomain) {
