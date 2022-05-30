@@ -33,7 +33,7 @@ function mimeFor(filename) {
 
 
 export function routerForStaticPages(rootPath, routes, htmlTemplate = a => a) {
-	const altRoot = '/root-meta'
+	const altRoot = '/root-meta' // @Convention
 
 	return async function ({ url, headers }, response) {
 		try {
@@ -76,7 +76,7 @@ export function routerForStaticPages(rootPath, routes, htmlTemplate = a => a) {
 				response.setHeader('Content-Type', mimeFor(url))
 				const reader = fs.existsSync(rootPath + url)
 					? fs.createReadStream(rootPath + url)
-					: fs.createReadStream(rootPath + altRoot + url) // @Convention
+					: fs.createReadStream(rootPath + altRoot + url)
 				reader.on('open', function () { this.pipe(response) })
 				reader.on('error', function (error) { onError(error, response) })
 			}
