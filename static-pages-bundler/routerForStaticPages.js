@@ -39,8 +39,7 @@ export function routerForStaticPages(rootPath, routes, htmlTemplate = a => a) {
 		try {
 			if (url === '/') { /* Redirect to "/index" or fallback to the first route */
 				response.statusCode = 302 // Found (Temporary Redirect)
-				const iRoute = Math.max(0, routes.indexOf('/index'))
-				response.setHeader('Location', routes[iRoute])
+				response.setHeader('Location', routes[Math.max(0, routes.indexOf('/index'))])
 				response.end()
 			}
 
