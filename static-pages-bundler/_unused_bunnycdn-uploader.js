@@ -1,6 +1,6 @@
-import https from 'https';
-import { basename } from 'path';
-import { readFileSync } from 'fs';
+import https from 'node:https'
+import { basename } from 'node:path'
+import { readFileSync } from 'node:fs'
 
 
 /**
@@ -19,8 +19,8 @@ import { readFileSync } from 'fs';
 
 const BUNNY_CREDENTIAL_HEADER = { // TODO to env var
 	AccessKey: 'same-as-your-ftp-password'
-};
-const BUNNY_STORAGE_ZONE = 'enter-your-zone-name';
+}
+const BUNNY_STORAGE_ZONE = 'enter-your-zone-name'
 
 export async function uploadVideosToBunnyCDN(localDir, zoneDir) {
 	await uploadMissingFiles(
@@ -31,15 +31,15 @@ export async function uploadVideosToBunnyCDN(localDir, zoneDir) {
 
 async function uploadMissingFiles(dir, ext, bunnyURL) {
 	try {
-		const candidates = listFilesWithoutDirs(dir).filter(f => f.endsWith(ext));
+		const candidates = listFilesWithoutDirs(dir).filter(f => f.endsWith(ext))
 		const alreadyUploaded = await listAlreadyUploadedFiles(bunnyURL)
-		const toUpload = candidates.filter(f => !alreadyUploaded.has(f));
+		const toUpload = candidates.filter(f => !alreadyUploaded.has(f))
 		if (toUpload.length)
 			Promise
 				.all(toUpload.map(f => putFile(`${bunnyURL}/${f}`, `${dir}/${f}`)))
-				.catch(console.error);
+				.catch(console.error)
 		else
-			console.log(`No ${ext} needed to be uploaded to BunnyCDN.`);
+			console.log(`No ${ext} needed to be uploaded to BunnyCDN.`)
 	}
 	catch (error) {
 		console.error(error)
@@ -53,19 +53,19 @@ function listAlreadyUploadedFiles(url) {
 	})
 		.then(res => {
 			if (res.statusCode !== 200)
-				throw res.statusCode;
+				throw res.statusCode
 
 			const body = JSON.parse(res.body)
-			const saved = new Set();
+			const saved = new Set()
 			for (const f of body)
-				saved.add(f.ObjectName);
-			return saved;
+				saved.add(f.ObjectName)
+			return saved
 		})
 }
 
 function putFile(url, file) {
-	console.log('Uploading to BunnyCDN', basename(url));
-	const data = readFileSync(file);
+	console.log('Uploading to BunnyCDN', basename(url))
+	const data = readFileSync(file)
 	return request(url, {
 		method: 'PUT',
 		headers: { 'Content-Length': Buffer.byteLength(data) },
@@ -92,6 +92,6 @@ function request(url, { method, headers, body = '' }) {
 }
 
 function listFilesWithoutDirs(dir) {
-	return readdirSync(dir).filter(f => lstatSync(join(dir, f)).isFile());
+	return readdirSync(dir).filter(f => lstatSync(join(dir, f)).isFile())
 }
 
