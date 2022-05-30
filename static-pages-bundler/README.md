@@ -1,4 +1,4 @@
-# Static Pages Bundler
+# Static Site Generator
 
 This bundler is used for:
 - [docs.uidrafter.com](https://docs.uidrafter.com)
