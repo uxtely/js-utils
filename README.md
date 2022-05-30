@@ -1,9 +1,6 @@
 # JavaScript Utils
 
-This repository has JavaScript utilities that are used
-in UI Drafter, and that you can adapt to your needs.
+These JavaScript utilities are used in UI Drafter.
 
-
-## License
-These programs are [ISC licensed](./LICENSE).
+Feel free to adapt them to your needs, they are [ISC licensed](./LICENSE).
 
