@@ -20,8 +20,8 @@ an optional head section and the rest is considered part of the body.
 
 
 ## Assets and CSP
-The production bundler inlines the JavaScript and CSS. Also, it
-computes their corresponding CSP nonce and injects it as well.
+The production bundler inlines the JavaScript and CSS files. Also, it
+combines in one script tag and computes its corresponding CSP nonce.
 
 
 ## Images and Videos

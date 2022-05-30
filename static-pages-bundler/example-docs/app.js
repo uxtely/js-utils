@@ -29,21 +29,20 @@ switch (process.argv[2]) {
 		break
 
 	case 'production':
-		buildStaticPages(router, routes, 'docs.uidrafter.com')
-			.then(async () => {
-				const server = http.createServer(router)
-				server.listen(0, DevHost, async error => {
-					if (error)
-						console.error(error)
+		buildStaticPages(router, routes, 'docs.uidrafter.com').then(async () => {
+			const server = http.createServer(router)
+			server.listen(0, DevHost, async error => {
+				if (error)
+					console.error(error)
 
-					await throwIfHasDeadLinks(server.address().port)
+				await throwIfHasDeadLinks(server.address().port)
 
-					// Default to the first route (using a copy to avoid redirect)
-					copy('dist' + routes[0], 'dist/index')
-					copy('dist' + routes[0] + '.br', 'dist/index.br')
-					server.close()
-				})
+				// Default to the first route (using a copy to avoid redirect)
+				copy('dist' + routes[0], 'dist/index')
+				copy('dist' + routes[0] + '.br', 'dist/index.br')
+				server.close()
 			})
+		})
 		break
 
 	default:

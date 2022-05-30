@@ -15,6 +15,7 @@ switch (process.argv[2]) {
 		break
 
 	case 'production':
+		// For drafting blogs, we exclude files starting with an underscore from the production build.
 		buildStaticPages(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com')
 		break
 
