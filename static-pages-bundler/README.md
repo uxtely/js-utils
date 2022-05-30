@@ -1,6 +1,6 @@
 # Static Pages Bundler
 
-In UI Drafter, this bundler is used for:
+This bundler is used for:
 - [docs.uidrafter.com](https://docs.uidrafter.com)
 - [blog.uidrafter.com](https://blog.uidrafter.com)
 - [uidrafter.com](https://uidrafter.com)
