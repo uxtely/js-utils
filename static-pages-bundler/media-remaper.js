@@ -3,7 +3,7 @@ import { copy, sha1, makeDir, listFiles } from '../fs-utils.js'
 
 
 /**
- * Copies a dir, without subdirectories, and adds SHA-1 hash to the copied filename
+ * Copies a dir, without subdirectories, and adds their SHA-1 hash to the copied filename
  *   foo.png      -> foo-<sha1>.png
  *   foo.png.webp -> foo-<sha1>.png.webp
  *   foo.png.avif -> foo-<sha1>.png.avif
@@ -36,11 +36,11 @@ export function copyDirWithHashedNames(src, dest) {
 
 
 /**
- * For using the SHA-1 hashes as filenames in HTML.
+ * Edit the media source links in the HTML, so they have the new SHA-1 hashed
+ * filenames. Assumes that all the files are in "media/" (not ../media, ./media)
+ *
  * If you want to handle CSS files, edit the regex so
  * instead of checking `="` (e.g. src="img.png") also checks for `url(`
- *
- * Assumes that all the files are in "media/" (not ../media, ./media)
  **/
 export function remapMediaInHTML(mediaHashes, html) {
 	const reFindMedia = new RegExp('(="media/.*?)"', 'g')
