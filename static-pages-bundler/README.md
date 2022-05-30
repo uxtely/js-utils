@@ -75,10 +75,10 @@ For the logs database see [web-traffic-logs](https://github.com/uxtely/ops-utils
 ```shell script
 npm install
 
+# Optional:
 cd ~
 npm install -g eslint \
   stylelint \
   stylelint-config-idiomatic-order \
   stylelint-config-recommended 
-  
 ```
