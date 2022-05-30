@@ -17,8 +17,8 @@ For example, to handle the common header, navigation, and footer.
 
 
 ## Assets and CSP
-The production bundler inlines the JavaScript and CSS files. Also, it
-combines in one script tag and computes its corresponding CSP nonce.
+The production bundler inlines the JavaScript
+and CSS files. And computes their CSP nonces.
 
 
 ## Images and Videos
