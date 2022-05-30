@@ -2,8 +2,10 @@
 
 In UI Drafter, this bundler is used for:
 - https://uidrafter.com
-- https://blog.uidrafter.com [example-blog/](./example-blog)
-- https://docs.uidrafter.com [example-docs/](./example-docs)
+- https://blog.uidrafter.com 
+- https://docs.uidrafter.com
+
+There are two example projects (docs, and blog) included in this repo.
  
 In dev, it serves and auto reloads the browser on changes. While
 in production it compiles all the pages to static HTML files.
