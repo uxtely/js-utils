@@ -45,6 +45,9 @@ a popular NPM package like we do in [minifyJS](./minifyJS.js)
 Each HTML document, CSS and JS file is pre-compressed with brotli in parallel.
 For example, there's a `dist/index` and a `dist/index.br`.
 
+### Sitemap
+Builds a `sitemap.txt`
+
 
 ## Serving
 Here's the
