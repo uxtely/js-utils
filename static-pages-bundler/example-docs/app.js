@@ -5,7 +5,7 @@ import { DevHost } from '../../Environment.js'
 
 import { minifyHTML } from '../minifyHTML.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
-import { devStaticPages, httpGet, buildStaticPages } from '../static-pages.js'
+import { devStaticPages, httpGet, buildStaticPages } from '../builders.js'
 
 import { htmlTemplate } from './htmlTemplate.js'
 

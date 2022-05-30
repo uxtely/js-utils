@@ -1,7 +1,7 @@
 import { basename } from 'node:path'
 import { listFiles } from '../../fs-utils.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
-import { buildStaticPages, devStaticPages } from '../static-pages.js'
+import { buildStaticPages, devStaticPages } from '../builders.js'
 
 import { htmlTemplate } from './htmlTemplate.js'
 

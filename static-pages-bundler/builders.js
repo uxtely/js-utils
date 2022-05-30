@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 import watch from 'node-watch'
 
-import { BrotliPool } from './BrotliPool.js'
+import { BrotliPool } from './worker-pool-for-brotli.js'
 import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
 import { minifyHTML } from './minifyHTML.js'
