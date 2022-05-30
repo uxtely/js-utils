@@ -4,6 +4,8 @@ import { EventEmitter } from 'node:events'
 import { AsyncResource } from 'node:async_hooks'
 
 
+/** This file is only needed for running brotli in parallel */
+
 const TASK = 'brotli-worker.js'
 const kTaskInfo = Symbol('kTaskInfo')
 const kWorkerFreedEvent = Symbol('kWorkerFreedEvent')
