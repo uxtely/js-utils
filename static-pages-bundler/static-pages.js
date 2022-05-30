@@ -27,7 +27,7 @@ export function devStaticPages(router, rootDir = './root') {
 			const serverAddr = `http://${DevHost}:${server.address().port}`
 			spawn(browser(), [serverAddr])
 			console.log(serverAddr)
-			watch(rootDir, { recursive: true }, () => { // @Convention. Relative to where app.js is
+			watch(rootDir, { recursive: true }, () => {
 				spawn(dirname(fileURLToPath(import.meta.url)) + '/reload-browser')
 			})
 		}
