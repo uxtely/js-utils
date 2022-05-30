@@ -1,13 +1,12 @@
 import http from 'node:http'
 import { spawn } from 'node:child_process'
-import { dirname } from 'node:path'
 import { createHash } from 'node:crypto'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import watch from 'node-watch'
 
 import { BrotliPool } from './BrotliPool.js'
-import { reportSizes } from './reportSizes.js'
 import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
 import { minifyHTML } from './minifyHTML.js'
@@ -15,7 +14,7 @@ import { remapMediaInHTML, copyDirWithHashedNames } from './media-remaper.js'
 import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parsers.js'
 
 import { DevHost, browser } from '../Environment.js'
-import { read, write, copyDir, removeDir } from '../fs-utils.js'
+import { read, write, copyDir, removeDir, sizeOf, sha1, exists, saveAsJSON } from '../fs-utils.js'
 
 
 export function devStaticPages(router, rootDir = './root') {
@@ -144,5 +143,28 @@ function cspNonce(data) {
 	return data
 		? 'sha256-' + createHash('sha256').update(data).digest('base64')
 		: ''
+}
+
+function reportSizes(reportFilename, baseDir, files) {
+	const oldReport = JSON.parse(read(reportFilename))
+	const newReport = {}
+
+	for (const f of files) {
+		const fPath = join(baseDir, f)
+		const size = sizeOf(fPath)
+		newReport[f] = {
+			hash: sha1(fPath),
+			delta: size - (oldReport[f] && oldReport[f].size),
+			size: size
+		}
+		if (exists(fPath + '.br')) {
+			const size = sizeOf(fPath + '.br')
+			newReport[f].brotliedSize = size
+			newReport[f].brotliedDelta = size - (oldReport[f] && oldReport[f].brotliedSize)
+		}
+	}
+
+	console.table(newReport)
+	saveAsJSON(reportFilename, newReport)
 }
 
