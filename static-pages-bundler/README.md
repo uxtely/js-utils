@@ -12,8 +12,8 @@ in production it compiles all the pages to static HTML files.
 
 
 ## HTML Template
-Optionally, you can create an HTML template.
-For example, to handle the common header, navigation, and footer.
+Optionally, you can use an HTML template. For example,
+to handle the common header, navigation, and footer.
 
 
 ## Assets and CSP
