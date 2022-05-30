@@ -1,5 +1,6 @@
 import { extname } from 'node:path'
 
+// JPG is deliberately omitted (explained in ./media-optimizer)
 
 const mimes = {
 	'.js': 'application/javascript',
@@ -15,7 +16,7 @@ const mimes = {
 	'.css': 'text/css',
 	'.html': 'text/html',
 
-	'.txt': 'text/plain', // e.g. robots.txt when running lighthouse
+	'.txt': 'text/plain', // e.g. for robots.txt when running lighthouse
 	'.less': 'text/plain',
 	'.scss': 'text/plain',
 
