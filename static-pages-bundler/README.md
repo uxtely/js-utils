@@ -75,3 +75,8 @@ cloc . --not-match-d=./ --fullpath
 - [Hitting 304s Across Servers](https://blog.uidrafter.com/hitting-304-across-servers)
 - [Deploy Assets Before Documents](https://blog.uidrafter.com/deploy-assets-before-documents)
 - [Securely creating TLS certificates with Let's Encrypt](https://blog.uidrafter.com/isolated-tls-certificate-creation)
+
+
+## CDN Media Uploading
+See [bunnycdn-uploader.sh](../bunnycdn-uploader.js) for a script to upload video files to BunnyCDN.
+It's no longer used in UI Drafter, and I haven't used it in a while…
