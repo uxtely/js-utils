@@ -1,12 +1,10 @@
 # Static Site Generator
 
-This bundler is used for:
+This is a tiny (363 LoC) bundler used for:
 - [docs.uidrafter.com](https://docs.uidrafter.com)
 - [blog.uidrafter.com](https://blog.uidrafter.com)
 - [uidrafter.com](https://uidrafter.com)
 
-There are two example projects (docs, and blog) included in this repo.
- 
 In dev, it serves and auto reloads the browser on changes. While
 in production it compiles all the pages to static HTML files.
 
