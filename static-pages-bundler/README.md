@@ -20,9 +20,9 @@ to handle the common header, navigation, and footer.
 In production, the JS and CSS gets inlined with their corresponding CSP nonces.
 
 
-## Images and Videos
-[media-remaper.js](./media-remaper.js) appends a SHA-1 hash to the filenames
-and rewrites their `src` in HTML.
+## Images and Videos (immutable naming)
+For long term caching, [media-remaper.js](./media-remaper.js) appends
+a SHA-1 hash to the filenames and rewrites their `src` in HTML.
 
 ### Images
 We [Conditionally Serve AVIF and WebP with Nginx](https://blog.uidrafter.com/conditional-avif-for-video-posters)
