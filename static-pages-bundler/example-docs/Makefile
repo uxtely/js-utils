@@ -4,10 +4,10 @@ dev:
 	node app.js development
 	
 lint:
-	eslint --config ../.eslintrc.json --fix "root/**/*.js"
+	eslint --config ../../.eslintrc.json --fix "root/**/*.js"
   
 slint:
-	stylelint --config ../.stylelintrc.json --fix "root/**/*.css"
+	stylelint --config ../../.stylelintrc.json --fix "root/**/*.css"
 
 opm:
 	../media-optimizer.sh root/media
