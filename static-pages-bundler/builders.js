@@ -99,14 +99,11 @@ export async function buildProduction(router, routes, sitemapDomain) {
 						console.error(error)
 
 					if (allFilesAreBrotlied) {
-						if (sitemapDomain) {
-							let sitemap = ''
-							for (const route of routes)
-								if (route !== '/index')
-									sitemap += `https://${sitemapDomain + route}\n`
-							write(`${pDist}/sitemap.txt`, sitemap)
-						}
-						
+						if (sitemapDomain)
+							write(`${pDist}/sitemap.txt`, routes
+								.filter(r => r !== '/index')
+								.map(r => `https://${sitemapDomain + r}`)
+								.join('\n'))
 						copyDir(pMeta, pDist)
 						reportSizes(pSizesReport, pDist, routes)
 					}

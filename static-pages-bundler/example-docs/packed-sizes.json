@@ -1,23 +1,23 @@
 {
 	"/workspaces": {
 		"hash": "6FKEYcP3CL7XqNHB3aNHnO_InuA",
-		"delta": -49,
+		"delta": 0,
 		"size": 23490,
 		"brotliedSize": 7530,
-		"brotliedDelta": -4
+		"brotliedDelta": 0
 	},
 	"/cards": {
 		"hash": "VKuTvEC5MaDTEoCBVfwGkuW_Dok",
-		"delta": -52,
+		"delta": 0,
 		"size": 22314,
 		"brotliedSize": 7142,
-		"brotliedDelta": -10
+		"brotliedDelta": 0
 	},
 	"/shortcuts": {
 		"hash": "1WBMLFy-zSe9EcILASow22JKZzk",
-		"delta": -52,
+		"delta": 0,
 		"size": 28867,
 		"brotliedSize": 7385,
-		"brotliedDelta": -14
+		"brotliedDelta": 0
 	}
 }
