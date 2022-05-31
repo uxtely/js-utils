@@ -56,9 +56,7 @@ export async function buildProduction(router, routes, sitemapDomain) {
 
 			removeDir(pDist)
 			const mediaHashes = copyDirWithHashedNames(pMedia, pDistMedia)
-
-			const brotliPool = new Pool(__dirname + '/worker-for-brotli.js')
-			let nFinishedBrotliWorkers = 0
+			const brotliPool = new Pool(__dirname + '/worker-for-brotli.js', routes.length)
 
 			for (const route of routes) {
 				let html = await httpGet(serverAddr + route)
@@ -96,13 +94,11 @@ export async function buildProduction(router, routes, sitemapDomain) {
 					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
 
 				write(pDist + route, html)
-				brotliPool.run(pDist + route, error => {
+				brotliPool.runTask(pDist + route, (error, allFilesAreBrotlied) => {
 					if (error)
 						console.error(error)
 
-					if (++nFinishedBrotliWorkers === routes.length) {
-						brotliPool.close()
-
+					if (allFilesAreBrotlied) {
 						if (sitemapDomain) {
 							let sitemap = ''
 							for (const route of routes)
@@ -110,7 +106,7 @@ export async function buildProduction(router, routes, sitemapDomain) {
 									sitemap += `https://${sitemapDomain + route}\n`
 							write(`${pDist}/sitemap.txt`, sitemap)
 						}
-
+						
 						copyDir(pMeta, pDist)
 						reportSizes(pSizesReport, pDist, routes)
 					}
