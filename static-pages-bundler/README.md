@@ -72,3 +72,8 @@ npm install -g eslint \
   stylelint-config-idiomatic-order \
   stylelint-config-recommended 
 ```
+
+## Deployment Tips
+- [Hitting 304s Across Servers](https://blog.uidrafter.com/hitting-304-across-servers)
+- [Deploy Assets Before Documents](https://blog.uidrafter.com/deploy-assets-before-documents)
+- [Securely creating TLS certificates with Let's Encrypt](https://blog.uidrafter.com/isolated-tls-certificate-creation)
