@@ -36,7 +36,7 @@ URLs, it saves the pages without the `.html` extension, see [Pretty routes
 for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
 
 ### Minifiers
-The HTML and CSS are custom, but you can point them to
+The HTML and CSS minifiers are custom, but you can point them to
 a popular NPM package like we do in [minifyJS](./minifyJS.js)
 
 ### Compression
