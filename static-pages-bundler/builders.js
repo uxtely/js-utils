@@ -43,6 +43,7 @@ export async function buildProduction(router, routes, sitemapDomain) {
 	const pMeta = 'root/root-meta'
 	const pDist = 'dist'
 	const pDistMedia = 'dist/media'
+	const pDistSitemap = 'dist/sitemap.txt'
 	const pSizesReport = 'packed-sizes.json'
 
 	const server = http.createServer(router)
@@ -100,7 +101,7 @@ export async function buildProduction(router, routes, sitemapDomain) {
 
 					if (allFilesAreBrotlied) {
 						if (sitemapDomain)
-							write(`${pDist}/sitemap.txt`, routes
+							write(pDistSitemap, routes
 								.filter(r => r !== '/index')
 								.map(r => `https://${sitemapDomain + r}`)
 								.join('\n'))
