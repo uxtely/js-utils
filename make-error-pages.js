@@ -4,8 +4,8 @@ import { writeFileSync } from 'node:fs'
 // The error pages have no extension, see
 // https://blog.uidrafter.com/pretty-routes-for-static-html
 [
-	'./example-blog/root/root-meta/',
-	'./example-docs/root/root-meta/'
+	'./static-pages-bundler/example-blog/root/root-meta/',
+	'./static-pages-bundler/example-docs/root/root-meta/'
 ]
 	.forEach(dir => {
 		make(dir, 400, 'Bad Request')
