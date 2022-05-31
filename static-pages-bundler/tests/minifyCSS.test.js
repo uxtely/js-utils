@@ -1,6 +1,6 @@
 import test from 'node:test'
 import { strictEqual, throws } from 'node:assert'
-import { minifyCSS, Testable } from './minifyCSS.js'
+import { minifyCSS, Testable } from '../minifyCSS.js'
 
 
 test('Acceptance', () => {

@@ -74,7 +74,7 @@ npm install -g eslint \
 
 ## Counting Lines of Code
 ```shell
-cloc . --not-match-d=./ --fullpath --not-match-f='\.test\.js$'
+cloc . --not-match-d=./ --fullpath
 ```
 
 

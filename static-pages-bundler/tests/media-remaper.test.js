@@ -1,6 +1,6 @@
 import test from 'node:test'
 import { strictEqual, throws } from 'node:assert'
-import { remapMediaInHTML } from './media-remaper.js'
+import { remapMediaInHTML } from '../media-remaper.js'
 
 
 const mHashes = new Map([
