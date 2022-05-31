@@ -52,15 +52,12 @@ export async function buildProduction(router, routes, sitemapDomain) {
 			if (error)
 				throw error
 
-			const { port } = server.address()
-			const serverAddr = `http://${DevHost}:${port}`
-
 			removeDir(pDist)
 			const mediaHashes = copyDirWithHashedNames(pMedia, pDistMedia)
 			const brotliPool = new Pool(__dirname + '/worker-for-brotli.js', routes.length)
 
 			for (const route of routes) {
-				let html = await httpGet(serverAddr + route)
+				let html = await httpGet(`http://${DevHost}:${server.address().port}` + route)
 				html = minifyHTML(html) // To remove comments and format multi-line tags (needed for `removeLineContaining`)
 				html = remapMediaInHTML(mediaHashes, html)
 
