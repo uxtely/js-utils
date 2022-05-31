@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 
 
 /**
- *  Although this script is NOT IN USE, you can use adapt it to:
+ *  At UI Drafter we no longer use CDNs, but here's how we used to do it:
  *   - upload new .mp4 of the `localDir`
  *     - ignores sub-directories
  *     - skips already uploaded videos
