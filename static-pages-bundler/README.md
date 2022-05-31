@@ -79,5 +79,5 @@ cloc . --not-match-d=./ --fullpath
 
 
 ## CDN Media Uploading
-See [bunnycdn-uploader.sh](../bunnycdn-uploader.js) for a script to upload video files to BunnyCDN.
-It's no longer used in UI Drafter, and I haven't used it in a while…
+See [bunnycdn-uploader.js](../bunnycdn-uploader.js) for a script to upload video files to BunnyCDN.
+It's no longer used in UI Drafter, and it hasn't been used it in a while…
