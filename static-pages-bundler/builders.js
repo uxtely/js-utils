@@ -20,7 +20,7 @@ import { read, write, copyDir, removeDir, sizeOf, sha1, exists, saveAsJSON } fro
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 
-export function devStaticPages(router, rootDir = './root') {
+export function startDev(router, rootDir = './root') {
 	const server = http.createServer(router)
 	server.listen(0, DevHost, error => {
 		if (error)
@@ -37,7 +37,7 @@ export function devStaticPages(router, rootDir = './root') {
 }
 
 
-export async function buildStaticPages(router, routes, sitemapDomain) {
+export async function buildProduction(router, routes, sitemapDomain) {
 	const pSource = 'root/'
 	const pMedia = 'root/media'
 	const pMeta = 'root/root-meta'

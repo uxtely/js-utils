@@ -1,7 +1,7 @@
 import { basename } from 'node:path'
 import { listFiles } from '../../fs-utils.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
-import { buildStaticPages, devStaticPages } from '../builders.js'
+import { buildProduction, startDev } from '../builders.js'
 
 import { htmlTemplate } from './htmlTemplate.js'
 
@@ -11,12 +11,12 @@ const router = routerForStaticPages('root', routes, htmlTemplate.bind(null, rout
 
 switch (process.argv[2]) {
 	case 'development':
-		devStaticPages(router)
+		startDev(router)
 		break
 
 	case 'production':
 		// For drafting blog posts, we exclude files starting with an underscore from the production build.
-		buildStaticPages(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com')
+		buildProduction(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com')
 		break
 
 	default:

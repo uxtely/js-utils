@@ -5,7 +5,7 @@ import { DevHost } from '../../Environment.js'
 
 import { minifyHTML } from '../minifyHTML.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
-import { devStaticPages, httpGet, buildStaticPages } from '../builders.js'
+import { startDev, httpGet, buildProduction } from '../builders.js'
 
 import { htmlTemplate } from './htmlTemplate.js'
 
@@ -25,11 +25,11 @@ const router = routerForStaticPages('root', routes, htmlTemplate.bind(null, Rout
 
 switch (process.argv[2]) {
 	case 'development':
-		devStaticPages(router)
+		startDev(router)
 		break
 
 	case 'production':
-		buildStaticPages(router, routes, 'docs.uidrafter.com').then(async () => {
+		buildProduction(router, routes, 'docs.uidrafter.com').then(async () => {
 			const server = http.createServer(router)
 			server.listen(0, DevHost, async error => {
 				if (error)
