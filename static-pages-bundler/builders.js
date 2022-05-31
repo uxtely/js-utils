@@ -96,7 +96,7 @@ export async function buildStaticPages(router, routes, sitemapDomain) {
 					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
 
 				write(pDist + route, html)
-				brotliPool.run(pDist + route, async error => {
+				brotliPool.run(pDist + route, error => {
 					if (error)
 						console.error(error)
 

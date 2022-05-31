@@ -35,8 +35,8 @@ export class Pool extends EventEmitter {
 
 		this.on(kWorkerFreedEvent, () => { // Dispatch the next enqueued task, if any.
 			if (this.tasks.length) {
-				const { task, callback } = this.tasks.shift()
-				this.run(task, callback)
+				const { taskArg, callback } = this.tasks.shift()
+				this.run(taskArg, callback)
 			}
 		})
 	}
@@ -66,14 +66,14 @@ export class Pool extends EventEmitter {
 		this.emit(kWorkerFreedEvent)
 	}
 
-	run(task, callback) { // Main Task
+	run(taskArg, callback) { // Main Task
 		if (this.freeWorkers.length) {
 			const worker = this.freeWorkers.pop()
 			worker[kTaskInfo] = new WorkerPoolTaskInfo(callback)
-			worker.postMessage(task)
+			worker.postMessage(taskArg)
 		}
 		else // Wait until a worker thread becomes free
-			this.tasks.push({ task, callback })
+			this.tasks.push({ taskArg, callback })
 	}
 
 	close() {
