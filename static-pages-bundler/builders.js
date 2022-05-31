@@ -157,13 +157,13 @@ function reportSizes(reportFilename, baseDir, files) {
 		const size = sizeOf(fPath)
 		newReport[f] = {
 			hash: sha1(fPath),
-			delta: size - (oldReport[f] && oldReport[f].size),
+			delta: size - oldReport[f]?.size,
 			size: size
 		}
 		if (exists(fPath + '.br')) {
 			const size = sizeOf(fPath + '.br')
 			newReport[f].brotliedSize = size
-			newReport[f].brotliedDelta = size - (oldReport[f] && oldReport[f].brotliedSize)
+			newReport[f].brotliedDelta = size - oldReport[f]?.brotliedSize
 		}
 	}
 
