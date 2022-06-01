@@ -37,7 +37,7 @@ export function routerForStaticPages(rootPath, routes, template, templateArg) {
 
 	return async function ({ url, headers }, response) {
 		try {
-			let htmlTemplate = a => a // A template is optional
+			let htmlTemplate = html => html // A template is optional
 			if (template) {
 				const ht = await import(template + '?' + Date.now()) // The date is a cache workaround
 				htmlTemplate = templateArg
