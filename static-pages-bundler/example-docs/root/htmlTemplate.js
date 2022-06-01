@@ -1,7 +1,7 @@
-import { parseHeadAndBody } from '../parsers.js'
+import { parseHeadAndBody } from '../../parsers.js'
 
 
-export function htmlTemplate(RouteDefs, html, iRoute) {
+export default function htmlTemplate(RouteDefs, html, iRoute) {
 	const [head, body] = parseHeadAndBody(html.toString())
 	const [, title] = RouteDefs[iRoute]
 	const [nextRoute, nextTitle] = iRoute < (RouteDefs.length - 1)

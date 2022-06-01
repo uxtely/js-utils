@@ -1,4 +1,6 @@
 import http from 'node:http'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import { copy } from '../../fs-utils.js'
 import { DevHost } from '../../Environment.js'
@@ -6,8 +8,6 @@ import { DevHost } from '../../Environment.js'
 import { minifyHTML } from '../minifyHTML.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
 import { startDev, httpGet, buildProduction } from '../builders.js'
-
-import { htmlTemplate } from './htmlTemplate.js'
 
 
 const hasDivider = true
@@ -19,8 +19,10 @@ export const RouteDefs = [
 	['/shortcuts', 'Shortcuts', hasDivider]
 ]
 
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
 const routes = RouteDefs.map(r => r[0])
-const router = routerForStaticPages('root', routes, htmlTemplate.bind(null, RouteDefs))
+const router = routerForStaticPages('root', routes, __dirname + '/root/htmlTemplate.js', RouteDefs)
 
 
 switch (process.argv[2]) {

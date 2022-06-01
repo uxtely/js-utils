@@ -1,6 +1,6 @@
 # Static Site Generator
 
-This is a tiny (360 LoC) bundler used for:
+This is a tiny (370 LoC) bundler used for:
 - [docs.uidrafter.com](https://docs.uidrafter.com)
 - [blog.uidrafter.com](https://blog.uidrafter.com)
 - [uidrafter.com](https://uidrafter.com)

@@ -32,11 +32,19 @@ function mimeFor(filename) {
 
 
 
-export function routerForStaticPages(rootPath, routes, htmlTemplate = a => a) {
+export function routerForStaticPages(rootPath, routes, template, templateArg) {
 	const altRoot = '/root-meta' // @Convention
 
 	return async function ({ url, headers }, response) {
 		try {
+			let htmlTemplate = a => a // A template is optional
+			if (template) {
+				const ht = await import(template + '?' + Date.now()) // The date is a cache workaround
+				htmlTemplate = templateArg
+					? ht.default.bind(null, templateArg)
+					: ht.default
+			}
+			
 			if (url === '/') { /* Redirect to "/index" or fallback to the first route */
 				response.statusCode = 302 // Found (Temporary Redirect)
 				response.setHeader('Location', routes[Math.max(0, routes.indexOf('/index'))])

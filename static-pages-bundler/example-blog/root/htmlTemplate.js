@@ -1,7 +1,7 @@
-import { parseHeadAndBody } from '../parsers.js'
+import { parseHeadAndBody } from '../../parsers.js'
 
 
-export function htmlTemplate(docRoutes, html, iRoute) {
+export default function htmlTemplate(docRoutes, html, iRoute) {
 	const [head, body] = parseHeadAndBody(html.toString())
 	const route = docRoutes[iRoute]
 	const hideSponsor = route === '/index' 
