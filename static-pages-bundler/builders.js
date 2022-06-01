@@ -12,7 +12,7 @@ import { minifyHTML } from './minifyHTML.js'
 import { remapMediaInHTML, copyDirWithHashedNames } from './media-remaper.js'
 import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parsers.js'
 
-import { Pool } from '../parallel.js'
+import { Pool } from '../parallel/parallel.js'
 import { DevHost, browser } from '../Environment.js'
 import { read, write, copyDir, removeDir, sizeOf, sha1, exists, saveAsJSON } from '../fs-utils.js'
 

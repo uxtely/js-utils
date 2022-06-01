@@ -5,7 +5,7 @@ import { AsyncResource } from 'node:async_hooks'
 
 // Based on: https://nodejs.org/api/async_context.html#using-asyncresource-for-a-worker-thread-pool
 
-const kTaskInfo = Symbol('kTaskInfo')
+	const kTaskInfo = Symbol('kTaskInfo')
 const kWorkerFreedEvent = Symbol('kWorkerFreedEvent')
 
 
@@ -50,7 +50,7 @@ export class Pool extends EventEmitter {
 		worker.on('message', () => {
 			this.nDoneTasks++
 			const areAllTasksCompleted = this.nDoneTasks === this.nTotalTasks
-			worker[kTaskInfo].done(null, areAllTasksCompleted) 
+			worker[kTaskInfo].done(null, areAllTasksCompleted)
 			worker[kTaskInfo] = null // Removes the `TaskInfo` associated with the Worker
 			this.freeWorkers.push(worker)
 			this.emit(kWorkerFreedEvent)
