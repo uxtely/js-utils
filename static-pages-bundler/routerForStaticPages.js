@@ -52,9 +52,9 @@ export function routerForStaticPages(rootPath, routes, template, templateArg) {
 			}
 
 			else if (routes.includes(url)) { /* Serve Documents */
-				const f = await fs.promises.readFile(rootPath + url + '.html')
+				const html = await fs.promises.readFile(rootPath + url + '.html')
 				response.setHeader('Content-Type', 'text/html')
-				response.end(htmlTemplate(f, routes.indexOf(url)))
+				response.end(htmlTemplate(html, routes.indexOf(url)))
 			}
 
 			else if (headers.range) { /* Serve Videos (by range) */
