@@ -7,9 +7,9 @@
     "node-watch": "0.7.3"
   },
   "dependencies": {
-    "terser": "5.13.1"
+    "terser": "5.14.0"
   },
-	"engines": {
-		"node": ">=18"
-	}
+  "engines": {
+    "node": ">=18"
+  }
 }
