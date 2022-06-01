@@ -93,8 +93,10 @@ export async function buildProduction(router, routes, sitemapDomain) {
 
 				write(pDist + route, html)
 				brotliPool.runTask(pDist + route, (error, allFilesAreBrotlied) => {
-					if (error)
+					if (error) {
 						console.error(error)
+						process.exitCode = 1
+					}
 
 					if (allFilesAreBrotlied) {
 						if (sitemapDomain)
