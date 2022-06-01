@@ -66,12 +66,6 @@ npm install -g eslint \
 ```
 
 
-## Counting Lines of Code
-```shell
-cloc . --not-match-d=./ --fullpath
-```
-
-
 ## Deployment Tips
 - [Hitting 304s Across Servers](https://blog.uidrafter.com/hitting-304-across-servers)
 - [Deploy Assets Before Documents](https://blog.uidrafter.com/deploy-assets-before-documents)
