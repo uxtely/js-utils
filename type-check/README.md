@@ -1,7 +1,7 @@
 # check
 
 A plain-JS type checker with an API similar to:
-- [Meteor `check`](https://github.com/meteor/meteor/tree/devel/packages/check)
+- [Meteor `check`](https://github.com/meteor/meteor/blob/devel/packages/check/match.js)
 - [React `prop-types`](https://github.com/facebook/prop-types)
 
 ## Usage
