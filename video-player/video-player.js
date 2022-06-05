@@ -20,6 +20,7 @@
 	function VideoPlayer(videoEl) {
 		videoEl.controls = false
 
+		// Private fields
 		this.Videoº = videoEl
 		this.MiddlePlayButtonº = null
 		this.ProgressBarº = null

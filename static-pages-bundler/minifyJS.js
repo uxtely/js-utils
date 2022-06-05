@@ -2,8 +2,7 @@ import { minify } from 'terser'
 
 
 const TerserConfig = {
-	compress: { passes: 2 },
-	mangle: { properties: { regex: /º$/ } }
+	compress: { passes: 2 }
 }
 
 export async function minifyJS(code) {
