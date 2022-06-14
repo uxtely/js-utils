@@ -24,8 +24,8 @@ test $nJPG = 0 || abort "Found a JPG, use a PNG instead."
 
 # If there's no foo.png.avif, foo.png outputs:
 #  1. foo.png (better compressed lossless, and without EXIF metadata)
-#  2. foo.png.avif
-#  3. foo.png.webp
+#  2. foo.png.webp
+#  3. foo.png.avif
 for img in $(find $1 -type f -name *\.png); do
   if [ ! -f "$img.avif" ]; then
     chmod 644 $img
