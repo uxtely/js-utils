@@ -8,6 +8,7 @@ import { buildProduction, startDev } from '../builders.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+// The file list is read only once (it doesn't auto-reload).
 const routes = listFiles('root', /\.html$/).map(file => '/' + basename(file, '.html'))
 const router = routerForStaticPages('root', routes, __dirname + '/root/htmlTemplate.js', routes)
 

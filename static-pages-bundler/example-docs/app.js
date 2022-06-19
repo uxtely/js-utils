@@ -12,7 +12,7 @@ import { startDev, httpGet, buildProduction } from '../builders.js'
 
 const hasDivider = true
 
-// Manually typing the routes because the order is important for the navigation
+// Hardcoding the routes because the order is important for the navigation.
 export const RouteDefs = [
 	['/workspaces', 'Workspaces'],
 	['/cards', 'Cards'],
