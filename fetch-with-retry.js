@@ -14,16 +14,15 @@ export function httpPost(route, json) {
 }
 
 function fetchWithRetry(url, options) {
-	const maxRetries = 3
-	const msRetryDelayIncrement = 1500
+	const msAttemptsAt = [1500, 2800, 5000]
 
 	return new Promise((resolve, reject) => {
-		attemptFetch(1)
+		attemptFetch(0)
 
 		function attemptFetch(nRetry) {
 			fetch(url, options)
 				.then(response => {
-					if (nRetry <= maxRetries
+					if (nRetry < msAttemptsAt.length
 						&& response.status >= 500
 						&& response.status < 600)
 						retry(nRetry)
@@ -31,7 +30,7 @@ function fetchWithRetry(url, options) {
 						resolve(response)
 				})
 				.catch(error => {
-					if (nRetry <= maxRetries)
+					if (nRetry < msAttemptsAt.length)
 						retry(nRetry)
 					else
 						reject(error)
@@ -41,7 +40,7 @@ function fetchWithRetry(url, options) {
 		function retry(nRetry) {
 			setTimeout(() => {
 				attemptFetch(++nRetry)
-			}, msRetryDelayIncrement * nRetry)
+			}, msAttemptsAt[nRetry])
 		}
 	})
 }
