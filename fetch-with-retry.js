@@ -14,7 +14,7 @@ export function httpPost(route, json) {
 }
 
 function fetchWithRetry(url, options) {
-	const attempts = [1500, 2800, 5000] // milliseconds
+	const RetryDelays = [1500, 2800, 5000] // milliseconds
 
 	return new Promise((resolve, reject) => {
 		attemptFetch(0)
@@ -22,7 +22,7 @@ function fetchWithRetry(url, options) {
 		function attemptFetch(nRetry) {
 			fetch(url, options)
 				.then(response => {
-					if (nRetry < attempts.length
+					if (nRetry < RetryDelays.length
 						&& response.status >= 500
 						&& response.status < 600)
 						retry(nRetry)
@@ -30,7 +30,7 @@ function fetchWithRetry(url, options) {
 						resolve(response)
 				})
 				.catch(error => {
-					if (nRetry < attempts.length)
+					if (nRetry < RetryDelays.length)
 						retry(nRetry)
 					else
 						reject(error)
@@ -40,7 +40,7 @@ function fetchWithRetry(url, options) {
 		function retry(nRetry) {
 			setTimeout(() => {
 				attemptFetch(++nRetry)
-			}, attempts[nRetry])
+			}, RetryDelays[nRetry])
 		}
 	})
 }
