@@ -14,7 +14,7 @@ import {
 } from 'node:fs'
 
 
-export const reIsSourceCode = /^(?!.*\.test).*\.js$/; // js not ending in .test.js
+export const reIsSourceCode = /^(?!.*\.test).*\.js$/; // *.js not ending in .test.js
 
 export const read = f => readFileSync(f, 'utf8')
 export const readIfExists = f => existsSync(f) ? read(f) : ''
