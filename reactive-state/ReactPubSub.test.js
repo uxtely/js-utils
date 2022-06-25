@@ -66,6 +66,8 @@ test('Adds the listener on didMount and removes it on willUnmount', () => {
 
 	const rc = new class ReactComponent {
 		constructor() { emitter.on(this, spy) }
+		componentDidMount() {}
+		componentWillUnmount() {}
 	}
 
 	emitter.emit()

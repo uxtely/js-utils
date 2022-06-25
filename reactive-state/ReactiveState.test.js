@@ -156,6 +156,8 @@ test('bindState fires setState, and unbinds the emitter on CWU', () => {
 	const rc = new class ReactComponent {
 		constructor() { rs.bindState(this, 'state_key') }
 		setState(obj) { Object.assign(this.state, obj) }
+		componentDidMount() {}
+		componentWillUnmount() {}
 	}
 	isTrue(rc.state.state_key)
 	rc.componentDidMount()
