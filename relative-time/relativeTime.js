@@ -8,7 +8,7 @@ const hour = 60 * minute
 const day = 24 * hour
 const week = 7 * day
 const month = 30 * day
-const year = 12 * month
+const year = 365 * day
 
 const agoThresholds = [
 	[year, 1, TK.relative_time_years],
