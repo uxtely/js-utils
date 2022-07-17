@@ -1,6 +1,6 @@
 # JavaScript Object Keys Obfuscator
 
-Obfuscates field names in production and generates friendly ones in dev.
+Mangles field names in production and generates friendly ones in dev.
 
 ## Option A: Creates sequential base52 keys
 ```javascript
@@ -38,8 +38,8 @@ export { FF }
   In short, it's closer to an array lookup than a hash map one.
 
 
-## Example
-In UI Drafter, the Card data structures are like this:
+## Another Example
+In UI Drafter, the Card data structure is like this:
 ```js
 let CF = { 
   id: 0, 
