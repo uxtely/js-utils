@@ -9,7 +9,7 @@ const FF = proxyFieldNames('FF', { foo: null, bar: null })
 // PROD: FF.foo → 'a'
 ```
 
-## Option B: Pre-baked (non-null) values are honored in production
+## Option B: Honors pre-baked (non-null) values in production
 ```javascript
 const FF = proxyFieldNames('FF', { foo: 0, bar: 1 })
 // DEV:  FF.foo → FF_foo
