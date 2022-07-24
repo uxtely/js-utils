@@ -2,7 +2,7 @@
 
 Mangles field names in production and generates friendly ones in dev.
 
-## Option A: Creates sequential base52 keys
+## Option A: Creates sequential base52 keys in production
 ```javascript
 const FF = proxyFieldNames('FF', { foo: null, bar: null })
 // DEV:  FF.foo → FF_foo
