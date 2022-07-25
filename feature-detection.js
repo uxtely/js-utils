@@ -5,7 +5,7 @@ export const isMac = (function () {
 	if (navigator.userAgentData && navigator.userAgentData.platform)
 		return navigator.userAgentData.platform === 'macOS'
 
-	return /Mac|iP/.test(navigator.platform)
+	return /Mac|iPhone|iPad/.test(navigator.platform)
 }())
 
 
@@ -14,7 +14,7 @@ export const isSafari = typeof navigator !== 'undefined'
 
 
 export const isIos = typeof navigator !== 'undefined'
-	&& ['iPhone', 'iPad'].includes(navigator.platform)
+	&& /iPhone|iPad/.test(navigator.platform)
 
 
 export const touchSupported = typeof document !== 'undefined'
