@@ -22,10 +22,12 @@ nJPG=$(find $1 -type f -name *\.jpg | awk 'END{print NR}')
 test $nJPG = 0 || abort "Found a JPG, use a PNG instead." 
 
 
-# If foo.png has been modified later than foo.png.avif, foo.png outputs:
-#  1. foo.png (better compressed lossless, and without EXIF metadata)
-#  2. foo.png.webp
-#  3. foo.png.avif
+# IF there is no foo.png.avif OR 
+# IF foo.png has been modified later than foo.png.avif, 
+#   foo.png will output:
+#     1. foo.png (better compressed lossless, and without EXIF metadata)
+#     2. foo.png.webp
+#     3. foo.png.avif
 for img in $(find $1 -type f -name *\.png); do
   if [ $img -nt "$img.avif" ]; then
     chmod 644 $img
