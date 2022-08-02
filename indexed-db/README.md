@@ -2,7 +2,7 @@
 
 Promisifies and automates the ceremony of the
 browser's `IndexedDB`. For example, it automatically:
-- **Creates** || **Opens** an `IDBDatabase`. Each end-user gets one named by your own `dbName()` function.
+- **Creates** || **Opens** an `IDBDatabase`. Named after your own `dbName()` function (there's only one database).
 - **Creates** || **Uses** an existing `IDBObjectStore` (there's only one per database).
 - **Creates** && **Closes** the `IDBTransaction`.
 
