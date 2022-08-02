@@ -2,7 +2,7 @@
 
 Promisifies and automates the ceremony of the
 browser's `IndexedDB`. For example, it automatically:
-- **Creates** || **Opens** an `IDBDatabase`. Each end-user gets one named by your own `userId()` function.
+- **Creates** || **Opens** an `IDBDatabase`. Each end-user gets one named by your own `dbName()` function.
 - **Creates** || **Uses** an existing `IDBObjectStore` (there's only one per database).
 - **Creates** && **Closes** the `IDBTransaction`.
 
@@ -13,6 +13,8 @@ browser's `IndexedDB`. For example, it automatically:
 
 ## Usage
 ```js
+const dbName = () => 'abc123' // e.g. user id
+
 idbSaveFile({ id: 1, foo: 'bar' }).catch(console.error)
 
 idbReadFile(1) // fileId = 1

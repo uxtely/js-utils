@@ -1,4 +1,4 @@
-function idOfUser() { return '0' }
+function dbName() { return '0' } // e.g. the used id
 
 const STORE_NAME = 0
 const VERSION = 1
@@ -24,7 +24,7 @@ export const idbListFiles = () => {
 
 function IDB(method, mode, payload, callback) {
 	return new Promise((resolve, reject) => {
-		const req = indexedDB.open(idOfUser(), VERSION)
+		const req = indexedDB.open(dbName(), VERSION)
 
 		req.onupgradeneeded = event => {
 			event.target.result.createObjectStore(STORE_NAME, { keyPath: 'id' })
