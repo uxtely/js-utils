@@ -46,7 +46,6 @@ export function minifyCSS(css) {
 		.replace(reSpacesAfterComma, '')
 
 	css = inlineVars(css)
-		.replace(reRootPseudoClass, '')
 
 	if (reVars.test(css))
 		throw 'ERROR: undefined or nested var(), or multiple ":root". ' + css.match(reVars)[0].substr(0, 24)
@@ -56,6 +55,7 @@ export function minifyCSS(css) {
 
 function inlineVars(css) {
 	const res = css.match(reRootPseudoClassBody)
+	css = css.replace(reRootPseudoClass, '') // Removes a :root {…} (FIXME only its vars)
 	if (res && res[1]) {
 		const kvs = res[1].split(';')
 			.map(line => line.split(':')
