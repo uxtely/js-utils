@@ -29,7 +29,7 @@ const reLastSemicolonInSet = /;(?=})/gm
 const reSpacesAfterComma = /(?<=,)\s+/g
 
 const reRootPseudoClassBody = /:root\s*{\s*([^}]+)}/m
-const reRootPseudoClass = /:root(.*?)\}/m
+const reRootPseudoClass = /:root(.*?)}/m
 
 const reVars = /\Wvar\(.*/g
 
