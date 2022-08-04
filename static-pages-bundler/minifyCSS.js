@@ -16,7 +16,7 @@
 // - it doesn't preserve anything within data-uri, nor content strings.
 //   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
-// - handle multiple :root {}
+// - handle variables in multiple :root and other selectors
 
 
 const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
