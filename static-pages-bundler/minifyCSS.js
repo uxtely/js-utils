@@ -3,20 +3,18 @@
  * for learning, but because popular CSS and HTML minifiers were causing issues.
  *
  * For example, in CSS some minifiers reorder rules (for compression) but
- * that messed up workarounds with browser-specific prefixes. 
+ * that messed up workaround for example with browser-specific prefixes.
  *
  * Similarly, in HTML the messed up the relevant spaces
  * between tags, and others did not handle <pre>
- *
- * At any rate, see minifyJS if you want to hook up a different minifier.
  */
 
-// TODO
+// TODO 
 // - it doesn't handle nested comments like /*/* foo */*/
 // - it doesn't preserve anything within data-uri, nor content strings.
 //   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
-// - handle variables in multiple :root and other selectors
+// - remove all empty	rules
 
 
 const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
@@ -27,11 +25,7 @@ const reWhitespaceBeforeBraces = /\s*(?=[{}])/gm
 const reWhitespaceAfterBraces = /(?<=[{}])\s*/gm
 const reLastSemicolonInSet = /;(?=})/gm
 const reSpacesAfterComma = /(?<=,)\s+/g
-
-const reRootPseudoClassBody = /:root\s*{\s*([^}]+)}/m
-const reRootPseudoClass = /:root(.*?)}/m
-
-const reVars = /\Wvar\(.*/g
+const reVarsDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g
 
 
 export function minifyCSS(css) {
@@ -44,27 +38,27 @@ export function minifyCSS(css) {
 		.replace(reWhitespaceAfterBraces, '')
 		.replace(reLastSemicolonInSet, '')
 		.replace(reSpacesAfterComma, '')
-
 	css = inlineVars(css)
-
-	if (reVars.test(css))
-		throw 'ERROR: undefined or nested var(), or multiple ":root". ' + css.match(reVars)[0].substr(0, 24)
-
+	css = css.replace(':root{}', '') // TODO remove all empty
 	return css
 }
 
 function inlineVars(css) {
-	const res = css.match(reRootPseudoClassBody)
-	css = css.replace(reRootPseudoClass, '') // Removes a :root {…} (FIXME only its vars)
-	if (res && res[1]) {
-		const kvs = res[1].split(';')
-			.map(line => line.split(':')
-				.map(str => str.trim().replace(/;$/, '')))
-
-		for (const [varName, varValue] of kvs)
-			css = css.replace(RegExp('var\\(\\s*' + varName + '\\s*\\)', 'g'), varValue)
-	}
+	const defs = findVariablesDefinitions(css)
+	for (const [varName, varValue] of defs)
+		css = css.replace(RegExp('var\\(\\s*' + varName + '\\s*\\)', 'g'), varValue)
+	css = css.replace(reVarsDefinitions, '')
 	return css
+}
+
+function findVariablesDefinitions(css) {
+	const defs = []
+	for (const def of css.matchAll(reVarsDefinitions)) {
+		const tupple = def[0].split(':').map(s => s.trim())
+		tupple[1] = tupple[1].replace(/;$/, '') // removes semicolon from value
+		defs.push(tupple)
+	}
+	return defs
 }
 
 
@@ -77,10 +71,6 @@ export const Testable = {
 	reWhitespaceAfterBraces,
 	reLastSemicolonInSet,
 	reSpacesAfterComma,
-
-	reRootPseudoClassBody,
-	inlineVars,
-	reVars
+	findVariablesDefinitions,
+	inlineVars
 }
-
-

@@ -1,52 +1,28 @@
 import test from 'node:test'
-import { strictEqual, throws } from 'node:assert'
+import { strictEqual, deepStrictEqual } from 'node:assert'
 import { minifyCSS, Testable } from '../minifyCSS.js'
 
 
 test('Acceptance', () => {
 	strictEqual(minifyCSS(`
 :root {
-  --foo: orange;
-  
-  --fooBar: red
+	--navBG:		#000;
+	--accentLightestMoreMore: #dbdcff;
+	--shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
+  --foo: orange; /* @Comment */
+  --bar: teal;
+  --foobar: blue;
+  --FooBar: red
 }
 .a { color: green; }
-.b { color: var(--foo ); }
-.c { color: var(--fooBar); }
+.b { color: var(--foo); }
+.c { color: var(--FooBar); }
 .d { color: rgb(255, 255,  0); }
 .e { color: #111; }
+.f { color: var(--foobar) }
 `),
-		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}`)
+		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}.f{color:blue}`)
 })
-
-
-test('Throws on Nested vars', () => {
-	throws(() => minifyCSS(`
-:root {
-  --a: 10px;
-  --b: var(--a);
-}
-.nested {
-  height: var(--b);
-}
-`))
-})
-
-test('Throws on multi :root {} pseudo blocks', () => {
-	throws(() => minifyCSS(`
-:root {
-  --A: 11px;
-}
-:root {
-  --B: 22px;
-}
-.multiRoot {
-  height: var(--B);
-}
-`))
-})
-
-
 
 test('Comments', () => {
 	testRegexMatchesGetDeleted(Testable.reBlockComments, `
@@ -146,17 +122,26 @@ test('Comma + Space', () => {
 	)
 })
 
-test('Lines within :root', () => {
-	strictEqual(`
+
+test('Finds variables definitions', () => {
+	const inCSS = `
 :root {
-  --foo: 100px;
-  --fooBar: 200px;
+    --foo:   100px; /* @Comment */
+  --fooBar: red;
+  --hashed: #000;
 }
-`.match(Testable.reRootPseudoClassBody)[1],
-		`--foo: 100px;
-  --fooBar: 200px;
-`
-	)
+section {
+  --bar: 300px;
+  --tom:   400px
+}`
+	const expected = [
+		['--foo', '100px'],
+		['--fooBar', 'red'],
+		['--hashed', '#000'],
+		['--bar', '300px'],
+		['--tom', '400px'],
+	]
+	deepStrictEqual(Testable.findVariablesDefinitions(inCSS), expected)
 })
 
 
@@ -173,10 +158,7 @@ test('Inline Vars', () => {
 }
 `
 	const outCSS = `
-:root {
-  --foo: 100px;
-  --fooBar: 200px;
-}
+:root {}
 .a {
   width: 100px;
   height: 200px;
@@ -185,7 +167,6 @@ test('Inline Vars', () => {
 `
 	strictEqual(Testable.inlineVars(inCSS), outCSS)
 })
-
 
 
 function testRegexMatchesGetDeleted(regex, input, expected) {
