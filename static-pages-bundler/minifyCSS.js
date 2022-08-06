@@ -45,9 +45,9 @@ export function minifyCSS(css) {
 
 function inlineVars(css) {
 	const defs = findVariablesDefinitions(css)
+	css = css.replace(reVarsDefinitions, '')
 	for (const [varName, varValue] of defs)
 		css = css.replace(RegExp('var\\(\\s*' + varName + '\\s*\\)', 'g'), varValue)
-	css = css.replace(reVarsDefinitions, '')
 	return css
 }
 
