@@ -3,7 +3,7 @@
  * for learning, but because popular CSS and HTML minifiers were causing issues.
  *
  * For example, in CSS some minifiers reorder rules (for compression) but
- * that messed up workaround for example with browser-specific prefixes.
+ * that messed up workarounds, for example, with browser-specific prefixes.
  *
  * Similarly, in HTML the messed up the relevant spaces
  * between tags, and others did not handle <pre>
