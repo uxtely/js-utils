@@ -9,7 +9,7 @@
  * between tags, and others did not handle <pre>
  */
 
-// TODO 
+// TODO
 // - Handle nested comments like /*/* foo */*/
 // - Preserve anything within data-uri, nor content strings.
 //   - we could do like in minifyHTML. i.e. stacking all the things to
@@ -65,20 +65,20 @@ function findVariablesDefinitions(css) {
 			defs.set(name, value)
 		else {
 			const [, nestedName] = value.match(reVarName)
-			if (!isLateDefinedOrMultiNested(nestedName))
-				defs.set(name, defs.get(nestedName))
-			else
+			if (isLateDefinedOrMultiNested(nestedName))
 				pendingDefs.set(name, value)
+			else
+				defs.set(name, defs.get(nestedName))
 		}
 	}
 
 	while (pendingDefs.size)
 		for (const [name, value] of pendingDefs) {
 			const [, nestedName] = value.match(reVarName)
-			if (!isLateDefinedOrMultiNested(nestedName)) {
-				defs.set(name, defs.get(nestedName))
-				pendingDefs.delete(name)
-			}
+			if (isLateDefinedOrMultiNested(nestedName))
+				continue
+			pendingDefs.delete(name)
+			defs.set(name, defs.get(nestedName))
 		}
 
 	function isLateDefinedOrMultiNested(nestedName) {
