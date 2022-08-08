@@ -30,6 +30,7 @@ const reSpacesAfterComma = /(?<=,)\s+/g
 const reVarDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
 const reVarNames = /var\(\s*(--\w*)\s*\)/g // e.g. var(--foo)
 const reVarName = /var\(\s*(--\w*)\s*\)/ // e.g. var(--foo)
+const reFinalSemicolon = /;$/
 
 
 export function minifyCSS(css) {
@@ -56,28 +57,34 @@ function inlineVars(css) {
 function findVariablesDefinitions(css) {
 	const multiNestedDefs = new Map()
 	const defs = new Map()
+
 	for (const [expr] of css.matchAll(reVarDefinitions)) {
 		const [name, _value] = expr.split(':').map(s => s.trim())
-		const value = _value.replace(/;$/, '') // removes semicolon from value
-		if (value.startsWith('var(')) {
-			const nestedName = value.match(reVarName)[1]
-			if (defs.has(nestedName) && !defs.get(nestedName).startsWith('var('))
+		const value = _value.replace(reFinalSemicolon, '')
+
+		if (!value.startsWith('var(')) // is a non-nested value
+			defs.set(name, value)
+		else {
+			const [, nestedName] = value.match(reVarName)
+			if (!isLateDefinedOrMultiNested(nestedName))
 				defs.set(name, defs.get(nestedName))
-			else // is doubly (or more) nested?, or it's defined later
+			else
 				multiNestedDefs.set(name, value)
 		}
-		else
-			defs.set(name, value)
 	}
 
 	while (multiNestedDefs.size) {
 		for (const [name, value] of multiNestedDefs) {
-			const nestedName = value.match(reVarName)[1]
-			if (defs.has(nestedName) && !defs.get(nestedName).startsWith('var(')) {
+			const [, nestedName] = value.match(reVarName)
+			if (!isLateDefinedOrMultiNested(nestedName)) {
 				defs.set(name, defs.get(nestedName))
 				multiNestedDefs.delete(name)
 			}
 		}
+	}
+
+	function isLateDefinedOrMultiNested(nestedName) {
+		return !defs.has(nestedName) || defs.get(nestedName).startsWith('var(')
 	}
 
 	return defs
@@ -96,3 +103,4 @@ export const Testable = {
 	findVariablesDefinitions,
 	inlineVars
 }
+
