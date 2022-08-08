@@ -10,8 +10,12 @@ test('Acceptance', () => {
 	--accentLightestMoreMore: #dbdcff;
 	--shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
   --foo: orange; /* @Comment */
-  --bar: teal;
   --foobar: blue;
+  --doublyN: var(--late);
+  --late: var(--BARRA);
+  --bar: teal;
+  --BARRA: yellow;
+  --nonlate: var(--bar);
   --FooBar9: red
 }
 .a { color: green; }
@@ -20,8 +24,11 @@ test('Acceptance', () => {
 .d { color: rgb(255, 255,  0); }
 .e { color: #111; }
 .f { color: var(--foobar) }
+.g { color: var(--nonlate) }
+.h { color: var(--late) }
+.i { color: var(--doublyN) }
 `),
-		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}.f{color:blue}`)
+		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}.f{color:blue}.g{color:teal}.h{color:yellow}.i{color:yellow}`)
 })
 
 test('Comments', () => {
@@ -142,7 +149,7 @@ section {
 		['--bar', '300px'],
 		['--tom', '400px'],
 	]
-	deepStrictEqual(Testable.findVariablesDefinitions(inCSS), expected)
+	deepStrictEqual(Array.from(Testable.findVariablesDefinitions(inCSS)), expected)
 })
 
 

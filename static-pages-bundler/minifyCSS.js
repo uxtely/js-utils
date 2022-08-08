@@ -15,7 +15,8 @@
 //   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
 // - remove all empty	rules
-// - Nested Vars
+// - Optimize the regexes that handle optional whitespace, but that's stripped out in an older step.
+// - handle hyphens in var names (--[\w-])
 
 
 const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
@@ -26,8 +27,9 @@ const reWhitespaceBeforeBraces = /\s*(?=[{}])/gm
 const reWhitespaceAfterBraces = /(?<=[{}])\s*/gm
 const reLastSemicolonInSet = /;(?=})/gm
 const reSpacesAfterComma = /(?<=,)\s+/g
-const reVarsDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g
-const reVarNames = /var\(\s*(--\w*)\s*\)/g
+const reVarDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
+const reVarNames = /var\(\s*(--\w*)\s*\)/g // e.g. var(--foo)
+const reVarName = /var\(\s*(--\w*)\s*\)/ // e.g. var(--foo)
 
 
 export function minifyCSS(css) {
@@ -46,18 +48,38 @@ export function minifyCSS(css) {
 }
 
 function inlineVars(css) {
-	const defs = new Map(findVariablesDefinitions(css))
-	css = css.replace(reVarsDefinitions, '')
+	const defs = findVariablesDefinitions(css)
+	css = css.replace(reVarDefinitions, '')
 	return css.replace(reVarNames, (_, varName) => defs.get(varName))
 }
 
 function findVariablesDefinitions(css) {
-	const defs = []
-	for (const def of css.matchAll(reVarsDefinitions)) {
-		const tupple = def[0].split(':').map(s => s.trim())
-		tupple[1] = tupple[1].replace(/;$/, '') // removes semicolon from value
-		defs.push(tupple)
+	const multiNestedDefs = new Map()
+	const defs = new Map()
+	for (const [expr] of css.matchAll(reVarDefinitions)) {
+		const [name, _value] = expr.split(':').map(s => s.trim())
+		const value = _value.replace(/;$/, '') // removes semicolon from value
+		if (value.startsWith('var(')) {
+			const nestedName = value.match(reVarName)[1]
+			if (defs.has(nestedName) && !defs.get(nestedName).startsWith('var('))
+				defs.set(name, defs.get(nestedName))
+			else // is doubly (or more) nested?, or it's defined later
+				multiNestedDefs.set(name, value)
+		}
+		else
+			defs.set(name, value)
 	}
+
+	while (multiNestedDefs.size) {
+		for (const [name, value] of multiNestedDefs) {
+			const nestedName = value.match(reVarName)[1]
+			if (defs.has(nestedName) && !defs.get(nestedName).startsWith('var(')) {
+				defs.set(name, defs.get(nestedName))
+				multiNestedDefs.delete(name)
+			}
+		}
+	}
+
 	return defs
 }
 
