@@ -90,14 +90,14 @@ function findVariablesDefinitions(css) {
 
 
 export const Testable = {
-	reBlockComments: BlockComments,
-	reLeadingAndTrailingWhitespace: LeadingAndTrailingWhitespace,
-	rePropValueWhitespaceSeparator: PropValueWhitespaceSeparator,
-	reNewlines: Newlines,
-	reWhitespaceBeforeBraces: WhitespaceBeforeBraces,
-	reWhitespaceAfterBraces: WhitespaceAfterBraces,
-	reLastSemicolonInSet: LastSemicolonInSet,
-	reSpacesAfterComma: SpacesAfterComma,
+	BlockComments,
+	LeadingAndTrailingWhitespace,
+	PropValueWhitespaceSeparator,
+	Newlines,
+	WhitespaceBeforeBraces,
+	WhitespaceAfterBraces,
+	LastSemicolonInSet,
+	SpacesAfterComma,
 	findVariablesDefinitions,
 	inlineVars
 }

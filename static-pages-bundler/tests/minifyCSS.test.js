@@ -32,7 +32,7 @@ test('Acceptance', () => {
 })
 
 test('Comments', () => {
-	testRegexMatchesGetDeleted(Testable.reBlockComments, `
+	testRegexMatchesGetDeleted(Testable.BlockComments, `
 /* Foo */
 /* Multiline line 1 
 Line 2 */
@@ -49,7 +49,7 @@ Line 2 */
 
 
 test('Trimming', () => {
-	testRegexMatchesGetDeleted(Testable.reLeadingAndTrailingWhitespace, `
+	testRegexMatchesGetDeleted(Testable.LeadingAndTrailingWhitespace, `
  .b .c {
 	color: orange;
   width: 20px;
@@ -69,7 +69,7 @@ height: 30px;
 
 
 test('Inner Prop Value space', () => {
-	testRegexMatchesGetDeleted(Testable.rePropValueWhitespaceSeparator, `
+	testRegexMatchesGetDeleted(Testable.PropValueWhitespaceSeparator, `
 .e {
 	color: #f00;
 	height:   100px;
@@ -89,7 +89,7 @@ test('Inner Prop Value space', () => {
 
 
 test('Newlines', () => {
-	testRegexMatchesGetDeleted(Testable.reNewlines, `
+	testRegexMatchesGetDeleted(Testable.Newlines, `
 .f {
 	color: blue;
 	height: 300px;
@@ -101,7 +101,7 @@ test('Newlines', () => {
 
 
 test('White spaces before braces', () => {
-	testRegexMatchesGetDeleted(Testable.reWhitespaceBeforeBraces, `
+	testRegexMatchesGetDeleted(Testable.WhitespaceBeforeBraces, `
 .g { color: pink; width: 400px; } `,
 		`
 .g{ color: pink; width: 400px;} `)
@@ -109,21 +109,21 @@ test('White spaces before braces', () => {
 
 
 test('White spaces after braces', () => {
-	testRegexMatchesGetDeleted(Testable.reWhitespaceAfterBraces, `
+	testRegexMatchesGetDeleted(Testable.WhitespaceAfterBraces, `
 .G { color: green; width: 410px; } `,
 		`
 .G {color: green; width: 410px; }`)
 })
 
 test('Final semicolon', () => {
-	testRegexMatchesGetDeleted(Testable.reLastSemicolonInSet,
+	testRegexMatchesGetDeleted(Testable.LastSemicolonInSet,
 		'.h {color: cyan; width: 500px;}',
 		'.h {color: cyan; width: 500px}'
 	)
 })
 
 test('Comma + Space', () => {
-	testRegexMatchesGetDeleted(Testable.reSpacesAfterComma,
+	testRegexMatchesGetDeleted(Testable.SpacesAfterComma,
 		'.H { color: rgb(255, 255, 0); }',
 		'.H { color: rgb(255,255,0); }'
 	)
