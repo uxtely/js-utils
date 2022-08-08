@@ -55,8 +55,8 @@ function inlineVars(css) {
 }
 
 function findVariablesDefinitions(css) {
-	const multiNestedDefs = new Map()
 	const defs = new Map()
+	const pendingDefs = new Map()
 
 	for (const [expr] of css.matchAll(reVarDefinitions)) {
 		const [name, _value] = expr.split(':').map(s => s.trim())
@@ -69,19 +69,18 @@ function findVariablesDefinitions(css) {
 			if (!isLateDefinedOrMultiNested(nestedName))
 				defs.set(name, defs.get(nestedName))
 			else
-				multiNestedDefs.set(name, value)
+				pendingDefs.set(name, value)
 		}
 	}
 
-	while (multiNestedDefs.size) {
-		for (const [name, value] of multiNestedDefs) {
+	while (pendingDefs.size)
+		for (const [name, value] of pendingDefs) {
 			const [, nestedName] = value.match(reVarName)
 			if (!isLateDefinedOrMultiNested(nestedName)) {
 				defs.set(name, defs.get(nestedName))
-				multiNestedDefs.delete(name)
+				pendingDefs.delete(name)
 			}
 		}
-	}
 
 	function isLateDefinedOrMultiNested(nestedName) {
 		return !defs.has(nestedName) || defs.get(nestedName).startsWith('var(')
