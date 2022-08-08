@@ -16,7 +16,6 @@
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
 // - remove all empty	rules
 // - Optimize the regexes that handle optional whitespace, but that's stripped out in an older step.
-// - handle hyphens in var names (--[\w-])
 
 
 const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
@@ -27,9 +26,9 @@ const reWhitespaceBeforeBraces = /\s*(?=[{}])/gm
 const reWhitespaceAfterBraces = /(?<=[{}])\s*/gm
 const reLastSemicolonInSet = /;(?=})/gm
 const reSpacesAfterComma = /(?<=,)\s+/g
-const reVarDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
-const reVarNames = /var\(\s*(--\w*)\s*\)/g // e.g. var(--foo)
-const reVarName = /var\(\s*(--\w*)\s*\)/ // e.g. var(--foo)
+const reVarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
+const reVarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo)
+const reVarName = /var\(\s*(--[\w-]*)\s*\)/ // e.g. var(--foo)
 const reFinalSemicolon = /;$/
 
 

@@ -11,11 +11,11 @@ test('Acceptance', () => {
 	--shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
   --foo: orange; /* @Comment */
   --foobar: blue;
-  --doublyN: var(--late);
+  --doubly_N: var(--late);
   --late: var(--BARRA);
   --bar: teal;
   --BARRA: yellow;
-  --nonlate: var(--bar);
+  --non-late: var(--bar);
   --FooBar9: red
 }
 .a { color: green; }
@@ -24,9 +24,9 @@ test('Acceptance', () => {
 .d { color: rgb(255, 255,  0); }
 .e { color: #111; }
 .f { color: var(--foobar) }
-.g { color: var(--nonlate) }
+.g { color: var(--non-late) }
 .h { color: var(--late) }
-.i { color: var(--doublyN) }
+.i { color: var(--doubly_N) }
 `),
 		`.a{color:green}.b{color:orange}.c{color:red}.d{color:rgb(255,255,0)}.e{color:#111}.f{color:blue}.g{color:teal}.h{color:yellow}.i{color:yellow}`)
 })
