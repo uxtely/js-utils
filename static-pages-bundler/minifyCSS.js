@@ -30,6 +30,7 @@ const reVarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
 const reVarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo)
 const reVarName = /var\(\s*(--[\w-]*)\s*\)/ // e.g. var(--foo)
 const reFinalSemicolon = /;$/
+const reIsVar = /^var\(/
 
 
 export function minifyCSS(css) {
@@ -61,7 +62,7 @@ function findVariablesDefinitions(css) {
 		const [name, _value] = expr.split(':').map(s => s.trim())
 		const value = _value.replace(reFinalSemicolon, '')
 
-		if (!value.startsWith('var(')) // is a non-nested value
+		if (!reIsVar.test(value)) // is a non-nested variable
 			defs.set(name, value)
 		else {
 			const [, nestedName] = value.match(reVarName)
@@ -82,7 +83,7 @@ function findVariablesDefinitions(css) {
 		}
 
 	function isLateDefinedOrMultiNested(nestedName) {
-		return !defs.has(nestedName) || defs.get(nestedName).startsWith('var(')
+		return !defs.has(nestedName) || reIsVar.test(defs.get(nestedName))
 	}
 
 	return defs
