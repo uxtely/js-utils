@@ -18,13 +18,13 @@
  */
 
 
-const reComments = /<!--(?!\s*?\[\s*?if)[\s\S]*?-->/gi
+const Comments = /<!--(?!\s*?\[\s*?if)[\s\S]*?-->/gi
 
-const rePreserveTags = /<(pre|style|script(?![^>]*?src))[^>]*>[\s\S]*?<\/\1>/gi
-const reInsertTags = /<PreServed>/g
+const PreserveTags = /<(pre|style|script(?![^>]*?src))[^>]*>[\s\S]*?<\/\1>/gi
+const InsertTags = /<PreServed>/g
 
-const reReduceAttributeDelimiters = /\s{2,}(?=[^<]*>)/g
-const reLeadingWhitespace = /^\s*/gm
+const ReduceAttributeDelimiters = /\s{2,}(?=[^<]*>)/g
+const LeadingWhitespace = /^\s*/gm
 
 
 export function minifyHTML(html) {
@@ -40,14 +40,14 @@ export function minifyHTML(html) {
 	}
 
 	return html
-		.replace(reComments, '')
-		.replace(rePreserveTags, cbPreserveTags)
-		.replace(reReduceAttributeDelimiters, ' ')
-		.replace(reLeadingWhitespace, '')
-		.replace(reInsertTags, cbInsertTags)
+		.replace(Comments, '')
+		.replace(PreserveTags, cbPreserveTags)
+		.replace(ReduceAttributeDelimiters, ' ')
+		.replace(LeadingWhitespace, '')
+		.replace(InsertTags, cbInsertTags)
 		.trim()
 }
 
 
 export const removeCommentsFromHTML = html =>
-	html.replace(reComments, '')
+	html.replace(Comments, '')

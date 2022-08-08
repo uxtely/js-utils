@@ -18,63 +18,63 @@
 // - Optimize the regexes that handle optional whitespace, but that's stripped out in an older step.
 
 
-const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
-const reLeadingAndTrailingWhitespace = /^\s*|\s*$/gm
-const rePropValueWhitespaceSeparator = /(?<=:)\s*/gm
-const reNewlines = /\n/gm
-const reWhitespaceBeforeBraces = /\s*(?=[{}])/gm
-const reWhitespaceAfterBraces = /(?<=[{}])\s*/gm
-const reLastSemicolonInSet = /;(?=})/gm
-const reSpacesAfterComma = /(?<=,)\s+/g
-const reVarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
-const reVarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo)
-const reVarName = /var\(\s*(--[\w-]*)\s*\)/ // e.g. var(--foo)
-const reFinalSemicolon = /;$/
-const reIsVar = /^var\(/
+const BlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
+const LeadingAndTrailingWhitespace = /^\s*|\s*$/gm
+const PropValueWhitespaceSeparator = /(?<=:)\s*/gm
+const Newlines = /\n/gm
+const WhitespaceBeforeBraces = /\s*(?=[{}])/gm
+const WhitespaceAfterBraces = /(?<=[{}])\s*/gm
+const LastSemicolonInSet = /;(?=})/gm
+const SpacesAfterComma = /(?<=,)\s+/g
+const VarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
+const VarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo)
+const VarName = /var\(\s*(--[\w-]*)\s*\)/ // e.g. var(--foo)
+const FinalSemicolon = /;$/
+const IsVar = /^var\(/
 
 
 export function minifyCSS(css) {
 	css = css
-		.replace(reBlockComments, '')
-		.replace(reLeadingAndTrailingWhitespace, '')
-		.replace(rePropValueWhitespaceSeparator, '')
-		.replace(reNewlines, '')
-		.replace(reWhitespaceBeforeBraces, '')
-		.replace(reWhitespaceAfterBraces, '')
-		.replace(reLastSemicolonInSet, '')
-		.replace(reSpacesAfterComma, '')
+		.replace(BlockComments, '')
+		.replace(LeadingAndTrailingWhitespace, '')
+		.replace(PropValueWhitespaceSeparator, '')
+		.replace(Newlines, '')
+		.replace(WhitespaceBeforeBraces, '')
+		.replace(WhitespaceAfterBraces, '')
+		.replace(LastSemicolonInSet, '')
+		.replace(SpacesAfterComma, '')
 	css = inlineVars(css)
 	return css.replace(':root{}', '')
 }
 
 function inlineVars(css) {
 	const defs = findVariablesDefinitions(css)
-	css = css.replace(reVarDefinitions, '')
-	return css.replace(reVarNames, (_, varName) => defs.get(varName))
+	css = css.replace(VarDefinitions, '')
+	return css.replace(VarNames, (_, varName) => defs.get(varName))
 }
 
 function findVariablesDefinitions(css) {
 	const defs = new Map()
 	const pendingDefs = new Map()
 
-	for (const [expr] of css.matchAll(reVarDefinitions)) {
+	for (const [expr] of css.matchAll(VarDefinitions)) {
 		const [name, _value] = expr.split(':').map(s => s.trim())
-		const value = _value.replace(reFinalSemicolon, '')
+		const value = _value.replace(FinalSemicolon, '')
 
-		if (!reIsVar.test(value)) // is a non-nested variable
-			defs.set(name, value)
-		else {
-			const [, nestedName] = value.match(reVarName)
+		if (IsVar.test(value)) {
+			const [, nestedName] = value.match(VarName)
 			if (isLateDefinedOrMultiNested(nestedName))
 				pendingDefs.set(name, value)
 			else
 				defs.set(name, defs.get(nestedName))
 		}
+		else
+			defs.set(name, value)
 	}
 
 	while (pendingDefs.size)
 		for (const [name, value] of pendingDefs) {
-			const [, nestedName] = value.match(reVarName)
+			const [, nestedName] = value.match(VarName)
 			if (isLateDefinedOrMultiNested(nestedName))
 				continue
 			pendingDefs.delete(name)
@@ -82,7 +82,7 @@ function findVariablesDefinitions(css) {
 		}
 
 	function isLateDefinedOrMultiNested(nestedName) {
-		return !defs.has(nestedName) || reIsVar.test(defs.get(nestedName))
+		return !defs.has(nestedName) || IsVar.test(defs.get(nestedName))
 	}
 
 	return defs
@@ -90,14 +90,14 @@ function findVariablesDefinitions(css) {
 
 
 export const Testable = {
-	reBlockComments,
-	reLeadingAndTrailingWhitespace,
-	rePropValueWhitespaceSeparator,
-	reNewlines,
-	reWhitespaceBeforeBraces,
-	reWhitespaceAfterBraces,
-	reLastSemicolonInSet,
-	reSpacesAfterComma,
+	reBlockComments: BlockComments,
+	reLeadingAndTrailingWhitespace: LeadingAndTrailingWhitespace,
+	rePropValueWhitespaceSeparator: PropValueWhitespaceSeparator,
+	reNewlines: Newlines,
+	reWhitespaceBeforeBraces: WhitespaceBeforeBraces,
+	reWhitespaceAfterBraces: WhitespaceAfterBraces,
+	reLastSemicolonInSet: LastSemicolonInSet,
+	reSpacesAfterComma: SpacesAfterComma,
 	findVariablesDefinitions,
 	inlineVars
 }
