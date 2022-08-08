@@ -10,11 +10,11 @@
  */
 
 // TODO 
-// - it doesn't handle nested comments like /*/* foo */*/
-// - it doesn't preserve anything within data-uri, nor content strings.
-//   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
+// - Handle nested comments like /*/* foo */*/
+// - Preserve anything within data-uri, nor content strings.
+//   - we could do like in minifyHTML. i.e. stacking all the things to
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
-// - remove all empty	rules
+// - Remove all empty	rules
 // - Optimize the regexes that handle optional whitespace, but that's stripped out in an older step.
 
 
