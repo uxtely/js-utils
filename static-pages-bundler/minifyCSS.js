@@ -44,8 +44,7 @@ export function minifyCSS(css) {
 		.replace(reLastSemicolonInSet, '')
 		.replace(reSpacesAfterComma, '')
 	css = inlineVars(css)
-	css = css.replace(':root{}', '')
-	return css
+	return css.replace(':root{}', '')
 }
 
 function inlineVars(css) {
