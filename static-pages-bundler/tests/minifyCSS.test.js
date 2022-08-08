@@ -12,11 +12,11 @@ test('Acceptance', () => {
   --foo: orange; /* @Comment */
   --bar: teal;
   --foobar: blue;
-  --FooBar: red
+  --FooBar9: red
 }
 .a { color: green; }
 .b { color: var(--foo); }
-.c { color: var(--FooBar); }
+.c { color: var(--FooBar9); }
 .d { color: rgb(255, 255,  0); }
 .e { color: #111; }
 .f { color: var(--foobar) }
@@ -127,7 +127,7 @@ test('Finds variables definitions', () => {
 	const inCSS = `
 :root {
     --foo:   100px; /* @Comment */
-  --fooBar: red;
+  --fooBar: red;--inline: coral;
   --hashed: #000;
 }
 section {
@@ -137,6 +137,7 @@ section {
 	const expected = [
 		['--foo', '100px'],
 		['--fooBar', 'red'],
+		['--inline', 'coral'],
 		['--hashed', '#000'],
 		['--bar', '300px'],
 		['--tom', '400px'],

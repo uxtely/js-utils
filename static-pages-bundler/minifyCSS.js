@@ -15,6 +15,7 @@
 //   - we could do like in minifyHTML, commit e5448b2. i.e. stacking all the things to
 //   be preserved and replace them with a magic string then pop the stack to re-replace.
 // - remove all empty	rules
+// - Nested Vars
 
 
 const reBlockComments = /\/\*(\*(?!\/)|[^*])*\*\//g
@@ -26,6 +27,7 @@ const reWhitespaceAfterBraces = /(?<=[{}])\s*/gm
 const reLastSemicolonInSet = /;(?=})/gm
 const reSpacesAfterComma = /(?<=,)\s+/g
 const reVarsDefinitions = /\s*--\w*:\s*[^;\n}]*;?\s*/g
+const reVarNames = /var\(\s*(--\w*)\s*\)/g
 
 
 export function minifyCSS(css) {
@@ -44,11 +46,9 @@ export function minifyCSS(css) {
 }
 
 function inlineVars(css) {
-	const defs = findVariablesDefinitions(css)
+	const defs = new Map(findVariablesDefinitions(css))
 	css = css.replace(reVarsDefinitions, '')
-	for (const [varName, varValue] of defs)
-		css = css.replace(RegExp('var\\(\\s*' + varName + '\\s*\\)', 'g'), varValue)
-	return css
+	return css.replace(reVarNames, (_, varName) => defs.get(varName))
 }
 
 function findVariablesDefinitions(css) {
