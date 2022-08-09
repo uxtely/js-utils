@@ -26,9 +26,9 @@ const WhitespaceBeforeBraces = /\s*(?=[{}])/gm
 const WhitespaceAfterBraces = /(?<=[{}])\s*/gm
 const LastSemicolonInSet = /;(?=})/gm
 const SpacesAfterComma = /(?<=,)\s+/g
-const VarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo: 10px;
-const VarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo)
-const VarName = /var\(\s*(--[\w-]*)\s*\)/ // e.g. var(--foo)
+const VarDefinitions = /\s*--[\w-]*:\s*[^;\n}]*;?\s*/g // e.g. --foo_Bar-9: 10px;
+const VarNames = /var\(\s*(--[\w-]*)\s*\)/g // e.g. var(--foo_Bar-9)
+const VarName = /var\(\s*(--[\w-]*)\s*\)/
 const FinalSemicolon = /;$/
 const IsVar = /^var\(/
 
