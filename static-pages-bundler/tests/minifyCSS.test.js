@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { strictEqual, deepStrictEqual } from 'node:assert'
+import { strictEqual, deepStrictEqual, throws } from 'node:assert'
 import { minifyCSS, Testable } from '../minifyCSS.js'
 
 
@@ -147,7 +147,7 @@ section {
 		['--inline', 'coral'],
 		['--hashed', '#000'],
 		['--bar', '300px'],
-		['--tom', '400px'],
+		['--tom', '400px']
 	]
 	deepStrictEqual(Array.from(Testable.findVariablesDefinitions(inCSS)), expected)
 })
@@ -163,18 +163,31 @@ test('Inline Vars', () => {
   width: var(--foo);
   height: var(--fooBar);
   left: var( --fooBar  );
-}
-`
+}`
 	const outCSS = `
 :root {}
 .a {
   width: 100px;
   height: 200px;
   left: 200px;
-}
-`
+}`
 	strictEqual(Testable.inlineVars(inCSS), outCSS)
 })
+
+
+test('Circular defintions throw', () => throws(() =>
+	Testable.inlineVars(`
+:root {
+  --circleA: var(--circleB);
+  --circleB: var(--circleA);
+}`)))
+
+
+test('Undefined variable throws', () => throws(() =>
+	Testable.inlineVars(`
+:root {
+  --undefA: var(--undefB);
+}`)))
 
 
 function testRegexMatchesGetDeleted(regex, input, expected) {

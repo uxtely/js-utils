@@ -72,7 +72,9 @@ function findVariablesDefinitions(css) {
 			defs.set(name, value)
 	}
 
-	while (pendingDefs.size)
+
+	let nSafeCycles = 1000
+	while (pendingDefs.size && --nSafeCycles)
 		for (const [name, value] of pendingDefs) {
 			const [, nestedName] = value.match(VarName)
 			if (isLateDefinedOrMultiNested(nestedName))
@@ -81,11 +83,14 @@ function findVariablesDefinitions(css) {
 			defs.set(name, defs.get(nestedName))
 		}
 
+	if (!nSafeCycles)
+		throw pendingDefs
+
+	return defs
+
 	function isLateDefinedOrMultiNested(nestedName) {
 		return !defs.has(nestedName) || IsVar.test(defs.get(nestedName))
 	}
-
-	return defs
 }
 
 
