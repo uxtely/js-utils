@@ -77,10 +77,10 @@ function findVariablesDefinitions(css) {
 	while (pendingDefs.size && --nSafeCycles)
 		for (const [name, value] of pendingDefs) {
 			const [, nestedName] = value.match(VarName)
-			if (isLateDefinedOrMultiNested(nestedName))
-				continue
-			pendingDefs.delete(name)
-			defs.set(name, defs.get(nestedName))
+			if (!isLateDefinedOrMultiNested(nestedName)) {
+				defs.set(name, defs.get(nestedName))
+				pendingDefs.delete(name)
+			}
 		}
 
 	if (!nSafeCycles)
