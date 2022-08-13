@@ -18,7 +18,7 @@ command -v ffmpeg  > /dev/null || abort "Please install ffmpeg"
 
 # We only use PNGs, no JPGs. This way we can ensure there's no
 # color shifting between screenshots. Also, PNGs look sharper anyways.
-nJPG=$(find $1 -type f -name *\.jpg | awk 'END{print NR}')
+nJPG=$(find $1 -type f -iname *\.jpg | awk 'END{print NR}')
 test $nJPG = 0 || abort "Found a JPG, use a PNG instead."
 
 
