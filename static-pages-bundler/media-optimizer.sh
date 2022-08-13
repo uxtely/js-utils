@@ -9,21 +9,21 @@ abort() { # Prints the message in red to stderr
   exit 1
 }
 
-# brew install oxipng webp libavif ffmpeg
-command -v cwebp > /dev/null || abort "Missing webp"
-command -v oxipng > /dev/null || abort "Missing oxipng"
-command -v avifenc > /dev/null || abort "Missing libavif"
-command -v ffmpeg > /dev/null || abort "Missing ffmpeg"
+# brew install webp oxipng libavif ffmpeg
+command -v cwebp   > /dev/null || abort "Please install webp"
+command -v oxipng  > /dev/null || abort "Please install oxipng"
+command -v avifenc > /dev/null || abort "Please install libavif"
+command -v ffmpeg  > /dev/null || abort "Please install ffmpeg"
 
 
 # We only use PNGs, no JPGs. This way we can ensure there's no
-# color shifting between screenshots and PNGs look sharper anyways.
+# color shifting between screenshots. Also, PNGs look sharper anyways.
 nJPG=$(find $1 -type f -name *\.jpg | awk 'END{print NR}')
-test $nJPG = 0 || abort "Found a JPG, use a PNG instead." 
+test $nJPG = 0 || abort "Found a JPG, use a PNG instead."
 
 
-# IF there is no foo.png.avif OR 
-# IF foo.png has been modified later than foo.png.avif, 
+# IF there is no foo.png.avif OR
+# IF foo.png has been modified later than foo.png.avif,
 #   foo.png will output:
 #     1. foo.png (better compressed lossless, and without EXIF metadata)
 #     2. foo.png.webp
