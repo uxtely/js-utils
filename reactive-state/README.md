@@ -6,16 +6,16 @@
 - [jotai](https://github.com/pmndrs/jotai)
 
 ## Description
-It's a standalone plain JS object that's bindable to the state of many React
+It’s a standalone plain JS object that’s bindable to the state of many React
 class components without needing higher-order components (HOC).
 
 As it's standalone and importable, it can be used in two leaf components,
-for either updating the state or for re-rendering. For example, in [UI
-Drafter](https://uidrafter.com) hitting **User** → **Delete all Files** needs to refresh
-**&lt;HomeFileList/>**. So with this `ReactiveState`, there's no need to write code in
-a parent component to handle this coupling, as it can be imported where it's needed.
+for either updating the state or for re-rendering. For example, in [UI Drafter](https://uidrafter.com) 
+hitting **User** → **Delete all Files** needs to refresh **&lt;HomeFileList/>**. 
+So with this `ReactiveState`, there’s no need to write code in a parent
+component to handle this coupling, as it can be imported where it’s needed.
 
-In addition to reducing wiring overhead, it simplifies testing as it doesn't
+In addition to reducing wiring overhead, it simplifies testing as it doesn’t
 require a DOM. For example, to test the router function, we assert the value of the
 `activeWorkspace` reactive state, which is plain JS. Therefore, it reduces, or in
 some cases eliminates, the need for DOM based testing, which are slow and brittle.
@@ -100,7 +100,7 @@ class Foo extends React.Component {
 - `on(reactComponentInstance, callback)`
     - Adds a listener callback on `componentDidMount`
     - Removes the listener on `componentWillUnmount`
-- `set(a)` or `set(a, b)`. Note, **two args at most**, it's not variadic.
+- `set(a)` or `set(a, b)`. Note, **two args at most**, it’s not variadic.
 - `get()`, `reset()`, `toggle()`
 
 
@@ -115,4 +115,4 @@ sure not to mutate it directly. Alternatively, edit the getter to return a copy.
 
 
 ## License
-This program is [ISC licensed](./LICENSE).
+This program is [ISC licensed](../LICENSE).

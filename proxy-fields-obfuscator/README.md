@@ -3,14 +3,14 @@
 Mangles field names in production and generates friendly ones in dev.
 
 ## Option A: Creates sequential base52 keys in production
-```javascript
+```js
 const FF = proxyFieldNames('FF', { foo: null, bar: null })
 // DEV:  FF.foo → FF_foo
 // PROD: FF.foo → 'a'
 ```
 
 ## Option B: Honors pre-baked (non-null) values in production
-```javascript
+```js
 const FF = proxyFieldNames('FF', { foo: 0, bar: 1 })
 // DEV:  FF.foo → FF_foo
 // PROD: FF.foo → 0
@@ -18,7 +18,7 @@ const FF = proxyFieldNames('FF', { foo: 0, bar: 1 })
 
 ## Tip for autocomplete
 In WebStorm, you can preserve autocomplete this way:
-```javascript
+```js
 let FF = { foo: null, bar: null }
 FF = proxyFieldNames('FF', FF)
 export { FF }
@@ -31,7 +31,7 @@ export { FF }
 
 
 ## Why?
-- For making it harder to reversers trying to steal the code.
+- For mitigating reversers trying to steal the code.
 - For reducing the bundle size.
 - For optimizing the field lookups time. For instance, by baking-in numbers, we can
   take advantage of [V8’s fast properties](https://v8.dev/blog/fast-properties).
