@@ -21,7 +21,6 @@ export const idbListFiles = () => {
 	})
 }
 
-
 function IDB(method, mode, payload, callback) {
 	return new Promise((resolve, reject) => {
 		const req = indexedDB.open(dbName(), VERSION)
@@ -42,8 +41,7 @@ function IDB(method, mode, payload, callback) {
 			}
 		}
 
-		// Errors bubble up to this handler. e.g. Quota Exceeded,
-		// or the on-disk version is greater than VERSION
+		// Errors bubble up to this handler. e.g. Quota Exceeded, or the on-disk version is greater than VERSION
 		req.onerror = reject
 	})
 }

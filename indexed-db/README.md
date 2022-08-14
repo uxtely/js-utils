@@ -1,12 +1,18 @@
 # IndexedDB
 
-Promisifies and automates the ceremony of the
-browser's `IndexedDB`. For example, it automatically:
-- **Creates** `||` **Opens** an `IDBDatabase`
-	- It's named after your own `dbName()` function.
-  - Only one database is supported.
-- **Creates** `||` **Uses** an existing `IDBObjectStore`
-	- Only one per database is supported.
+Promisifies and automates the ceremony of the browser’s `IndexedDB`. 
+
+## Pros
+- Battle tested in https://uidrafter.com
+- Lightweight (under 50 LoC)
+
+## Cons
+- Only one database is supported.
+- Only one object store per database is supported.
+
+## How it works
+- **Creates** `||` **Opens** an `IDBDatabase`, which is named after your own `dbName()`.
+- **Creates** `||` **Uses** an existing `IDBObjectStore`.
 - **Creates** `&&` **Closes** the `IDBTransaction`.
 
 
