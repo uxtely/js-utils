@@ -1,12 +1,12 @@
 import https from 'node:https'
-import { basename } from 'node:path'
-import { readFileSync } from 'node:fs'
+import { basename, join } from 'node:path'
+import { readFileSync, readdirSync, lstatSync } from 'node:fs'
 
 
 /**
  *  At UI Drafter we no longer use CDNs, but here's how we used to do it:
  *   - upload new .mp4 of the `localDir`
- *     - ignores sub-directories
+ *     - ignores subdirectories
  *     - skips already uploaded videos
  *   - use BunnyCDN's web API because the alternative is clear text FTP.
  *		Ideally, they should implement `rsync` access so this script shouldn't be needed.
