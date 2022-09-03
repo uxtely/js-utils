@@ -4,7 +4,7 @@ Promisifies and automates the ceremony of the browser’s `IndexedDB`.
 
 ## Pros
 - Battle tested in https://uidrafter.com
-- Lightweight (under 50 LoC)
+- Lightweight (40 LoC)
 
 ## Cons
 - Only one database is supported.
