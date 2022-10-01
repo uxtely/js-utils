@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { join, dirname } from 'node:path'
+import { join, dirname, basename, extname } from 'node:path'
 import { brotliCompressSync } from 'node:zlib'
 import {
 	rmSync,
@@ -80,4 +80,8 @@ export function copyDir(from, to) {
 
 export function brotli(f) {
 	writeFileSync(f + '.br', brotliCompressSync(readFileSync(f, 'utf8')))
+}
+
+export function removeExtension(file) {
+	return basename(file, extname(file))
 }

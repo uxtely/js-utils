@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url'
-import { dirname, basename } from 'node:path'
+import { dirname } from 'node:path'
 
-import { listFiles } from '../../fs-utils.js'
+import { listFiles, removeExtension } from '../../fs-utils.js'
 import { routerForStaticPages } from '../routerForStaticPages.js'
 import { buildProduction, startDev } from '../builders.js'
 
@@ -9,7 +9,7 @@ import { buildProduction, startDev } from '../builders.js'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 // The file list is read only once (it doesn't auto-reload).
-const routes = listFiles('root', /\.html$/).map(file => '/' + basename(file, '.html'))
+const routes = listFiles('root', /\.html$/).map(file => '/' + removeExtension(file))
 const router = routerForStaticPages('root', routes, __dirname + '/root/htmlTemplate.js', routes)
 
 switch (process.argv[2]) {
