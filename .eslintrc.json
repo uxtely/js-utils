@@ -2,24 +2,22 @@
   "env": {
     "browser": true,
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es2020": true
   },
   "extends": ["eslint:recommended"],
   "parserOptions": {
-    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "rules": {
     "prefer-const": "warn",
-    "no-mixed-spaces-and-tabs": "off"
+    "no-empty": [
+      "error", {
+        "allowEmptyCatch": true
+      }
+    ]
   },
   "globals": {
-    "PRODUCTION": "readonly",
-    "BigInt": "readonly",
-    "Promise": "readonly",
-    "Proxy": "readonly",
-    "Set": "readonly",
-    "Map": "readonly",
-    "PropTypes": "readonly"
+    "PRODUCTION": "readonly"
   }
 }
