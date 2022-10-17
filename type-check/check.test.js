@@ -12,8 +12,8 @@ function oks(arg, defs) {
 	test('OKs', () => doesNotThrow(() => check(arg, defs)))
 }
 
-function fails(arg, defs, msg) {
-	test('Fails', () => throws(() => check(arg, defs), msg))
+function fails(arg, defs, msg = '') {
+	test('Fails', () => throws(() => check(arg, defs), new RegExp(`^TypeError: ${msg}$`)))
 }
 
 console.log('check')
@@ -43,32 +43,32 @@ oks(new Uint8ClampedArray(), Uint8ClampedArray)
 oks(new Float32Array(), Float32Array)
 oks(new Float64Array(), Float64Array)
 
-fails({}, Array)
-fails(new Date(), Function)
-fails(null, Object)
-fails(new Int8Array(), Int16Array)
+fails({}, Array, `Got: "\\[object Object\\]"`)
+fails(new Date(), Function, `Got: "\\[object Date\\]"`)
+fails(null, Object, `Got: "\\[object Null\\]"`)
+fails(new Int8Array(), Int16Array, `Got: "\\[object Int8Array\\]"`)
 
 
 // check (multi)
 fails(null,
 	{},
-	'TypeError: Expected a literal object as argument')
+	'Expected an object literal as argument')
 
 fails({},
 	null,
-	'TypeError: Expected a literal object as type definitions')
+	'Expected an object literal as type definitions')
 
 fails({ a: '' },
 	{},
-	'TypeError: Missing type definition for "a"')
+	'Missing type definition for "a"')
 
 fails({},
 	{ a: String },
-	'TypeError: Missing argument "a"')
+	'Missing argument "a"')
 
 fails({ a: '' },
 	{ a: Number },
-	'TypeError: Mismatch on "a"')
+	'Mismatch on "a"')
 
 oks({
 		a: '',
@@ -113,7 +113,7 @@ oks({ a: '' },
 
 fails({ a: '' },
 	{ a: Optional(Number) },
-	'TypeError: Mismatch on "a"')
+	'Mismatch on "a"')
 
 
 // Where
@@ -129,11 +129,11 @@ oks({ a: '', b: 1 },
 
 fails({},
 	{ a: Where(isEmptyString) },
-	'TypeError: Missing argument "a"')
+	'Missing argument "a"')
 
 fails({ a: 'non empty string' },
 	{ a: Where(isEmptyString) },
-	'TypeError: Mismatch on "a"')
+	'Mismatch on "a"')
 
 
 const FooKinds = {
@@ -147,7 +147,7 @@ oks({ a: 200 },
 	{ a: Where(fooKindIsValid) })
 fails({ a: 999 },
 	{ a: Where(fooKindIsValid) },
-	'TypeError: Mismatch on "a"')
+	'Mismatch on "a"')
 
 
 // OptionalWhere
@@ -160,7 +160,7 @@ oks({ a: '' },
 
 fails({ a: 'non empty string' },
 	{ a: OptionalWhere(isEmptyString) },
-	'TypeError: Mismatch on "a"')
+	'Mismatch on "a"')
 
 
 // Shape
@@ -189,5 +189,5 @@ fails({
 			c: Number
 		})
 	},
-	'TypeError: Mismatch on "b"')
+	'Mismatch on "b"')
 

@@ -2,10 +2,9 @@
  * Copyright (c) Uxtely LLC. All rights reserved. Licensed under the ISC
  * license found in the LICENSE file in the root directory of this source tree.
  */
-function isTypeOf(example) {
-	const egType = Object.prototype.toString.call(example)
-	return value => Object.prototype.toString.call(value) === egType
-}
+
+const typeOf = example => Object.prototype.toString.call(example)
+const isTypeOf = example => value => typeOf(value) === typeOf(example)
 
 const typeCheckers = new Map([
 	[Date, isTypeOf(new Date())],
@@ -53,7 +52,7 @@ export const Shape = shape => (_, value) => {
 }
 
 export function check(valueArg, typeDef) {
-	if (typeCheckers.has(typeDef)) // is non-object (single check)
+	if (typeCheckers.has(typeDef)) // is non-object-literal arg, e.g., check('a', String)
 		checkMatch(typeDef, valueArg, '')
 	else {
 		checkArgsHaveDef(valueArg, typeDef)
@@ -69,8 +68,8 @@ export function check(valueArg, typeDef) {
 }
 
 function checkArgsHaveDef(args, defs) {
-	if (!isTypeOf({})(args)) throw TypeError('Expected a literal object as argument')
-	if (!isTypeOf({})(defs)) throw TypeError('Expected a literal object as type definitions')
+	if (!isTypeOf({})(args)) throw TypeError('Expected an object literal as argument')
+	if (!isTypeOf({})(defs)) throw TypeError('Expected an object literal as type definitions')
 
 	for (const name of Object.keys(args))
 		if (!(name in defs))
@@ -83,8 +82,11 @@ function checkRequired(hasArg, name) {
 }
 
 function checkMatch(type, value, name) {
-	if (!typeCheckers.get(type)(value))
-		throw TypeError(`Mismatch on "${name}"`)
+	if (!typeCheckers.get(type)(value)) {
+		if (name)
+			throw TypeError(`Mismatch on "${name}"`)
+		throw TypeError(`Got: "${typeOf(value)}"`)
+	}
 }
 
 function checkWhere(conditionFnOrConstructor, value, name) {
