@@ -1,6 +1,6 @@
 import test from 'node:test'
 import { ReactiveState } from './ReactiveState.js'
-import { Spy, strictEqual, isTrue, isFalse, arraysAreShallowEqual } from './test-utils.js'
+import { Spy, strictEqual, isTrue, isFalse, arraysAreShallowEqual, throws } from './test-utils.js'
 
 
 console.log('ReactiveState')
@@ -168,4 +168,9 @@ test('bindState fires setState, and unbinds the emitter on CWU', () => {
 	rc.componentWillUnmount()
 	rs.toggle()
 	isFalse(rc.state.state_key)
+})
+
+test('.isTrue', () => {
+	isTrue(new ReactiveState(true).isTrue)
+	throws(() => new ReactiveState([]).isTrue, /TypeError/)
 })

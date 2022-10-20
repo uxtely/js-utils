@@ -8,6 +8,12 @@ export class PassiveState {
 
 	get get() { return this.valueº }
 	is(a, b) { return this.setFnº(a, b) === this.valueº }
+	
+	get isTrue() {
+		if (typeof this.valueº !== 'boolean')
+			throw TypeError(`PassiveState value is not boolean`, { cause: this.valueº })
+		return this.valueº
+	}
 
 	set(a, b) { this.valueº = this.setFnº(a, b) }
 	reset() { this.valueº = this.defaultValueº }

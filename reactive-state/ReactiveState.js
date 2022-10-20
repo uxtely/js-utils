@@ -29,6 +29,12 @@ export class ReactiveState extends ReactPubSub {
 	get get() { return this.valueº }
 	is(a, b) { return this.equalsº(this.setterFnº(a, b), this.valueº) }
 
+	get isTrue() {
+		if (typeof this.valueº !== 'boolean')
+			throw TypeError(`ReactiveState value is not boolean`, { cause: this.valueº })
+		return this.valueº
+	}
+
 	set(a, b) {
 		const nextVal = this.setterFnº(a, b)
 		if (!this.equalsº(this.valueº, nextVal)) {

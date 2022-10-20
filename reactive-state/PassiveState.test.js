@@ -1,6 +1,6 @@
 import test from 'node:test'
 import { PassiveState } from './PassiveState.js'
-import { strictEqual, isTrue } from './test-utils.js'
+import { strictEqual, isTrue, isFalse, throws } from './test-utils.js'
 
 
 console.log('PassiveState')
@@ -52,4 +52,9 @@ test('.is compares strict equality', () => {
 	const defaultValue = true
 	const ps = new PassiveState(defaultValue)
 	isTrue(ps.is(true))
+})
+
+test('.isTrue', () => {
+	isTrue(new PassiveState(true).isTrue)
+	throws(() => new PassiveState([]).isTrue, /TypeError/)
 })

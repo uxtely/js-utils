@@ -2,6 +2,7 @@ import assert from 'node:assert'
 
 
 export const strictEqual = assert.strictEqual
+export const throws = assert.throws
 
 export const isTrue = actual => strictEqual(actual, true)
 export const isFalse = actual => strictEqual(actual, false)
