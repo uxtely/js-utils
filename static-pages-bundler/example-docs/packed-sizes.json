@@ -1,23 +1,23 @@
 {
 	"/workspaces": {
-		"hash": "6FKEYcP3CL7XqNHB3aNHnO_InuA",
-		"delta": 0,
-		"size": 23490,
-		"brotliedSize": 7530,
-		"brotliedDelta": 0
+		"hash": "3CngU7c-t_bxvd1eSMHIeW3o71s",
+		"delta": 583,
+		"size": 24073,
+		"brotliedSize": 7607,
+		"brotliedDelta": 77
 	},
 	"/cards": {
-		"hash": "VKuTvEC5MaDTEoCBVfwGkuW_Dok",
-		"delta": 0,
-		"size": 22314,
-		"brotliedSize": 7142,
-		"brotliedDelta": 0
+		"hash": "NOmdBvEmwe5E2cWMx9cg7GR0ENQ",
+		"delta": 583,
+		"size": 22897,
+		"brotliedSize": 7192,
+		"brotliedDelta": 50
 	},
 	"/shortcuts": {
-		"hash": "1WBMLFy-zSe9EcILASow22JKZzk",
-		"delta": 0,
-		"size": 28867,
-		"brotliedSize": 7385,
-		"brotliedDelta": 0
+		"hash": "zuBfEpCuf3dzTWpcnc0kZudBw3A",
+		"delta": 583,
+		"size": 29450,
+		"brotliedSize": 7478,
+		"brotliedDelta": 93
 	}
 }

@@ -37,14 +37,17 @@ export function startDev(router, rootDir = './root') {
 }
 
 
-export async function buildProduction(router, routes, sitemapDomain) {
+export async function buildProduction(router, routes, sitemapDomain, cspNginxVarName) {
 	const pSource = 'root/'
 	const pMedia = 'root/media'
 	const pMeta = 'root/root-meta'
 	const pDist = 'dist'
 	const pDistMedia = 'dist/media'
 	const pDistSitemap = 'dist/sitemap.txt'
+	const pDistCspNginxMap = 'dist/csp-map.nginx'
 	const pSizesReport = 'packed-sizes.json'
+	
+	const nginxCspMap = [];
 
 	const server = http.createServer(router)
 	server.listen(0, DevHost, async error => {
@@ -78,17 +81,17 @@ export async function buildProduction(router, routes, sitemapDomain) {
 
 				const cssNonce = cspNonce(css)
 				const jsNonce = cspNonce(js) || 'self'
+				
 				const csp = [
 					`default-src 'self'`,
 					`img-src 'self' data:`, // data: is for Safari's video player icons and for CSS bg images
 					`style-src '${cssNonce}'`,
 					`script-src '${jsNonce}'`
 				].join(';')
+				nginxCspMap.push(`${route} "${csp}";`)
 
-				html = html // Adds CSP rules, and injects (inlines) the CSS and JS
-					.replace('<head>', '<head>'
-						+ `<meta http-equiv="Content-Security-Policy" content="${csp};">`
-						+ `<style nonce="${cssNonce}">${css}</style>`)
+				html = html // Inlines CSS and JS
+					.replace('<head>', `<head><style nonce="${cssNonce}">${css}</style>`)
 					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
 
 				write(pDist + route, html)
@@ -99,11 +102,20 @@ export async function buildProduction(router, routes, sitemapDomain) {
 					}
 
 					if (allFilesAreBrotlied) {
+						
 						if (sitemapDomain)
 							write(pDistSitemap, routes
 								.filter(r => r !== '/index')
 								.map(r => `https://${sitemapDomain + r}`)
 								.join('\n'))
+						
+						if (cspNginxVarName) 
+							write(pDistCspNginxMap, `
+							map $uri ${cspNginxVarName} {
+							  ${nginxCspMap.join('\n')}
+							  default '';
+							}`)
+							
 						copyDir(pMeta, pDist)
 						reportSizes(pSizesReport, pDist, routes)
 					}

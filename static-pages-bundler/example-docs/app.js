@@ -31,7 +31,7 @@ switch (process.argv[2]) {
 		break
 
 	case 'production':
-		buildProduction(router, routes, 'docs.uidrafter.com').then(async () => {
+		buildProduction(router, routes, 'docs.uidrafter.com', '$docs_csp').then(async () => {
 			const server = http.createServer(router)
 			server.listen(0, DevHost, async error => {
 				if (error)

@@ -1,6 +1,6 @@
 # Static Site Generator
 
-This is a tiny (370 LoC) bundler used for:
+This is a tiny (under 400 LoC) bundler used for:
 - [docs.uidrafter.com](https://docs.uidrafter.com)
 - [blog.uidrafter.com](https://blog.uidrafter.com)
 - [uidrafter.com](https://uidrafter.com)
@@ -20,7 +20,7 @@ It crawls the dev server and saves each route as static html page. For pretty
 URLs, it saves the pages without the `.html` extension, see [Pretty routes
 for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
 
-- **Assets and CSP:** JS and CSS files get inlined with their corresponding CSP nonces.
+- **Assets:** JS and CSS files get inlined with their corresponding CSP nonces.
 
 - **Minifiers:** The HTML and CSS minifiers are custom, but you can point them to
 a popular NPM package like we do in [minifyJS](./minifyJS.js)
@@ -45,9 +45,20 @@ a popular NPM package like we do in [minifyJS](./minifyJS.js)
 
 - **Sitemap:** Builds a `sitemap.txt`
 
+- **CSP Header:** It creates a route/CSP map for Nginx in `dist/csp-map.nginx`.
+For that, the `nginx.conf` will need to include it and add the header. For example:
+```confg
+  # …
+  include                   /usr/local/DistBundles/Blog/csp-map.nginx;
+  server {
+    server_name             blog.example.com;
+    location / {
+      add_header            Content-Security-Policy $blog_csp;
+    }
+```
 
 ## Serving
-Here's an
+Here’s an
 [nginx.conf](https://github.com/uxtely/ops-utils/blob/main/location-server/jails/nginx_j/usr/local/etc/nginx/nginx.conf)
 example. For the logs
 database see [web-traffic-logs](https://github.com/uxtely/ops-utils/tree/main/web-traffic-logs/).
