@@ -74,7 +74,7 @@ class Foo extends React.Component {
   }
 
   callback() {
-    console.log(menuIsOpen.get)
+    console.log(menuIsOpen.valueOf())
   }
 }
 ```
