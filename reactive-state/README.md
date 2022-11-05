@@ -35,19 +35,9 @@ React.Component.prototype.subscribeState = function (reactiveStates) {
 ```
 
 ### Initialize
-#### with a Primitive
 ```js
 const defaultValue = false
 export const menuIsOpen = new ReactiveState(defaultValue)
-```
-
-#### with an Object
-```js
-export const myPoint = new ReactiveState(
-  { x: 0, y: 0 },       // default value
-  (x, y) => ({ x, y }), // setter function
-  areShallowEqual       // comparer function
-)
 ```
 
 ### Binding Option A
@@ -92,16 +82,15 @@ class Foo extends React.Component {
 
 ## Details
 - Only emits when its value changes.
-- Constructor Signature `(defaultValue, [setterFn], [comparerFn])`
 - `subscribeState` calls many `bindState(reactComponentInstance, stateKey)` to:
     - Set the initial state
-    - Add a listener on `componentDidMount` that does `setState({ [stateKey]: myReactiveState.get })`
+    - Add a listener on `componentDidMount` that does `setState({ [stateKey]: myReactiveState.valueOf() })`
     - Remove the listener on `componentWillUnmount`
 - `on(reactComponentInstance, callback)`
     - Adds a listener callback on `componentDidMount`
     - Removes the listener on `componentWillUnmount`
-- `set(a)` or `set(a, b)`. Note, **two args at most**, it’s not variadic.
-- `get()`, `reset()`, `toggle()`
+- `set(value)` 
+- `valueOf()`, `reset()`
 
 
 ## How it works?
@@ -110,8 +99,22 @@ React component on `componentDidMount` and unbinds it on `componentWillUnmount`.
 
 
 ## Caveats
-When using non-primitive values, the getters return a reference, so you have to make
-sure not to mutate it directly. Alternatively, edit the getter to return a copy.
+When using non-primitive values, the getter returns a reference, so you have to make
+sure not to mutate it directly. Alternatively, extend the class and override `valueOf()`.
+
+
+## Customizing Example
+```js
+export class ReactiveStateBitfield extends ReactiveState {
+  constructor(defaultValue) { 
+    super(defaultValue) 
+  }
+  mask(m) { return this.valueº & m }
+  setBit(bit) { this.set(this.valueº | bit) }
+  clearBit(bit) { this.set(this.valueº & ~bit) }
+  toggleBit(bit) { this.set(this.valueº ^ bit) }
+}
+```
 
 
 ## License
