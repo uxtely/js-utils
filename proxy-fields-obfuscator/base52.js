@@ -11,9 +11,9 @@ export function base52(n) {
 
 
 export function base52Decode(str) {
-	let j = 0
+	let i = 0
 	let decoded = 0
-	for (let i = str.length - 1; i >= 0; i--)
-		decoded += Charset.indexOf(str[i]) * (52 ** j++)
+	for (let j = str.length - 1; j >= 0; j--)
+		decoded += Charset.indexOf(str[j]) * (52 ** i++)
 	return decoded
 }
