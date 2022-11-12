@@ -50,7 +50,11 @@ export function minifyCSS(css) {
 function inlineVars(css) {
 	const defs = findVariablesDefinitions(css)
 	css = css.replace(VarDefinitions, '')
-	return css.replace(VarNames, (_, varName) => defs.get(varName))
+	return css.replace(VarNames, (_, varName) => {
+		if (!defs.has(varName))
+			throw `Missing CSS variable ${varName}`
+		return defs.get(varName)
+	})
 }
 
 function findVariablesDefinitions(css) {
