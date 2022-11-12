@@ -18,20 +18,20 @@ function fetchWithRetry(url, options) {
 	const AttemptAt = [0, 1500, 3000, 5000] // milliseconds
 	const isError = status => status >= 500 && status < 600
 	return new Promise((resolve, reject) => {
-		(function attemptFetch(nRetry) {
+		(function attemptFetch() {
 			setTimeout(() => {
 				fetch(url, options).then(response => {
-					if (isError(response.status) && nRetry < AttemptAt.length)
-						attemptFetch(nRetry)
+					if (isError(response.status) && AttemptAt.length)
+						attemptFetch()
 					else
 						resolve(response)
 				}).catch(error => {
-					if (nRetry < AttemptAt.length)
-						attemptFetch(nRetry)
+					if (AttemptAt.length)
+						attemptFetch()
 					else
 						reject(error)
 				})
-			}, AttemptAt[++nRetry])
-		}(0))
+			}, AttemptAt.shift())
+		}())
 	})
 }
