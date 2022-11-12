@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { strictEqual } from 'node:assert'
+import { equal } from 'node:assert/strict'
 import { relativeTime } from './relativeTime.js'
 import { TK, tr, trPrintf } from './relativeTimeStrings.js'
 
@@ -8,7 +8,7 @@ const now = new Date('2000-06-15 12:00:00.000 +00:00')
 
 function is(date, expected) {
 	test(`${expected} when ${date}`, () =>
-		strictEqual(relativeTime(date + '.000 +00:00', now), expected))
+		equal(relativeTime(date + '.000 +00:00', now), expected))
 }
 
 console.log('relativeTime')
@@ -56,5 +56,5 @@ is('2001-06-15 00:00:00', '') // future
 // Safari date handling
 const safariOneSecondAgo = '2000-06-15T11:59:59.000Z'
 test('Reformats date', () =>
-	strictEqual(relativeTime(safariOneSecondAgo, now), tr(TK.relative_time_just_now)))
+	equal(relativeTime(safariOneSecondAgo, now), tr(TK.relative_time_just_now)))
 

@@ -1,13 +1,13 @@
 import test from 'node:test'
 import { ReactiveState } from './ReactiveState.js'
-import { Spy, strictEqual, isTrue, isFalse } from './test-utils.js'
+import { Spy, equal, isTrue, isFalse } from './test-utils.js'
 
 
 console.log('ReactiveState')
 test('Gets the value', () => {
 	const defaultValue = true
 	const rs = new ReactiveState(defaultValue)
-	strictEqual(rs.valueOf(), defaultValue)
+	equal(rs.valueOf(), defaultValue)
 })
 
 test('Emits changes to all listeners', () => {
@@ -57,7 +57,7 @@ test('bindState preserves the original state object', () => {
 			rs.bindState(this, 'state_key')
 		}
 	}
-	strictEqual(rc.state.alpha, 'originalValue')
+	equal(rc.state.alpha, 'originalValue')
 	isTrue(rc.state.state_key)
 })
 

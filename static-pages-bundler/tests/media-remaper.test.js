@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { strictEqual, throws } from 'node:assert'
+import { equal, throws } from 'node:assert/strict'
 import { remapMediaInHTML } from '../media-remaper.js'
 
 
@@ -13,7 +13,7 @@ test('Throws when the file does not exist', () =>
 	throws(() => remapMediaInHTML(mHashes, `<video src="media/missing.mp4">`)))
 
 test('Acceptance', () =>
-	strictEqual(remapMediaInHTML(mHashes, `
+	equal(remapMediaInHTML(mHashes, `
 <img src="media/alpha.png">
 <img src="media/alpha.png">
 <img src="media/beta.png">

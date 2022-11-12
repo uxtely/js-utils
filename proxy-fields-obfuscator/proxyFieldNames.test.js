@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { throws, strictEqual } from 'node:assert'
+import { throws, equal } from 'node:assert/strict'
 import { proxyFieldNames } from './proxyFieldNames.js'
 
 
@@ -14,7 +14,7 @@ function devTest(prefix, a, b) {
 function _test(prefix, a, b, isProduction) {
 	const proxy = proxyFieldNames(prefix, a, isProduction)
 	for (const k in proxy)
-		strictEqual(proxy[k], b[k])
+		equal(proxy[k], b[k])
 }
 
 console.log('proxyFields');

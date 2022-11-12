@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { strictEqual } from 'node:assert'
+import { equal } from 'node:assert/strict'
 import { base52 } from './base52.js'
 
 
@@ -12,7 +12,6 @@ is(52, 'ba')
 is(2 ** 30, 'cQSvTm')
 
 function is(input, expected) {
-	test(`${input} => ${expected}`, () => {
-		strictEqual(base52(input), expected)
-	})
+	test(`${input} => ${expected}`, () =>
+		equal(base52(input), expected))
 }

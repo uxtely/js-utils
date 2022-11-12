@@ -1,15 +1,15 @@
-import assert from 'node:assert'
+import assert from 'node:assert/strict'
 
 
-export const strictEqual = assert.strictEqual
-export const isTrue = actual => strictEqual(actual, true)
-export const isFalse = actual => strictEqual(actual, false)
+export const equal = assert.equal
+export const isTrue = actual => equal(actual, true)
+export const isFalse = actual => equal(actual, false)
 
 export function Spy() {
 	let callCount = 0
 	function spy() {
 		callCount++
 	}
-	spy.callCountIs = expected => strictEqual(callCount, expected)
+	spy.callCountIs = expected => equal(callCount, expected)
 	return spy
 }

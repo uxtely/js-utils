@@ -1,10 +1,10 @@
 import test from 'node:test'
-import { strictEqual } from 'node:assert'
+import { equal } from 'node:assert/strict'
 import { minifyHTML } from '../minifyHTML.js'
 
 
 test('minifyHTML', () => {
-	strictEqual(minifyHTML(`
+	equal(minifyHTML(`
 <!DOCTYPE html>
 <html   
   lang="en">

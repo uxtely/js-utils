@@ -4,7 +4,7 @@
  */
 
 import test from 'node:test'
-import { throws, doesNotThrow } from 'node:assert'
+import { throws, doesNotThrow } from 'node:assert/strict'
 import { check, Shape, Where, Optional, OptionalWhere } from './check.js'
 
 

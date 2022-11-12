@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { strictEqual } from 'node:assert'
+import { equal } from 'node:assert/strict'
 import { removePropTypes } from './removePropTypes.js'
 
 
@@ -29,5 +29,5 @@ const between = 2;
 const keepMe = 2;
 const finalLine = 4;
 `
-	strictEqual(removePropTypes(input), expected)
+	equal(removePropTypes(input), expected)
 })

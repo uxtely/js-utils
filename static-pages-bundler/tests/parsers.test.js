@@ -1,5 +1,5 @@
 import test from 'node:test'
-import { deepStrictEqual, throws } from 'node:assert'
+import { deepEqual, throws } from 'node:assert/strict'
 import {
 	parseHeadAndBody,
 	extractStyleSheetHrefs,
@@ -28,18 +28,18 @@ const HTML = `
 `
 
 test('Extracts CSS files', () =>
-	deepStrictEqual(extractStyleSheetHrefs(HTML), [
+	deepEqual(extractStyleSheetHrefs(HTML), [
 		'0.css', '1.css', '2.css'
 	]))
 
 test('Extracts JS files', () =>
-	deepStrictEqual(extractJavaScriptSources(HTML), [
+	deepEqual(extractJavaScriptSources(HTML), [
 		'0.js', '1.js', '2.js'
 	]))
 
 
 test('Removes line containing X', () =>
-	deepStrictEqual(removeLineContaining(HTML, 'href="0.css"'),
+	deepEqual(removeLineContaining(HTML, 'href="0.css"'),
 		`
 <html lang="en">
 <head>
@@ -73,7 +73,7 @@ test('Throws when the head tags are swapped', () =>
 
 
 test('Empty head is OK', () =>
-	deepStrictEqual(parseHeadAndBody(`<article>TEST_1_BODY</article>`),
+	deepEqual(parseHeadAndBody(`<article>TEST_1_BODY</article>`),
 		[
 			'',
 			`<article>TEST_1_BODY</article>`
@@ -81,7 +81,7 @@ test('Empty head is OK', () =>
 
 
 test('Has Head and Body', () =>
-	deepStrictEqual(parseHeadAndBody(`
+	deepEqual(parseHeadAndBody(`
     <head>
 <title>Test2</title>
 HEAD_CONTENT_LINE2
@@ -97,7 +97,7 @@ HEAD_CONTENT_LINE2
 
 
 test('Excludes searching within comments', () =>
-	deepStrictEqual(parseHeadAndBody(`
+	deepEqual(parseHeadAndBody(`
     <head>
 <title>Test3</title>
 <!-- </head> -->
