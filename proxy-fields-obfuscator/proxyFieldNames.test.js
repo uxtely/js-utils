@@ -38,7 +38,7 @@ test('Prod uses pre-baked values', () =>
 test('Prod generates base52 values', () =>
 	prodTest(
 		{ x: null, y: null },
-		{ x: 'a', y: 'b' }))
+		{ x: 'A', y: 'B' }))
 
 
 test('Repeated values throw', () =>
