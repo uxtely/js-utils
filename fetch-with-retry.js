@@ -15,23 +15,23 @@ export function httpPost(route, json) {
 
 
 function fetchWithRetry(url, options) {
-	const AttemptAt = [0, 1500, 3000, 5000] // milliseconds
+	const AttemptDelay = [0, 1500, 3000, 5000] // milliseconds
 	const isError = status => status >= 500 && status < 600
 	return new Promise((resolve, reject) => {
 		(function attemptFetch() {
 			setTimeout(() => {
 				fetch(url, options).then(response => {
-					if (isError(response.status) && AttemptAt.length)
+					if (isError(response.status) && AttemptDelay.length)
 						attemptFetch()
 					else
 						resolve(response)
 				}).catch(error => {
-					if (AttemptAt.length)
+					if (AttemptDelay.length)
 						attemptFetch()
 					else
 						reject(error)
 				})
-			}, AttemptAt.shift())
+			}, AttemptDelay.shift())
 		}())
 	})
 }
