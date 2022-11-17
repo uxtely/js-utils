@@ -1,10 +1,10 @@
 import http from 'node:http'
+import { watch } from 'node:fs'
 import { spawn } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import watch from 'node-watch'
 
 import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
@@ -46,8 +46,8 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 	const pDistSitemap = 'dist/sitemap.txt'
 	const pDistCspNginxMap = 'dist/csp-map.nginx'
 	const pSizesReport = 'packed-sizes.json'
-	
-	const nginxCspMap = [];
+
+	const nginxCspMap = []
 
 	const server = http.createServer(router)
 	server.listen(0, DevHost, async error => {
@@ -81,7 +81,7 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 
 				const cssNonce = cspNonce(css)
 				const jsNonce = cspNonce(js) || 'self'
-				
+
 				const csp = [
 					`default-src 'self'`,
 					`img-src 'self' data:`, // data: is for Safari's video player icons and for CSS bg images
@@ -102,20 +102,20 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 					}
 
 					if (allFilesAreBrotlied) {
-						
+
 						if (sitemapDomain)
 							write(pDistSitemap, routes
 								.filter(r => r !== '/index')
 								.map(r => `https://${sitemapDomain + r}`)
 								.join('\n'))
-						
-						if (cspNginxVarName) 
+
+						if (cspNginxVarName)
 							write(pDistCspNginxMap, `
 							map $uri ${cspNginxVarName} {
 							  ${nginxCspMap.join('\n')}
 							  default '';
 							}`)
-							
+
 						copyDir(pMeta, pDist)
 						reportSizes(pSizesReport, pDist, routes)
 					}

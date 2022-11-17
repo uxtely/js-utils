@@ -3,16 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "devDependencies": {
-    "node-watch": "0.7.3"
-  },
   "dependencies": {
     "terser": "5.14.0"
   },
   "engines": {
     "node": ">=18"
   },
-	"scripts": {
-		"cloc": "cloc . --not-match-d=./ --fullpath"
-	}
+  "scripts": {
+    "cloc": "cloc . --not-match-d=./ --fullpath"
+  }
 }
