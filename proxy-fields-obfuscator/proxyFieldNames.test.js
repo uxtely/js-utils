@@ -17,7 +17,7 @@ function _test(prefix, a, b, isProduction) {
 		equal(proxy[k], b[k])
 }
 
-console.log('proxyFields');
+console.log('proxyFields')
 
 test('Dev prefixes', () =>
 	devTest('PRE',

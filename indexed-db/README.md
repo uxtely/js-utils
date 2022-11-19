@@ -1,6 +1,6 @@
 # IndexedDB
 
-Promisifies and automates the ceremony of the browser’s `IndexedDB`. 
+Promisifies and automates the ceremony of the browser’s `IndexedDB`.
 
 ## Pros
 - Battle tested in https://uidrafter.com

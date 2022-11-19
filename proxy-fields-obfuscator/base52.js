@@ -5,7 +5,7 @@ export function base52(n) {
 	do {
 		encoded = Charset[n % 52] + encoded
 		n = (n / 52) | 0
-	} while ( n > 0 )
+	} while (n > 0)
 	return encoded
 }
 

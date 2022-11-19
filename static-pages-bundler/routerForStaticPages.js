@@ -44,7 +44,7 @@ export function routerForStaticPages(rootPath, routes, template, templateArg) {
 					? ht.default.bind(null, templateArg)
 					: ht.default
 			}
-			
+
 			if (url === '/') { /* Redirect to "/index" or fallback to the first route */
 				response.statusCode = 302 // Found (Temporary Redirect)
 				response.setHeader('Location', routes[Math.max(0, routes.indexOf('/index'))])

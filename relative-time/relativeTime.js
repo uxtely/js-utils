@@ -22,7 +22,7 @@ const agoThresholds = [
 ]
 
 export function relativeTime(date, now = new Date()) {
-	if (!date) 
+	if (!date)
 		return ''
 
 	if (typeof date !== 'number') // Workaround for Safari

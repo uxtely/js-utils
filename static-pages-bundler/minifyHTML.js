@@ -1,6 +1,6 @@
 /**
  * See minifyCSS for why.
- * 
+ *
  * This is a simple (incomplete) regex-based minifier. Incomplete because
  * we just minify what's safe and regexable.
  *

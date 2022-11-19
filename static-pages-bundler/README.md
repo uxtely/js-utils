@@ -12,7 +12,7 @@ to handle the common header, navigation, and footer.
 
 
 ## Development Build
-It serves and auto reloads the browser on changes. 
+It serves and auto reloads the browser on changes.
 
 
 ## Production Build
@@ -23,13 +23,13 @@ for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
 - **Assets:** JS and CSS files get inlined with their corresponding CSP nonces.
 
 - **Minifiers:** The HTML and CSS minifiers are custom, but you can point them to
-a popular NPM package like we do in [minifyJS](./minifyJS.js)
- 
+  a popular NPM package like we do in [minifyJS](./minifyJS.js)
+
 - [**media-optimizer.sh**](./media-optimizer.sh):
-  - **Images**: We [Conditionally Serve AVIF and WebP with
-  Nginx](https://blog.uidrafter.com/conditional-avif-for-video-posters). So
-  it auto-generates AVIF and WebP from each PNG.
-  - **Videos:** MP4 get rewritten if needed for fast playback. 
+    - **Images**: We [Conditionally Serve AVIF and WebP with
+      Nginx](https://blog.uidrafter.com/conditional-avif-for-video-posters). So
+      it auto-generates AVIF and WebP from each PNG.
+    - **Videos:** MP4 get rewritten if needed for fast playback.
 
 - **media (immutable naming):** for long term caching,
   [media-remaper.js](./media-remaper.js) appends a SHA-1
@@ -46,7 +46,7 @@ a popular NPM package like we do in [minifyJS](./minifyJS.js)
 - **Sitemap:** Builds a `sitemap.txt`
 
 - **CSP Header:** It creates a route/CSP map for Nginx in `dist/csp-map.nginx`.
-For that, the `nginx.conf` will need to include it and add the header. For example:
+  For that, the `nginx.conf` will need to include it and add the header. For example:
 ```confg
   # …
   include                   /usr/local/DistBundles/Blog/csp-map.nginx;

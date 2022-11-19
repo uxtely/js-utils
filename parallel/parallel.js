@@ -5,7 +5,7 @@ import { AsyncResource } from 'node:async_hooks'
 
 // Based on: https://nodejs.org/api/async_context.html#using-asyncresource-for-a-worker-thread-pool
 
-	const kTaskInfo = Symbol('kTaskInfo')
+const kTaskInfo = Symbol('kTaskInfo')
 const kWorkerFreedEvent = Symbol('kWorkerFreedEvent')
 
 

@@ -1,13 +1,13 @@
 /* stylelint-disable no-descending-specificity */
 :root {
-	--navHeight: 37px; 
+	--navHeight: 37px;
 	--navBG: #000;
 
 	--accentLightestMore: #aeafff;
 	--accentLightest: #988cff;
 	--accentLight: #5a35ff;
 
-	--colorAccent: #661edf; 
+	--colorAccent: #661edf;
 	--accent: #5200ea;
 
 	--accentDark: #391cb8;
@@ -76,7 +76,7 @@ body {
 fieldset {
 	padding: 8px 14px 14px;
 }
- 
+
 h1, h2, h3, h4, h5, h6 { /* For the JS highlight on click fragment */
 	position: relative;
 	left: -5px;
@@ -354,11 +354,11 @@ p {
 /* </editor-fold> */
 
 
-pre { 
+pre {
 	padding: 18px;
 	margin-top: 18px;
 	background: var(--colorCodeBG);
-	border-radius: 14px; 
+	border-radius: 14px;
 	box-shadow: var(--boxShadowIndex1);
 	font-size: 13px;
 	line-height: 1.5;
@@ -608,7 +608,6 @@ h2,
 h3 {
 	transition: all 500ms ease-in-out;
 }
-
 
 
 .marginTop {

@@ -4,7 +4,7 @@ import { parseHeadAndBody } from '../../parsers.js'
 export default function htmlTemplate(docRoutes, html, iRoute) {
 	const [head, body] = parseHeadAndBody(html.toString())
 	const route = docRoutes[iRoute]
-	const hideSponsor = route === '/index' 
+	const hideSponsor = route === '/index'
 
 	return `
 <!DOCTYPE html>

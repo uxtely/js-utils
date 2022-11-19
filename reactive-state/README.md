@@ -10,8 +10,8 @@ It’s a standalone plain JS object that’s bindable to the state of many React
 class components without needing higher-order components (HOC).
 
 As it's standalone and importable, it can be used in two leaf components,
-for either updating the state or for re-rendering. For example, in [UI Drafter](https://uidrafter.com) 
-hitting **User** → **Delete all Files** needs to refresh **&lt;HomeFileList/>**. 
+for either updating the state or for re-rendering. For example, in [UI Drafter](https://uidrafter.com)
+hitting **User** → **Delete all Files** needs to refresh **&lt;HomeFileList/>**.
 So with this `ReactiveState`, there’s no need to write code in a parent
 component to handle this coupling, as it can be imported where it’s needed.
 
@@ -89,7 +89,7 @@ class Foo extends React.Component {
 - `on(reactComponentInstance, callback)`
     - Adds a listener callback on `componentDidMount`
     - Removes the listener on `componentWillUnmount`
-- `set(value)` 
+- `set(value)`
 - `valueOf()`, `reset()`
 
 

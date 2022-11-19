@@ -1,7 +1,6 @@
 # React.createElement like API
 
 
-
 ## Usage (Option A)
 ```js
 const make = createElement
@@ -11,7 +10,6 @@ document.body.append(
     make('h1', null, 'My title',
       make('div' { className: 'bar' }, 'Hello')))))
 ```
-
 
 ## Usage (Option B)
 ```js

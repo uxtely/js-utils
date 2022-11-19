@@ -14,7 +14,7 @@ is(2 ** 30, 'CqsVtM')
 function is(decoded, encoded) {
 	test(`Encode: ${decoded} => ${encoded}`, () =>
 		equal(base52(decoded), encoded))
-	
+
 	test(`Decode: ${encoded} => ${decoded}`, () =>
 		equal(base52Decode(encoded), decoded))
 }
