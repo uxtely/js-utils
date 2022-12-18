@@ -6,5 +6,8 @@
 	"license": "ISC",
 	"engines": {
 		"node": ">=18"
-	}
+	},
+  "scripts": {
+    "test": "node _testAll.js"
+  }
 }

@@ -56,14 +56,13 @@ export function check(valueArg, typeDef) {
 		checkMatch(typeDef, valueArg, '')
 	else {
 		checkArgsHaveDef(valueArg, typeDef)
-		for (const [name, type] of Object.entries(typeDef)) {
+		for (const [name, type] of Object.entries(typeDef))
 			if (typeCheckers.has(type)) {
 				checkRequired(name in valueArg, name)
 				checkMatch(type, valueArg[name], name)
 			}
 			else
 				type(name in valueArg, valueArg[name], name)
-		}
 	}
 }
 
@@ -82,11 +81,10 @@ function checkRequired(hasArg, name) {
 }
 
 function checkMatch(type, value, name) {
-	if (!typeCheckers.get(type)(value)) {
-		if (name)
-			throw TypeError(`Mismatch on "${name}"`)
-		throw TypeError(`Got: "${typeOf(value)}"`)
-	}
+	if (!typeCheckers.get(type)(value))
+		throw TypeError(name
+			? `Mismatch on "${name}"`
+			: `Got: "${typeOf(value)}"`)
 }
 
 function checkWhere(conditionFnOrConstructor, value, name) {
