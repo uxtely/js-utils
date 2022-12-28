@@ -18,3 +18,4 @@ function is(decoded, encoded) {
 	test(`Decode: ${encoded} => ${decoded}`, () =>
 		equal(base52Decode(encoded), decoded))
 }
+                                              
