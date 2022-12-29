@@ -1,10 +1,10 @@
 const MID_GREY = 137
 const firstHashRegex = /^#/
-
+const reValidColor = /^#[\da-f]{6}$/i
 
 export function isDarkColor(color) {
-	if (color.length !== 7)
-		throw `Invalid color format length "${color}". It must have a "#" and 6 hex digits`
+	if (!reValidColor.test(color))
+		throw `Invalid color format: "${color}". It must have a "#" and 6 hex digits`
 	const c = parseInt(color.replace(firstHashRegex, ''), 16)
 	const r = 0.299 * ((c & 0xff0000) >> 16)
 	const g = 0.587 * ((c & 0xff00) >> 8)
