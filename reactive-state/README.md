@@ -106,13 +106,11 @@ sure not to mutate it directly. Alternatively, extend the class and override `va
 ## Customizing Example
 ```js
 export class ReactiveStateBitfield extends ReactiveState {
-  constructor(defaultValue) { 
-    super(defaultValue) 
-  }
-  mask(m) { return this.valueº & m }
-  setBit(bit) { this.set(this.valueº | bit) }
-  clearBit(bit) { this.set(this.valueº & ~bit) }
-  toggleBit(bit) { this.set(this.valueº ^ bit) }
+  constructor(defaultValue) { super(defaultValue) }
+  mask(m) { return this.valueOf() & m }
+  setBit(bit) { this.set(this.valueOf() | bit) }
+  clearBit(bit) { this.set(this.valueOf() & ~bit) }
+  toggleBit(bit) { this.set(this.valueOf() ^ bit) }
 }
 ```
 
