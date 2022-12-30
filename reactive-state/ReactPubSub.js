@@ -1,17 +1,15 @@
 export class ReactPubSub {
-	constructor() {
-		this.allCallbacksº = new Set()
-	}
+	#allCallbacks = new Set()
 
 	addListener(fn) {
-		this.allCallbacksº.add(fn)
+		this.#allCallbacks.add(fn)
 		return () => {
-			this.allCallbacksº.delete(fn)
+			this.#allCallbacks.delete(fn)
 		}
 	}
 
 	emit() {
-		for (const fn of this.allCallbacksº)
+		for (const fn of this.#allCallbacks)
 			fn()
 	}
 
