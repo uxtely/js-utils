@@ -35,10 +35,6 @@ for static HTML](https://blog.uidrafter.com/pretty-routes-for-static-html)
   [media-remaper.js](./media-remaper.js) appends a SHA-1
   hash to the filenames and rewrites their `src` in HTML.
 
-- **Compression:** Each HTML document, CSS and JS file is compressed with brotli in parallel.
-  For example, there's a `dist/index` and a `dist/index.br` for enabling
-  [`brotli_static`](https://github.com/google/ngx_brotli#brotli_static) in Nginx.
-
 - **Report:** The `packed-sizes.json` report is handy for showing size
   deltas. Also, it computes SHA-1 hashes, which are handy for example
   for updating dependencies and seeing if they affected the output.
