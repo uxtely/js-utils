@@ -5,16 +5,14 @@ import { createHash } from 'node:crypto'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-
 import { minifyJS } from './minifyJS.js'
 import { minifyCSS } from './minifyCSS.js'
 import { minifyHTML } from './minifyHTML.js'
 import { remapMediaInHTML, copyDirWithHashedNames } from './media-remaper.js'
 import { extractStyleSheetHrefs, extractJavaScriptSources, removeLineContaining } from './parsers.js'
 
-import { Pool } from '../parallel/parallel.js'
 import { DevHost, browser } from '../Environment.js'
-import { read, write, copyDir, removeDir, sizeOf, sha1, exists, saveAsJSON } from '../fs-utils.js'
+import { read, write, copyDir, removeDir, sizeOf, sha1, saveAsJSON } from '../fs-utils.js'
 
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -57,7 +55,6 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 
 			removeDir(pDist)
 			const mediaHashes = copyDirWithHashedNames(pMedia, pDistMedia)
-			const brotliPool = new Pool(__dirname + '/worker-for-brotli.js', routes.length)
 
 			for (const route of routes) {
 				let html = await httpGet(`http://${DevHost}:${server.address().port}` + route)
@@ -95,32 +92,23 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
 
 				write(pDist + route, html)
-				brotliPool.runTask(pDist + route, (error, allFilesAreBrotlied) => {
-					if (error) {
-						console.error(error)
-						process.exitCode = 1
-					}
+			}
 
-					if (allFilesAreBrotlied) {
+			if (sitemapDomain)
+				write(pDistSitemap, routes
+					.filter(r => r !== '/index')
+					.map(r => `https://${sitemapDomain + r}`)
+					.join('\n'))
 
-						if (sitemapDomain)
-							write(pDistSitemap, routes
-								.filter(r => r !== '/index')
-								.map(r => `https://${sitemapDomain + r}`)
-								.join('\n'))
-
-						if (cspNginxVarName)
-							write(pDistCspNginxMap, `
+			if (cspNginxVarName)
+				write(pDistCspNginxMap, `
 							map $uri ${cspNginxVarName} {
 							  ${nginxCspMap.join('\n')}
 							  default '';
 							}`)
 
-						copyDir(pMeta, pDist)
-						reportSizes(pSizesReport, pDist, routes)
-					}
-				})
-			}
+			copyDir(pMeta, pDist)
+			reportSizes(pSizesReport, pDist, routes)
 		}
 		catch (error) {
 			console.error(error)
@@ -164,11 +152,6 @@ function reportSizes(reportFilename, baseDir, files) {
 			hash: sha1(fPath),
 			delta: size - oldReport[f]?.size,
 			size: size
-		}
-		if (exists(fPath + '.br')) {
-			const size = sizeOf(fPath + '.br')
-			newReport[f].brotliedSize = size
-			newReport[f].brotliedDelta = size - oldReport[f]?.brotliedSize
 		}
 	}
 

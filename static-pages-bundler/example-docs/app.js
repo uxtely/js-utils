@@ -41,7 +41,6 @@ switch (process.argv[2]) {
 
 				// Default to the first route (using a copy to avoid redirect)
 				copy('dist' + routes[0], 'dist/index')
-				copy('dist' + routes[0] + '.br', 'dist/index.br')
 				server.close()
 			})
 		})

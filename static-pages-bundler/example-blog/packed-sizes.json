@@ -1,23 +1,17 @@
 {
 	"/bitwise-table-lookup": {
 		"hash": "ZfVTaV9D0J-M2nVdxEfx3M8WQNQ",
-		"delta": -223,
-		"size": 27778,
-		"brotliedSize": 7181,
-		"brotliedDelta": -60
+		"delta": 0,
+		"size": 27778
 	},
 	"/conditional-avif-for-video-posters": {
 		"hash": "fXMlE0uaz0NexoCepUg4iOR_CgM",
-		"delta": -223,
-		"size": 29534,
-		"brotliedSize": 8007,
-		"brotliedDelta": -55
+		"delta": 0,
+		"size": 29534
 	},
 	"/index": {
-		"hash": "lHjt4iMBedKhmYOuTlqnFhO3ZyI",
-		"delta": -223,
-		"size": 20327,
-		"brotliedSize": 6349,
-		"brotliedDelta": -41
+		"hash": "JdW60FhAGi3HYGNlgU4BF1ol0Qs",
+		"delta": -5,
+		"size": 20322
 	}
 }
