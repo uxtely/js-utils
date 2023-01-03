@@ -28,7 +28,7 @@ export function readLocalStorageNumber(key, defaultValue) {
 }
 
 export function setLocalStorageItem(key, value) {
-	try { localStorage.setItem(key, Number(value)) }
+	try { localStorage.setItem(key, value) }
 	catch {}
 }
 
