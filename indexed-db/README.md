@@ -10,16 +10,6 @@ Promisifies and automates the ceremony of the browser’s `IndexedDB`.
 - Only one database is supported.
 - Only one object store per database is supported.
 
-## How it works
-- **Creates** `||` **Opens** an `IDBDatabase`, which is named after your own `dbName()`.
-- **Creates** `||` **Uses** an existing `IDBObjectStore`.
-- **Creates** `&&` **Closes** the `IDBTransaction`.
-
-
-## Similar projects
-- [idb](https://github.com/jakearchibald/idb)
-
-
 ## Usage
 ```js
 const dbName = () => 'abc123' // e.g. user id
@@ -38,3 +28,13 @@ idbReadFile(1) // fileId = 1
 - `idbWipeAllFiles()`
 - `idbCountFiles()`
 - `idbListFiles()`
+
+
+## How it works
+- **Creates** `||` **Opens** an `IDBDatabase`, which is named after your own `dbName()`.
+- **Creates** `||` **Uses** an existing `IDBObjectStore`.
+- **Creates** `&&` **Closes** the `IDBTransaction`.
+
+## Similar projects
+- [idb](https://github.com/jakearchibald/idb)
+
