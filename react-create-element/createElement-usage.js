@@ -14,12 +14,14 @@ window.addEventListener('load', function () {
 		div({ className: 'Controls' },
 			label(null, 'Width', input({
 				ref: refWidthInput,
+				type: 'number',
 				onChange: update,
 				value: 100,
 				autofocus: true
 			})),
 			label(null, 'Height', input({
 				ref: refHeightInput,
+				type: 'number',
 				onChange: update,
 				value: 80
 			})),
@@ -49,7 +51,7 @@ window.addEventListener('load', function () {
 
 	update()
 	function update() {
-		refOutputBox.current.style.width = parseInt(refWidthInput.current.value, 10) + 'px'
-		refOutputBox.current.style.height = parseInt(refHeightInput.current.value, 10) + 'px'
+		refOutputBox.current.style.width = refWidthInput.current.valueAsNumber + 'px'
+		refOutputBox.current.style.height = refHeightInput.current.valueAsNumber + 'px'
 	}
 })
