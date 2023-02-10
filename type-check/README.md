@@ -1,18 +1,27 @@
 # check
 
 A plain-JS type checker with an API similar to:
-- [Meteor `check`](https://github.com/meteor/meteor/blob/devel/packages/check/match.js)
-- [React `prop-types`](https://github.com/facebook/prop-types)
+- [Meteor’s check](https://github.com/meteor/meteor/blob/devel/packages/check/match.js)
+- [React’s prop-types](https://github.com/facebook/prop-types)
+- [rho-contracts](https://github.com/rho-contracts/rho-contracts)
 
-## Usage
-### Single type definition
+## TL;DR
 ```js
+function square(n) {
+  check(n, Number)
+  return check(n * n, Number)
+}
+```
+
+## Single type definition
+```js
+check([], Array)
 check('a', String)
 check(100, Number)
 check(new Int8Array([1, 2, 3]), Int8Array)
 ```
 
-### Multiple type definitions
+## Multiple type definitions
 ```js
 function Person(p) {
   check(p, {
