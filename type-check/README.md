@@ -43,6 +43,10 @@ function Person(p) {
   this.zipcode = p.zipcode || null
   this.point = p.point
 }
+
+function isValidZipCode(zip) {
+  return /^\d{5}$/.test(zip)
+}
 ```
 
 ```js
