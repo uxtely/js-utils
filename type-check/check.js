@@ -32,23 +32,12 @@ const typeCheckers = new Map([
 	[Float64Array, isTypeOf(new Float64Array())]
 ])
 
-export const Optional = type => (hasArg, value, name) => {
-	if (hasArg)
-		return checkMatch(type, value, name)
-}
-
-export const OptionalWhere = conditionFn => (hasArg, value, name) => {
-	if (hasArg)
-		return checkWhere(conditionFn, value, name)
-}
-
+export const Shape = shape => (_, value) => check(value, shape)
+export const Optional = type => (hasArg, value, name) => hasArg && checkMatch(type, value, name)
+export const OptionalWhere = conditionFn => (hasArg, value, name) => hasArg && checkWhere(conditionFn, value, name)
 export const Where = conditionFn => (hasArg, value, name) => {
 	checkRequired(hasArg, name)
 	return checkWhere(conditionFn, value, name)
-}
-
-export const Shape = shape => (_, value) => {
-	return check(value, shape)
 }
 
 export function check(valueArg, typeDef) {
