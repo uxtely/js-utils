@@ -58,7 +58,6 @@ export function check(valueArg, typeDef) {
 function checkArgsHaveDef(args, defs) {
 	if (!isTypeOf({})(args)) throw TypeError('Expected an object literal as argument')
 	if (!isTypeOf({})(defs)) throw TypeError('Expected an object literal as type definitions')
-
 	for (const name of Object.keys(args))
 		if (!(name in defs))
 			throw TypeError(`Missing type definition for "${name}"`)
