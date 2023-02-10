@@ -7,11 +7,11 @@ A plain-JS type checker with an API similar to:
 
 ## TL;DR
 ```js
-const isNumber = n => check(n, Number)
+const t_num = n => check(n, Number)
 
 function square(n) {
-  isNumber(n)
-  return isNumber(n * n)
+  t_num(n)
+  return t_num(n * n)
 }
 ```
 
