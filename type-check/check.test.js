@@ -4,7 +4,7 @@
  */
 
 import test from 'node:test'
-import { throws, doesNotThrow } from 'node:assert/strict'
+import { throws, doesNotThrow, equal, deepEqual } from 'node:assert/strict'
 import { check, Shape, Where, Optional, OptionalWhere } from './check.js'
 
 
@@ -16,7 +16,17 @@ function fails(arg, defs, msg = '') {
 	test('Fails', () => throws(() => check(arg, defs), new RegExp(`^TypeError: ${msg}$`)))
 }
 
-console.log('check')
+
+console.log('Testing check…')
+
+test('Returns the argument when is valid', () => equal(check(1, Number), 1))
+test('Returns the argument when is valid', () =>
+	deepEqual(
+		check(
+			{ a: 3, b: 'B', c: { n: 42 }, d: 5 },
+			{ a: Where(Number.isInteger), b: Optional(String), c: Shape({ n: Number }), d: OptionalWhere(n => n > 3) }),
+		{ a: 3, b: 'B', c: { n: 42 }, d: 5 }))
+
 
 // check (single)
 oks(1, Number)

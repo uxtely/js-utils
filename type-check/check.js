@@ -34,36 +34,36 @@ const typeCheckers = new Map([
 
 export const Optional = type => (hasArg, value, name) => {
 	if (hasArg)
-		checkMatch(type, value, name)
+		return checkMatch(type, value, name)
 }
 
 export const OptionalWhere = conditionFn => (hasArg, value, name) => {
 	if (hasArg)
-		checkWhere(conditionFn, value, name)
+		return checkWhere(conditionFn, value, name)
 }
 
 export const Where = conditionFn => (hasArg, value, name) => {
 	checkRequired(hasArg, name)
-	checkWhere(conditionFn, value, name)
+	return checkWhere(conditionFn, value, name)
 }
 
 export const Shape = shape => (_, value) => {
-	check(value, shape)
+	return check(value, shape)
 }
 
 export function check(valueArg, typeDef) {
 	if (typeCheckers.has(typeDef)) // is non-object-literal arg, e.g., check('a', String)
-		checkMatch(typeDef, valueArg, '')
-	else {
-		checkArgsHaveDef(valueArg, typeDef)
-		for (const [name, type] of Object.entries(typeDef))
-			if (typeCheckers.has(type)) {
-				checkRequired(name in valueArg, name)
-				checkMatch(type, valueArg[name], name)
-			}
-			else
-				type(name in valueArg, valueArg[name], name)
-	}
+		return checkMatch(typeDef, valueArg, '')
+
+	checkArgsHaveDef(valueArg, typeDef)
+	for (const [name, type] of Object.entries(typeDef))
+		if (typeCheckers.has(type)) {
+			checkRequired(name in valueArg, name)
+			checkMatch(type, valueArg[name], name)
+		}
+		else
+			type(name in valueArg, valueArg[name], name)
+	return valueArg
 }
 
 function checkArgsHaveDef(args, defs) {
@@ -85,11 +85,12 @@ function checkMatch(type, value, name) {
 		throw TypeError(name
 			? `Mismatch on "${name}"`
 			: `Got: "${typeOf(value)}"`)
+	return value
 }
 
 function checkWhere(conditionFnOrConstructor, value, name) {
 	if (typeCheckers.has(conditionFnOrConstructor))
-		checkMatch(conditionFnOrConstructor, value, name)
-	else if (!conditionFnOrConstructor(value))
+		return checkMatch(conditionFnOrConstructor, value, name)
+	if (!conditionFnOrConstructor(value))
 		throw TypeError(`Mismatch on "${name}"`)
 }
