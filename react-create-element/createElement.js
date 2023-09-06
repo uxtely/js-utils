@@ -30,3 +30,24 @@ function useRef() {
 	return { current: null }
 }
 
+
+// V2
+function upsertElement(elem, props, ...children) {
+	const node = elem instanceof HTMLElement
+		? elem
+		: document.createElement(elem)
+	for (const [key, value] of Object.entries(props))
+		if (key === 'ref')
+			value.current = node
+		else if (key === 'style')
+			Object.assign(node.style, value)
+		else if (key.startsWith('on'))
+			node.addEventListener(key.replace(/^on/, '').toLowerCase(), value)
+		else if (key in node)
+			node[key] = value
+		else
+			node.setAttribute(key, value)
+	node.append(...children)
+	return node
+}
+
