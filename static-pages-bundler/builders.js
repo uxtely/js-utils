@@ -45,7 +45,7 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 	const pDistCspNginxMap = 'dist/csp-map.nginx'
 	const pSizesReport = 'packed-sizes.json'
 
-	const nginxCspMap = []
+	const cspByRoute = []
 
 	const server = http.createServer(router)
 	server.listen(0, DevHost, async error => {
@@ -83,9 +83,9 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 					`default-src 'self'`,
 					`img-src 'self' data:`, // data: is for Safari's video player icons and for CSS bg images
 					`style-src '${cssNonce}'`,
-					`script-src '${jsNonce}'`
+					`script-src '${jsNonce}' 'unsafe-inline'` // 'unsafe-inline' is ignored by browsers supporting nonces/hashes. But it's needed for backward compatibility.
 				].join(';')
-				nginxCspMap.push(`${route} "${csp}";`)
+				cspByRoute.push([route, csp])
 
 				html = html // Inlines CSS and JS
 					.replace('<head>', `<head><style nonce="${cssNonce}">${css}</style>`)
@@ -101,11 +101,12 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 					.join('\n'))
 
 			if (cspNginxVarName)
-				write(pDistCspNginxMap, `
-							map $uri ${cspNginxVarName} {
-							  ${nginxCspMap.join('\n')}
-							  default '';
-							}`)
+				write(pDistCspNginxMap, [
+					`map $uri ${cspNginxVarName} {`,
+					cspByRoute.map(([route, csp]) => `${route} "${csp}";`).join('\n'),
+					`default '';`,
+					`}`
+				].join('\n'))
 
 			copyDir(pMeta, pDist)
 			reportSizes(pSizesReport, pDist, routes)
