@@ -93,6 +93,7 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 
 				write(pDist + route, html)
 			}
+			
 
 			if (sitemapDomain)
 				write(pDistSitemap, routes
@@ -127,7 +128,6 @@ export function httpGet(url) {
 		http.get(url, response => {
 			if (response.statusCode !== 200)
 				reject(`URL: ${url}, Status: ${response.statusCode}`)
-
 			response.setEncoding('utf8')
 			let body = ''
 			response.on('data', chunk => { body += chunk })
@@ -145,7 +145,6 @@ function cspNonce(data) {
 function reportSizes(reportFilename, baseDir, files) {
 	const oldReport = JSON.parse(read(reportFilename))
 	const newReport = {}
-
 	for (const f of files) {
 		const fPath = join(baseDir, f)
 		const size = sizeOf(fPath)
@@ -155,7 +154,6 @@ function reportSizes(reportFilename, baseDir, files) {
 			size: size
 		}
 	}
-
 	console.table(newReport)
 	saveAsJSON(reportFilename, newReport)
 }

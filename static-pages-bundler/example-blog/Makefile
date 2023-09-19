@@ -1,3 +1,9 @@
+all: lint slint opm build
+
+build:
+	node app.js production
+	
+
 dev:
 	node app.js development
 	
@@ -10,10 +16,5 @@ slint:
 opm:
 	../media-optimizer.sh root/media
  
-prod:
-	sh -c "time node app.js production"
-
-all: lint slint opm prod
-
-.PHONY: dev lint slint opm prod all
-
+ 
+.PHONY: dev lint slint opm build all

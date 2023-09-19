@@ -1,35 +1,27 @@
 import fs from 'node:fs'
-import { extname } from 'node:path'
 
 
 const mimes = { // JPG is deliberately omitted (explained in ./media-optimizer)
-	'.js': 'application/javascript',
-	'.zip': 'application/zip',
-	'.json': 'application/json',
-
-	'.ico': 'image/x-icon',
-	'.png': 'image/png',
-	'.svg': 'image/svg+xml',
-	'.avif': 'image/avif',
-	'.webp': 'image/webp',
-
-	'.css': 'text/css',
-	'.html': 'text/html',
-
-	'.txt': 'text/plain', // e.g. for robots.txt when running lighthouse
-	'.less': 'text/plain',
-	'.scss': 'text/plain',
-
-	'.mp4': 'video/mp4'
+	'html': 'text/html; charset=utf8',
+	'txt': 'text/plain; charset=utf8', // e.g. robots.txt when running lighthouse
+	'js': 'application/javascript; charset=utf8',
+	'json': 'application/json; charset=utf8',
+	'css': 'text/css; charset=utf8',
+	'less': 'text/plain; charset=utf8',
+	'svg': 'image/svg+xml; charset=utf8',
+	'zip': 'application/zip',
+	'ico': 'image/x-icon',
+	'png': 'image/png',
+	'avif': 'image/avif',
+	'webp': 'image/webp',
+	'mp4': 'video/mp4'
 }
-
 function mimeFor(filename) {
-	const mime = mimes[extname(filename)]
+	const mime = mimes[filename.replace(/.*\./, '')]
 	if (mime)
 		return mime
 	throw `Missing MIME for ${filename}`
 }
-
 
 
 export function routerForStaticPages(rootPath, routes, template, templateArg) {
@@ -53,7 +45,7 @@ export function routerForStaticPages(rootPath, routes, template, templateArg) {
 
 			else if (routes.includes(url)) { /* Serve Documents */
 				const html = await fs.promises.readFile(rootPath + url + '.html')
-				response.setHeader('Content-Type', 'text/html')
+				response.setHeader('Content-Type', mimeFor('html'))
 				response.end(htmlTemplate(html, routes.indexOf(url)))
 			}
 
