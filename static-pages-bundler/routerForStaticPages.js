@@ -2,19 +2,19 @@ import fs from 'node:fs'
 
 
 const mimes = { // JPG is deliberately omitted (explained in ./media-optimizer)
-	'html': 'text/html; charset=utf8',
-	'txt': 'text/plain; charset=utf8', // e.g. robots.txt when running lighthouse
-	'js': 'application/javascript; charset=utf8',
-	'json': 'application/json; charset=utf8',
-	'css': 'text/css; charset=utf8',
-	'less': 'text/plain; charset=utf8',
-	'svg': 'image/svg+xml; charset=utf8',
-	'zip': 'application/zip',
-	'ico': 'image/x-icon',
-	'png': 'image/png',
-	'avif': 'image/avif',
-	'webp': 'image/webp',
-	'mp4': 'video/mp4'
+	html: 'text/html; charset=utf8',
+	txt: 'text/plain; charset=utf8', // e.g. robots.txt when running lighthouse
+	js: 'application/javascript; charset=utf8',
+	json: 'application/json; charset=utf8',
+	css: 'text/css; charset=utf8',
+	less: 'text/plain; charset=utf8',
+	svg: 'image/svg+xml; charset=utf8',
+	zip: 'application/zip',
+	ico: 'image/x-icon',
+	png: 'image/png',
+	avif: 'image/avif',
+	mp4: 'video/mp4',
+	webp: 'image/webp'
 }
 function mimeFor(filename) {
 	const mime = mimes[filename.replace(/.*\./, '')]
