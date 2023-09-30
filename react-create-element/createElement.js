@@ -2,10 +2,8 @@ function createElement(tagName, props, ...children) {
 	const elem = document.createElement(tagName)
 	if (props)
 		for (const [key, value] of Object.entries(props))
-			if (key === 'onChange')
-				elem.addEventListener('change', value)
-			else if (key === 'onClick')
-				elem.addEventListener('click', value)
+			if (key.startsWith('on'))
+				elem.addEventListener(key.replace(/^on/, '').toLowerCase(), value);
 			else if (key === 'ref')
 				value.current = elem
 			else if (key === 'style')
