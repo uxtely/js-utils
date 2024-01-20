@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "terser": "5.14.0"
+    "terser": "5.27.0"
   },
   "engines": {
     "node": ">=18"
