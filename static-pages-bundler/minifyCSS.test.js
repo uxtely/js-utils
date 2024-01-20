@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test'
 import { equal, deepEqual, throws } from 'node:assert/strict'
-import { minifyCSS, Testable } from '../minifyCSS.js'
+import { minifyCSS, Testable } from './minifyCSS.js'
 
 
 describe('minifyCSS', () => {

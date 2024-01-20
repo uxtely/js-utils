@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test'
 import { equal, throws } from 'node:assert/strict'
-import { remapMediaInHTML } from '../media-remaper.js'
+import { remapMediaInHTML } from './media-remaper.js'
 
 
 describe('Media Remapper', () => {

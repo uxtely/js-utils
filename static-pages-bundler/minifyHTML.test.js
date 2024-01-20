@@ -1,6 +1,6 @@
 import { describe, test } from 'node:test'
 import { equal } from 'node:assert/strict'
-import { minifyHTML } from '../minifyHTML.js'
+import { minifyHTML } from './minifyHTML.js'
 
 
 describe('minifyHTML', () => {

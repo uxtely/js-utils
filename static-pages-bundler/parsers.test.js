@@ -5,7 +5,7 @@ import {
 	extractStyleSheetHrefs,
 	extractJavaScriptSources,
 	removeLineContaining
-} from '../parsers.js'
+} from './parsers.js'
 
 
 describe('Parsers', () => {
