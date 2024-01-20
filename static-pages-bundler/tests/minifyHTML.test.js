@@ -1,10 +1,11 @@
-import test from 'node:test'
+import { describe, test } from 'node:test'
 import { equal } from 'node:assert/strict'
 import { minifyHTML } from '../minifyHTML.js'
 
 
-test('minifyHTML', () => {
-	equal(minifyHTML(`
+describe('minifyHTML', () => {
+	test('Acceptance', () => {
+		equal(minifyHTML(`
 <!DOCTYPE html>
 <html   
   lang="en">
@@ -39,7 +40,7 @@ test('minifyHTML', () => {
 </html>
 `),
 
-		`<!DOCTYPE html>
+			`<!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Foo Bar</title>
@@ -66,5 +67,6 @@ Removes leading tabs.
 </p>
 </body>
 </html>`
-	)
+		)
+	})
 })

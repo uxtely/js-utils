@@ -10,6 +10,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "cloc": "cloc . --not-match-d=./ --fullpath"
+    "cloc": "cloc . --not-match-d=./ --fullpath",
+    "test": "node --test"
   }
 }
