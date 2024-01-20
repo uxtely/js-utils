@@ -1,4 +1,4 @@
-import { base52 } from './base52.js'
+import { base52 } from '../base52/base52.js'
 
 
 export function proxyFieldNames(devPrefix, dict, isProduction = process.env.NODE_ENV === 'production') {

@@ -1,6 +1,6 @@
 const Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
-export function toBase52(n) {
+export function base52(n) {
 	let encoded = ''
 	do {
 		encoded = Charset[n % 52] + encoded
@@ -9,7 +9,7 @@ export function toBase52(n) {
 	return encoded
 }
 
-export function fromBase52(str) {
+export function base52Decode(str) {
 	let j = 0
 	let decoded = 0
 	for (let i = str.length - 1; i >= 0; i--) 
