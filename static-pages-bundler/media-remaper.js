@@ -10,7 +10,7 @@ import { copy, sha1, makeDir, listFiles } from '../fs-utils.js'
  *
  * Yes, all use the SHA-1 from the original PNG. That way
  * in nginx.conf we can conditionally serve the best format.
- *   https://blog.uidrafter.com/conditional-avif-for-video-posters
+ *   https://blog.uirig.com/conditional-avif-for-video-posters
  *
  * We don't use JPGs (explained in ./media-optimizer.sh)
  */

@@ -2,7 +2,7 @@
 import { writeFileSync } from 'node:fs'
 
 // The error pages have no extension, see
-// https://blog.uidrafter.com/pretty-routes-for-static-html
+// https://blog.uirig.com/pretty-routes-for-static-html
 [
 	'./static-pages-bundler/example-blog/root/root-meta/',
 	'./static-pages-bundler/example-docs/root/root-meta/'

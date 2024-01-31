@@ -19,7 +19,7 @@ switch (process.argv[2]) {
 
 	case 'production':
 		// For drafting blog posts, we exclude files starting with an underscore from the production build.
-		buildProduction(router, routes.filter(r => !r.startsWith('/_')), 'blog.uidrafter.com', '$blog_csp')
+		buildProduction(router, routes.filter(r => !r.startsWith('/_')), 'blog.uirig.com', '$blog_csp')
 		break
 
 	default:

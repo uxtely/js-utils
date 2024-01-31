@@ -3,7 +3,7 @@
 Promisifies and automates the ceremony of the browser’s `IndexedDB`.
 
 ## Pros
-- Battle tested in https://uidrafter.com
+- Battle tested in https://uirig.com
 - Lightweight (40 LoC)
 
 ## Cons

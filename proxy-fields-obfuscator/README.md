@@ -39,7 +39,7 @@ export { FF }
 
 
 ## Another Example
-In UI Drafter, the Card data structure is like this:
+In UI Rig, the Card data structure is like this:
 ```js
 let CF = { 
   id: 0, 

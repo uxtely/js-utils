@@ -11,7 +11,6 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
 <html lang="en">
 <head>
 	<meta name="viewport" content="width=device-width">
-	
 	<link rel="stylesheet" href="assets/base.css">
 	${head}
 
@@ -20,12 +19,11 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
   
 	<link rel="icon" href="favicon.svg" type="image/svg+xml">
 	<link rel="apple-touch-icon" href="favicon-apple-icon-touch.png">
-	<link rel="dns-prefetch" href="//uidrafter.com">
 </head>
 <body>
 <nav>
 	<div class="bodyWidth">
-		<a tabindex="0" href="//uidrafter.com" title="Website">
+		<a tabindex="0" href="//uirig.com" title="Website">
 			<svg xmlns="http://www.w3.org/2000/svg" id="LogoPosNav" viewBox="0 0 80 20"><!--	@KeepSync #LogoPosB -->
 				<path class="LetterU1" d="m7.18 5.12c.813.0218.544 4.63.399 6.77-.317 2.16-1.72 3.18-2.62 1.58-.491-.873-1.29-6.11.0982-8.65" />
 				<path class="LetterU1" d="m10 4.16c.0742 2.06-.0736 8.52.132 11-.156.812-3.75.944-3.75.944-.123-.218 1.29-1.25 1.45-2.18.433-2.62.32-7.5.791-9.97" />
@@ -38,9 +36,9 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
 		</a>
 
 		<div id="NavRight">
-			<a href="//free.uidrafter.com">Free App</a>
-			<a href="//docs.uidrafter.com">Docs</a>
-			<a href="//blog.uidrafter.com">Blog</a>
+			<a href="//my.uirig.com">Free App</a>
+			<a href="//docs.uirig.com">Docs</a>
+			<a href="//blog.uirig.com">Blog</a>
 		</div>
 	</div>
 </nav>
@@ -55,12 +53,12 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
 			<path class="LetterD1" d="m12.3 13.6c1.68.145 2.65-1.09 2.71-3.2.0613-1.71-.495-3.47-2.92-3.79 1.5.155 4.74-1.39 5.63 3.17-.477 3.44-2.96 4.97-5.44 3.82z" />
 			<path class="LetterD0" d="m11.7 3.23.113 13.6s3.47-.466 3.58-.502c.346-.0452 3.62-1.33 3.39-6.46-.221-4.77-3.21-5.74-3.62-5.86-.952-.321-3.48-.792-3.48-.792zm2.45 3.35.876.123s1.93.346 1.94 3.43c0 3.47-2.17 3.56-2.17 3.56l-.661.01z" />
 		</svg>
-		<div class="Line1">UI Drafter</div>
+		<div class="Line1">UI Rig</div>
 	</div>
 	${body}
 	
 	${hideSponsor ? '' : `
-		<a href="//uidrafter.com" id="Outro">
+		<a href="//uirig.com" id="Outro">
 		<p>Sponsored by:</p>
 		<svg xmlns="http://www.w3.org/2000/svg" id="LogoOutro" viewBox="0 0 80 20">
 			<path class="LetterU1" d="m7.18 5.12c.813.0218.544 4.63.399 6.77-.317 2.16-1.72 3.18-2.62 1.58-.491-.873-1.29-6.11.0982-8.65" />
@@ -77,19 +75,19 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
 <footer>
 	<div>
 		<div id="SocialLinks">
-			<a target="_blank" aria-label="Twitter" href="//twitter.com/uidrafter">
+			<a target="_blank" aria-label="Twitter" href="//twitter.com/uirig">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
   				<path d="M45.7 10.5a17.8 17.8 0 01-5.1 1.4A9 9 0 0044.5 7a17.8 17.8 0 01-5.7 2.2 8.9 8.9 0 00-15.1 8A25.3 25.3 0 015.3 8a8.9 8.9 0 002.8 11.9 8.9 8.9 0 01-4-1.1 9 9 0 007 8.8 9 9 0 01-4 .2 9 9 0 008.4 6.2 17.9 17.9 0 01-13.2 3.7 25.2 25.2 0 0013.6 4 25.2 25.2 0 0025.4-25.4v-1.1a18.1 18.1 0 004.4-4.7z"/>
 				</svg>
 			</a>
 
-			<a target="_blank" aria-label="Facebook" href="//www.facebook.com/uidrafter">
+			<a target="_blank" aria-label="Facebook" href="//www.facebook.com/uirig">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
 					<path d="M5.3 3A2.3 2.3 0 003 5.3v37.4A2.3 2.3 0 005.3 45h20.1V28.7H20v-6.3h5.4v-4.7c0-5.4 3.4-8.4 8.2-8.4 2.3 0 4.3.2 4.9.3v5.7H35c-2.6 0-3.1 1.2-3.1 3v4.1h6.3l-.9 6.3H32V45h10.7a2.3 2.3 0 002.3-2.3V5.3A2.3 2.3 0 0042.7 3z"/>
 				</svg>
 			</a>
 
-			<a target="_blank" aria-label="Instagram" href="//www.instagram.com/uidrafter">
+			<a target="_blank" aria-label="Instagram" href="//www.instagram.com/uirig">
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
   				<path d="M45 24l-.1 8.6c-.2 3.9-1.3 6.8-3.4 8.9-2.2 2-5 3.2-8.9 3.4L24 45l-8.6-.1c-3.9-.2-6.8-1.3-8.9-3.4-2-2-3.2-5-3.4-8.9L3 24l.1-8.6c.2-3.9 1.3-6.8 3.4-8.9 2-2 5-3.2 8.9-3.4L24 3l8.6.1c3.9.2 6.8 1.3 8.9 3.4 2 2.2 3.2 5 3.4 8.9L45 24zM26 6.7h-6.9l-2.6.1c-1.1 0-2.1.1-2.9.3a8 8 0 00-2 .5c-.8.4-1.6.9-2.4 1.6a7 7 0 00-1.6 2.4 65.7 65.7 0 00-.8 4.8v15.2c0 1 .1 2 .3 2.8l.5 2c.4.9 1 1.6 1.6 2.4a7 7 0 002.5 1.6 65.7 65.7 0 004.8.8H31.6c1 0 2-.1 2.8-.3a8 8 0 004.4-2 7 7 0 001.6-2.5 65.7 65.7 0 00.8-4.8V19v-2.6c0-1-.1-2-.3-2.8a8 8 0 00-.5-2 9.4 9.4 0 00-1.6-2.4 7 7 0 00-2.4-1.6 65.7 65.7 0 00-4.8-.8H26zm5.6 9.6a10.4 10.4 0 013.1 7.7c0 3-1 5.5-3.1 7.7a10.4 10.4 0 01-7.7 3 10.6 10.6 0 01-7.6-3A10.4 10.4 0 0113 24c0-3 1-5.5 3.1-7.7a10.4 10.4 0 017.7-3c3 0 5.6.9 7.7 3zM28.9 29a7 7 0 000-10 6.8 6.8 0 00-5-2c-2 0-3.6.7-5 2a6.8 6.8 0 00-2 5c0 2 .6 3.7 2 5a6.8 6.8 0 005 2c2 0 3.6-.6 5-2zm8-18c.5.5.8 1.1.8 1.8s-.3 1.3-.8 1.8-1 .8-1.7.8-1.3-.3-1.8-.8-.8-1.1-.8-1.8.3-1.3.8-1.8 1-.8 1.8-.8c.7 0 1.2.3 1.7.8z"/>
 				</svg>
@@ -104,13 +102,13 @@ export default function htmlTemplate(docRoutes, html, iRoute) {
 
 		<span class="FooterLeftLinks">
 			<a id="cor" href="#contact">Contact</a>
-			<a target="_blank" href="//uidrafter.com/report-issue">Issues</a>
+			<a target="_blank" href="//uirig.com/report-issue">Issues</a>
 		</span>
 	</div>
 
 	<div class="FooterRight">
 		<a href="/disclaimer" target="_blank">Disclaimer</a>
-		<a href="//uidrafter.com/privacy" target="_blank">Privacy</a>
+		<a href="//uirig.com/privacy" target="_blank">Privacy</a>
 		<a href="https://uxtely.com" target="_blank" class="Copyright">
 			&copy;2022&nbsp;&nbsp;Uxtely&nbsp;LLC
 		</a>

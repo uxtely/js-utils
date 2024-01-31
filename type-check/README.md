@@ -61,4 +61,4 @@ new Person({ unspecified: true })
 ```
 
 ## See also
-https://blog.uidrafter.com/types-without-typescript
+https://blog.uirig.com/types-without-typescript

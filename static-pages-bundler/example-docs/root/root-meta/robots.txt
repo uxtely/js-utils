@@ -1,2 +1,2 @@
-Sitemap: https://docs.uidrafter.com/sitemap.txt
+Sitemap: https://docs.uirig.com/sitemap.txt
 
