@@ -4,7 +4,7 @@ import { readFileSync, readdirSync, lstatSync } from 'node:fs'
 
 
 /**
- *  At UI Rig we no longer use CDNs, but here's how we used to do it:
+ *  At Uxtly we no longer use CDNs, but here's how we used to do it:
  *   - upload new .mp4 of the `localDir`
  *     - ignores subdirectories
  *     - skips already uploaded videos
