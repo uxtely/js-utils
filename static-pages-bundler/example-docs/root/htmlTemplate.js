@@ -37,11 +37,11 @@ export default function htmlTemplate(RouteDefs, html, iRoute) {
 		${head}
 		
     ${nextPagePrefetch}
-	  <link rel="dns-prefetch" href="//uirig.com">
+	  <link rel="dns-prefetch" href="//uxtly.com">
 	</head>
 	<body>
 	<header>
-		<a tabindex="0" href="//uirig.com" title="Website">
+		<a tabindex="0" href="//uxtly.com" title="Website">
 		<svg class="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 20">
 			<path class="LetterU1" d="m7.18 5.12c.813.0218.544 4.63.399 6.77-.317 2.16-1.72 3.18-2.62 1.58-.491-.873-1.29-6.11.0982-8.65" />
 			<path class="LetterU1" d="m10 4.16c.0742 2.06-.0736 8.52.132 11-.156.812-3.75.944-3.75.944-.123-.218 1.29-1.25 1.45-2.18.433-2.62.32-7.5.791-9.97" />

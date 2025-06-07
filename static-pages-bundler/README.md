@@ -1,9 +1,9 @@
 # Static Site Generator
 
 This is a tiny (under 400 LoC) bundler used for:
-- [docs.uirig.com](https://docs.uirig.com)
-- [blog.uirig.com](https://blog.uirig.com)
-- [uirig.com](https://uirig.com)
+- [docs.uxtly.com](https://docs.uxtly.com)
+- [blog.uxtly.com](https://blog.uxtly.com)
+- [uxtly.com](https://uxtly.com)
 
 
 ## HTML Template
@@ -18,7 +18,7 @@ It serves and auto reloads the browser on changes.
 ## Production Build
 It crawls the dev server and saves each route as static html page. For pretty
 URLs, it saves the pages without the `.html` extension, see [Pretty routes
-for static HTML](https://blog.uirig.com/pretty-routes-for-static-html)
+for static HTML](https://blog.uxtly.com/pretty-routes-for-static-html)
 
 - **Assets:** JS and CSS files get inlined with their corresponding CSP nonces.
 
@@ -27,7 +27,7 @@ for static HTML](https://blog.uirig.com/pretty-routes-for-static-html)
 
 - [**media-optimizer.sh**](./media-optimizer.sh):
     - **Images**: We [Conditionally Serve AVIF and WebP with
-      Nginx](https://blog.uirig.com/conditional-avif-for-video-posters). So
+      Nginx](https://blog.uxtly.com/conditional-avif-for-video-posters). So
       it auto-generates AVIF and WebP from each PNG.
     - **Videos:** MP4 get rewritten if needed for fast playback.
 
@@ -74,9 +74,9 @@ npm install -g eslint \
 
 
 ## Deployment Tips
-- [Hitting 304s Across Servers](https://blog.uirig.com/hitting-304-across-servers)
-- [Deploy Assets Before Documents](https://blog.uirig.com/deploy-assets-before-documents)
-- [Securely creating TLS certificates with Let's Encrypt](https://blog.uirig.com/isolated-tls-certificate-creation)
+- [Hitting 304s Across Servers](https://blog.uxtly.com/hitting-304-across-servers)
+- [Deploy Assets Before Documents](https://blog.uxtly.com/deploy-assets-before-documents)
+- [Securely creating TLS certificates with Let's Encrypt](https://blog.uxtly.com/isolated-tls-certificate-creation)
 
 
 ## CDN Media Uploading

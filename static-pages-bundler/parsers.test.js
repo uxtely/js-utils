@@ -15,7 +15,7 @@ describe('Parsers', () => {
 	<link rel="stylesheet" href="0.css">
 	<link href="1.css"  rel="stylesheet" >
 	<link href="2.css" rel="stylesheet">
-	<link rel="dns-prefetch" href="https://my.uirig.com">
+	<link rel="dns-prefetch" href="https://my.uxtly.com">
 </head>
 <body>
 
@@ -46,7 +46,7 @@ describe('Parsers', () => {
 <head>
 	<link href="1.css"  rel="stylesheet" >
 	<link href="2.css" rel="stylesheet">
-	<link rel="dns-prefetch" href="https://my.uirig.com">
+	<link rel="dns-prefetch" href="https://my.uxtly.com">
 </head>
 <body>
 

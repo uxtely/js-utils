@@ -31,7 +31,7 @@ switch (process.argv[2]) {
 		break
 
 	case 'production':
-		buildProduction(router, routes, 'docs.uirig.com', '$docs_csp').then(async () => {
+		buildProduction(router, routes, 'docs.uxtly.com', '$docs_csp').then(async () => {
 			const server = http.createServer(router)
 			server.listen(0, DevHost, async error => {
 				if (error)
@@ -53,7 +53,7 @@ switch (process.argv[2]) {
 
 async function throwIfHasDeadLinks(port) {
 	const knownLinks = [
-		'//uirig.com',
+		'//uxtly.com',
 		'//uxtely.com',
 		'https://github.com/uxtely/server-side-card-api-examples',
 		'https://github.com/uxtely/css-editor-connector'

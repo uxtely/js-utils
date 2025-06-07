@@ -2,7 +2,7 @@
 set -o noglob
 IFS=$'\n'
 
-# https://blog.uirig.com/convert-to-avif-programmatically
+# https://blog.uxtly.com/convert-to-avif-programmatically
 
 abort() { # Prints the message in red to stderr
   printf "\033[31m  ABORTED: $1\n\033[0m" >&2
