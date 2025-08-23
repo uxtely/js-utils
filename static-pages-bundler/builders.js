@@ -76,20 +76,20 @@ export async function buildProduction(router, routes, sitemapDomain, cspNginxVar
 				css = minifyCSS(css)
 				js = await minifyJS(js)
 
-				const cssNonce = cspNonce(css)
-				const jsNonce = cspNonce(js) || 'self'
+				const cssHash = hash256(css)
+				const jsHash = hash256(js) || 'self'
 
 				const csp = [
 					`default-src 'self'`,
 					`img-src 'self' data:`, // data: is for Safari's video player icons and for CSS bg images
-					`style-src '${cssNonce}'`,
-					`script-src '${jsNonce}' 'unsafe-inline'` // 'unsafe-inline' is ignored by browsers supporting nonces/hashes. But it's needed for backward compatibility.
+					`style-src '${cssHash}'`,
+					`script-src '${jsHash}'`
 				].join(';')
 				cspByRoute.push([route, csp])
 
 				html = html // Inlines CSS and JS
-					.replace('<head>', `<head><style nonce="${cssNonce}">${css}</style>`)
-					.replace('</body>', `<script nonce="${jsNonce}">${js}</script></body>`)
+					.replace('<head>', `<head><style>${css}</style>`)
+					.replace('</body>', `<script>${js}</script></body>`)
 
 				write(pDist + route, html)
 			}
@@ -136,7 +136,7 @@ export function httpGet(url) {
 	})
 }
 
-function cspNonce(data) {
+function hash256(data) {
 	return data
 		? 'sha256-' + createHash('sha256').update(data).digest('base64')
 		: ''

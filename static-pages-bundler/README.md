@@ -20,7 +20,7 @@ It crawls the dev server and saves each route as static html page. For pretty
 URLs, it saves the pages without the `.html` extension, see [Pretty routes
 for static HTML](https://blog.uxtly.com/pretty-routes-for-static-html)
 
-- **Assets:** JS and CSS files get inlined with their corresponding CSP nonces.
+- **Assets:** JS and CSS files get inlined with their corresponding CSP hashes.
 
 - **Minifiers:** The HTML and CSS minifiers are custom, but you can point them to
   a popular NPM package like we do in [minifyJS](./minifyJS.js)
