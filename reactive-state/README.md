@@ -5,7 +5,7 @@
 class components without needing higher-order components (HOC).
 
 As it's standalone and importable, it can be used in two leaf components,
-for either updating the state or for re-rendering. For example, in Uxtly,
+for either updating the state or for re-rendering. For example, in my app,
 hitting **User** → **Delete all Files** needs to refresh **&lt;HomeFileList/>**.
 So with this `ReactiveState`, there’s no need to write code in a parent
 component to handle this coupling, as it can be imported where it’s needed.
@@ -16,7 +16,7 @@ require a DOM. For example, to test the router function, we assert the value of 
 some cases eliminates, the need for DOM based testing, which are slow and brittle.
 
 ## Why?
-As Uxtly started out as a Meteor project, it used its
+As my app started out as a Meteor project, it used its
 [ReactiveVar](https://docs.meteor.com/api/reactive-var.html) extensively. Therefore,
 this `ReactiveState` is a re-implementation for React class components of ReactiveVar.
 
